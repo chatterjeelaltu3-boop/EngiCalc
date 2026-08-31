@@ -932,3 +932,21 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+// ============================================
+// HOME PAGE CARDS - CLICKABLE (সবার নিচে যোগ করুন)
+// ============================================
+document.querySelectorAll('.feature-card').forEach((card, index) => {
+    card.addEventListener('click', function() {
+        const sections = ['calculator', 'formulas', 'quiz'];
+        const section = sections[index];
+        
+        if (section) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            document.querySelector('.main-nav')?.classList.remove('open');
+        }
+    });
+    card.style.cursor = 'pointer';
+});
