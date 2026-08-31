@@ -1,1739 +1,2438 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* =====================================================
+   ENGICALC 2.0
+   ENGINEERING CALCULATOR
+===================================================== */
 
-    <meta name="description"
-          content="ENGICALC - Engineering Calculator and Student Toolkit">
 
-    <title>ENGICALC | Engineering Calculator</title>
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-    <link rel="stylesheet" href="style.css">
-</head>
+function showSection(sectionId) {
 
-<body>
+    const sections =
+        document.querySelectorAll(".section");
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+    sections.forEach(section => {
 
-<header class="header">
+        section.classList.remove("active");
 
-    <a class="brand" href="#" onclick="showSection('home'); return false;">
+    });
 
-        <img src="logo.png"
-             alt="ENGICALC Logo"
-             class="logo">
 
-        <div class="brand-text">
+    const target =
+        document.getElementById(sectionId);
 
-            <h1>ENGICALC</h1>
+    if (!target) return;
 
-            <span>ENGINEERING CALCULATOR</span>
+    target.classList.add("active");
 
-        </div>
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
-    </a>
+}
 
 
-    <nav class="navbar">
+/* =====================================================
+   DARK MODE
+===================================================== */
 
-        <button onclick="showSection('home')">
-            Home
-        </button>
+function toggleTheme() {
 
-        <button onclick="showSection('scientific')">
-            🧮 Scientific
-        </button>
+    document.body.classList.toggle("dark");
 
-        <button onclick="showSection('engineering')">
-            ⚙️ Engineering
-        </button>
+    const dark =
+        document.body.classList.contains("dark");
 
-        <button onclick="showSection('converter')">
-            📐 Converter
-        </button>
+    localStorage.setItem(
+        "engicalcTheme",
+        dark ? "dark" : "light"
+    );
 
-        <button onclick="showSection('advanced')">
-            🔬 Advanced
-        </button>
+}
 
-        <button onclick="showSection('formulas')">
-            📚 Formulas
-        </button>
 
-        <button onclick="showSection('quiz')">
-            🧠 Quiz
-        </button>
+if (
+    localStorage.getItem("engicalcTheme")
+    === "dark"
+) {
 
-        <button onclick="showSection('history')">
-            🕘 History
-        </button>
+    document.body.classList.add("dark");
 
-        <button class="theme-btn"
-                onclick="toggleTheme()"
-                title="Toggle Dark Mode">
-            🌙
-        </button>
+}
 
-    </nav>
 
-</header>
+/* =====================================================
+   SCIENTIFIC CALCULATOR
+===================================================== */
 
+let expression = "";
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+let memory = 0;
 
-<main>
+let angleMode = "DEG";
 
 
-<!-- =====================================================
-     HOME
-===================================================== -->
+function updateDisplay() {
 
-<section id="home" class="section active">
+    document.getElementById("expression")
+        .textContent =
+        expression || "0";
 
-    <div class="hero">
+}
 
-        <div class="hero-content">
 
-            <span class="badge">
-                ENGINEERING STUDENT TOOLKIT
-            </span>
+function addValue(value) {
 
-            <h2>
-                Calculate Smarter.<br>
-                <span>Engineer Better.</span>
-            </h2>
+    expression += value;
 
-            <p>
-                A complete engineering calculator platform
-                for students, learners and future engineers.
-            </p>
+    updateDisplay();
 
-            <div class="hero-buttons">
+}
 
-                <button class="primary-btn"
-                        onclick="showSection('scientific')">
-                    🧮 Open Scientific Calculator
-                </button>
 
-                <button class="secondary-btn"
-                        onclick="showSection('engineering')">
-                    ⚙️ Engineering Tools
-                </button>
+function addFunction(value) {
 
-            </div>
+    expression += value;
 
-        </div>
+    updateDisplay();
 
+}
 
-        <div class="hero-logo">
 
-            <img src="logo.png"
-                 alt="ENGICALC">
+function clearCalculator() {
 
-        </div>
+    expression = "";
 
-    </div>
+    document.getElementById("expression")
+        .textContent = "0";
 
+    document.getElementById("result")
+        .textContent = "0";
 
-    <div class="stats-strip">
+}
 
-        <div>
-            <strong>20+</strong>
-            <span>Tools</span>
-        </div>
 
-        <div>
-            <strong>50+</strong>
-            <span>Formulas</span>
-        </div>
+function deleteLast() {
 
-        <div>
-            <strong>10+</strong>
-            <span>Converters</span>
-        </div>
+    expression =
+        expression.slice(0, -1);
 
-        <div>
-            <strong>100%</strong>
-            <span>Student Focused</span>
-        </div>
+    updateDisplay();
 
-    </div>
+}
 
 
-    <div class="feature-grid">
+function toggleAngleMode() {
 
-        <div class="feature-card"
-             onclick="showSection('scientific')">
+    angleMode =
+        angleMode === "DEG"
+            ? "RAD"
+            : "DEG";
 
-            <div class="feature-icon">🧮</div>
 
-            <h3>Scientific Calculator</h3>
+    document.getElementById("angleMode")
+        .textContent = angleMode;
 
-            <p>
-                Advanced mathematical,
-                trigonometric and scientific calculations.
-            </p>
+}
 
-        </div>
 
+function factorialNumber(n) {
 
-        <div class="feature-card"
-             onclick="showSection('engineering')">
+    if (
+        n < 0 ||
+        !Number.isInteger(n) ||
+        n > 170
+    ) {
 
-            <div class="feature-icon">⚡</div>
+        throw new Error(
+            "Invalid factorial"
+        );
 
-            <h3>Engineering Tools</h3>
+    }
 
-            <p>
-                Electrical, mechanical and civil
-                engineering calculators.
-            </p>
 
-        </div>
+    let result = 1;
 
+    for (
+        let i = 2;
+        i <= n;
+        i++
+    ) {
 
-        <div class="feature-card"
-             onclick="showSection('converter')">
+        result *= i;
 
-            <div class="feature-icon">📐</div>
+    }
 
-            <h3>Unit Converter</h3>
+    return result;
 
-            <p>
-                Quickly convert commonly used
-                engineering units.
-            </p>
+}
 
-        </div>
 
+function evaluateExpression(exp) {
 
-        <div class="feature-card"
-             onclick="showSection('advanced')">
+    exp =
+        exp
+            .replace(/×/g, "*")
+            .replace(/÷/g, "/")
+            .replace(/\^/g, "**");
 
-            <div class="feature-icon">🔬</div>
 
-            <h3>Advanced Tools</h3>
+    const toRad = x => {
 
-            <p>
-                Complex numbers, matrices and statistics.
-            </p>
+        return angleMode === "DEG"
+            ? x * Math.PI / 180
+            : x;
 
-        </div>
+    };
 
 
-        <div class="feature-card"
-             onclick="showSection('formulas')">
+    const fromRad = x => {
 
-            <div class="feature-icon">📚</div>
+        return angleMode === "DEG"
+            ? x * 180 / Math.PI
+            : x;
 
-            <h3>Formula Library</h3>
+    };
 
-            <p>
-                Important engineering formulas
-                organized by subject.
-            </p>
 
-        </div>
+    const funcs = {
 
+        sin: x =>
+            Math.sin(toRad(x)),
 
-        <div class="feature-card"
-             onclick="showSection('quiz')">
+        cos: x =>
+            Math.cos(toRad(x)),
 
-            <div class="feature-icon">🧠</div>
+        tan: x =>
+            Math.tan(toRad(x)),
 
-            <h3>Engineering Quiz</h3>
+        asin: x =>
+            fromRad(Math.asin(x)),
 
-            <p>
-                Practice your engineering knowledge.
-            </p>
+        acos: x =>
+            fromRad(Math.acos(x)),
 
-        </div>
+        atan: x =>
+            fromRad(Math.atan(x)),
 
-    </div>
+        log: x =>
+            Math.log10(x),
 
-</section>
+        ln: x =>
+            Math.log(x),
 
+        sqrt: x =>
+            Math.sqrt(x),
 
+        abs: x =>
+            Math.abs(x),
 
-<!-- =====================================================
-     SCIENTIFIC CALCULATOR
-===================================================== -->
+        factorial: factorialNumber,
 
-<section id="scientific" class="section">
+        pi: Math.PI,
 
-    <div class="section-title">
+        e: Math.E
 
-        <span>🧮</span>
+    };
 
-        <div>
-            <h2>Scientific Calculator</h2>
-            <p>Powerful calculator for engineering mathematics</p>
-        </div>
 
-    </div>
+    const names =
+        Object.keys(funcs);
 
+    const values =
+        Object.values(funcs);
 
-    <div class="calculator-layout">
 
-        <div class="calculator">
+    const fn =
+        new Function(
+            ...names,
+            `"use strict"; return (${exp})`
+        );
 
-            <div class="memory-row">
 
-                <button onclick="memoryClear()">MC</button>
-                <button onclick="memoryRecall()">MR</button>
-                <button onclick="memoryAdd()">M+</button>
-                <button onclick="memorySubtract()">M−</button>
-                <button onclick="toggleAngleMode()"
-                        id="angleMode">
-                    DEG
-                </button>
+    return fn(...values);
 
-            </div>
+}
 
 
-            <div class="display">
+function calculate() {
 
-                <div id="expression">
-                    0
+    if (!expression) return;
+
+
+    try {
+
+        const answer =
+            evaluateExpression(expression);
+
+
+        if (
+            typeof answer !== "number" ||
+            !Number.isFinite(answer)
+        ) {
+
+            throw new Error();
+
+        }
+
+
+        const result =
+            Number(
+                answer.toPrecision(12)
+            );
+
+
+        document.getElementById("result")
+            .textContent = result;
+
+
+        addHistory(
+            expression,
+            result
+        );
+
+
+    }
+
+    catch {
+
+        document.getElementById("result")
+            .textContent = "Error";
+
+    }
+
+}
+
+
+function square() {
+
+    if (!expression) return;
+
+    expression =
+        `(${expression})^2`;
+
+    updateDisplay();
+
+}
+
+
+function power() {
+
+    expression += "^(";
+
+    updateDisplay();
+
+}
+
+
+function reciprocal() {
+
+    if (!expression) return;
+
+    expression =
+        `1/(${expression})`;
+
+    updateDisplay();
+
+}
+
+
+function factorial() {
+
+    if (!expression) return;
+
+
+    expression =
+        `factorial(${expression})`;
+
+    updateDisplay();
+
+}
+
+
+/* =====================================================
+   MEMORY
+===================================================== */
+
+function getCurrentValue() {
+
+    try {
+
+        return Number(
+            evaluateExpression(expression)
+        );
+
+    } catch {
+
+        return 0;
+
+    }
+
+}
+
+
+function memoryClear() {
+
+    memory = 0;
+
+}
+
+
+function memoryRecall() {
+
+    expression += String(memory);
+
+    updateDisplay();
+
+}
+
+
+function memoryAdd() {
+
+    memory += getCurrentValue();
+
+}
+
+
+function memorySubtract() {
+
+    memory -= getCurrentValue();
+
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+let history =
+    JSON.parse(
+        localStorage.getItem(
+            "engicalcHistory"
+        )
+    ) || [];
+
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function addHistory(exp, result) {
+
+    history.unshift({
+
+        expression: exp,
+
+        result: result,
+
+        time:
+            new Date().toLocaleString(
+                "en-IN"
+            )
+
+    });
+
+
+    if (history.length > 50) {
+
+        history.pop();
+
+    }
+
+
+    localStorage.setItem(
+        "engicalcHistory",
+        JSON.stringify(history)
+    );
+
+
+    renderHistory();
+
+}
+
+
+function renderHistory() {
+
+    const list =
+        document.getElementById(
+            "historyList"
+        );
+
+    const full =
+        document.getElementById(
+            "fullHistory"
+        );
+
+
+    if (!history.length) {
+
+        list.innerHTML =
+            "No calculations yet.";
+
+        full.innerHTML =
+            "No calculation history.";
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        history
+            .slice(0, 10)
+            .map(item => `
+
+                <div class="history-item">
+
+                    <div class="history-expression">
+                        ${escapeHTML(item.expression)}
+                    </div>
+
+                    <div class="history-result">
+                        = ${escapeHTML(item.result)}
+                    </div>
+
                 </div>
 
-                <div id="result">
-                    0
+            `)
+            .join("");
+
+
+    full.innerHTML =
+        history
+            .map(item => `
+
+                <div class="history-item">
+
+                    <div class="history-expression">
+                        ${escapeHTML(item.expression)}
+                    </div>
+
+                    <div class="history-result">
+                        = ${escapeHTML(item.result)}
+                    </div>
+
+                    <small>
+                        ${escapeHTML(item.time)}
+                    </small>
+
                 </div>
 
-            </div>
+            `)
+            .join("");
+
+}
 
 
-            <div class="scientific-row">
+function clearHistory() {
 
-                <button onclick="addFunction('sin(')">
-                    sin
-                </button>
+    history = [];
 
-                <button onclick="addFunction('cos(')">
-                    cos
-                </button>
+    localStorage.removeItem(
+        "engicalcHistory"
+    );
 
-                <button onclick="addFunction('tan(')">
-                    tan
-                </button>
+    renderHistory();
 
-                <button onclick="addFunction('asin(')">
-                    sin⁻¹
-                </button>
-
-                <button onclick="addFunction('acos(')">
-                    cos⁻¹
-                </button>
-
-                <button onclick="addFunction('atan(')">
-                    tan⁻¹
-                </button>
-
-            </div>
+}
 
 
-            <div class="scientific-row">
+/* =====================================================
+   ELECTRICAL
+===================================================== */
 
-                <button onclick="addFunction('log(')">
-                    log
-                </button>
+function numberValue(id) {
 
-                <button onclick="addFunction('ln(')">
-                    ln
-                </button>
+    return parseFloat(
+        document.getElementById(id).value
+    );
 
-                <button onclick="addFunction('sqrt(')">
-                    √
-                </button>
-
-                <button onclick="addFunction('10^(')">
-                    10ˣ
-                </button>
-
-                <button onclick="addFunction('e^(')">
-                    eˣ
-                </button>
-
-                <button onclick="addValue('Math.PI')">
-                    π
-                </button>
-
-            </div>
+}
 
 
-            <div class="calculator-grid">
+function calculateOhm() {
 
-                <button onclick="clearCalculator()"
-                        class="danger">
-                    AC
-                </button>
+    const V = numberValue("voltage");
 
-                <button onclick="deleteLast()">
-                    DEL
-                </button>
+    const I = numberValue("current");
 
-                <button onclick="addValue('(')">
+    const R = numberValue("resistance");
+
+
+    let result;
+
+
+    if (!isNaN(I) && !isNaN(R) && isNaN(V)) {
+
+        result =
+            `Voltage = ${(I * R).toFixed(4)} V`;
+
+    }
+
+    else if (!isNaN(V) && !isNaN(R) && isNaN(I)) {
+
+        result =
+            R !== 0
+                ? `Current = ${(V / R).toFixed(4)} A`
+                : "Resistance cannot be zero.";
+
+    }
+
+    else if (!isNaN(V) && !isNaN(I) && isNaN(R)) {
+
+        result =
+            I !== 0
+                ? `Resistance = ${(V / I).toFixed(4)} Ω`
+                : "Current cannot be zero.";
+
+    }
+
+    else {
+
+        result =
+            "Enter exactly two values.";
+
+    }
+
+
+    document.getElementById(
+        "ohmResult"
+    ).textContent = result;
+
+}
+
+
+function calculatePower() {
+
+    const V =
+        numberValue("powerVoltage");
+
+    const I =
+        numberValue("powerCurrent");
+
+
+    if (isNaN(V) || isNaN(I)) {
+
+        document.getElementById(
+            "powerResult"
+        ).textContent =
+            "Enter voltage and current.";
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "powerResult"
+    ).textContent =
+        `Power = ${(V * I).toFixed(4)} W`;
+
+}
+
+
+function getCommaNumbers(id) {
+
+    return document
+        .getElementById(id)
+        .value
+        .split(",")
+        .map(Number)
+        .filter(Number.isFinite);
+
+}
+
+
+function calculateSeries() {
+
+    const values =
+        getCommaNumbers(
+            "seriesResistance"
+        );
+
+
+    if (!values.length) {
+
+        document.getElementById(
+            "seriesResult"
+        ).textContent =
+            "Enter values separated by commas.";
+
+        return;
+
+    }
+
+
+    const total =
+        values.reduce(
+            (sum, value) =>
+                sum + value,
+            0
+        );
+
+
+    document.getElementById(
+        "seriesResult"
+    ).textContent =
+        `Equivalent Resistance = ${total.toFixed(4)} Ω`;
+
+}
+
+
+function calculateParallel() {
+
+    const values =
+        getCommaNumbers(
+            "parallelResistance"
+        );
+
+
+    if (
+        !values.length ||
+        values.some(v => v <= 0)
+    ) {
+
+        document.getElementById(
+            "parallelResult"
+        ).textContent =
+            "Enter positive resistance values.";
+
+        return;
+
+    }
+
+
+    const total =
+        1 /
+        values.reduce(
+            (sum, value) =>
+                sum + 1 / value,
+            0
+        );
+
+
+    document.getElementById(
+        "parallelResult"
+    ).textContent =
+        `Equivalent Resistance = ${total.toFixed(4)} Ω`;
+
+}
+
+
+function calculateCapacitorEnergy() {
+
+    const C =
+        numberValue("capacitance");
+
+    const V =
+        numberValue("capacitorVoltage");
+
+
+    if (
+        isNaN(C) ||
+        isNaN(V)
+    ) return;
+
+
+    const E =
+        0.5 * C * V * V;
+
+
+    document.getElementById(
+        "capacitorResult"
+    ).textContent =
+        `Energy = ${E.toFixed(6)} J`;
+
+}
+
+
+function calculateFrequency() {
+
+    const T =
+        numberValue("timePeriod");
+
+
+    if (
+        isNaN(T) ||
+        T <= 0
+    ) {
+
+        document.getElementById(
+            "frequencyResult"
+        ).textContent =
+            "Enter a positive time period.";
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "frequencyResult"
+    ).textContent =
+        `Frequency = ${(1 / T).toFixed(6)} Hz`;
+
+}
+
+
+/* =====================================================
+   MECHANICAL
+===================================================== */
+
+function calculateForce() {
+
+    const m =
+        numberValue("mass");
+
+    const a =
+        numberValue("acceleration");
+
+
+    if (isNaN(m) || isNaN(a)) return;
+
+
+    document.getElementById(
+        "forceResult"
+    ).textContent =
+        `Force = ${(m * a).toFixed(4)} N`;
+
+}
+
+
+function calculateWork() {
+
+    const F =
+        numberValue("workForce");
+
+    const d =
+        numberValue("distance");
+
+
+    if (isNaN(F) || isNaN(d)) return;
+
+
+    document.getElementById(
+        "workResult"
+    ).textContent =
+        `Work = ${(F * d).toFixed(4)} J`;
+
+}
+
+
+function calculateMechanicalPower() {
+
+    const W =
+        numberValue("mechanicalWork");
+
+    const t =
+        numberValue("mechanicalTime");
+
+
+    if (
+        isNaN(W) ||
+        isNaN(t) ||
+        t === 0
+    ) return;
+
+
+    document.getElementById(
+        "mechanicalPowerResult"
+    ).textContent =
+        `Power = ${(W / t).toFixed(4)} W`;
+
+}
+
+
+function calculateTorque() {
+
+    const F =
+        numberValue("torqueForce");
+
+    const r =
+        numberValue("torqueRadius");
+
+
+    if (isNaN(F) || isNaN(r)) return;
+
+
+    document.getElementById(
+        "torqueResult"
+    ).textContent =
+        `Torque = ${(F * r).toFixed(4)} N·m`;
+
+}
+
+
+function calculatePressure() {
+
+    const F =
+        numberValue("pressureForce");
+
+    const A =
+        numberValue("pressureArea");
+
+
+    if (
+        isNaN(F) ||
+        isNaN(A) ||
+        A === 0
+    ) return;
+
+
+    document.getElementById(
+        "mechanicalPressureResult"
+    ).textContent =
+        `Pressure = ${(F / A).toFixed(4)} Pa`;
+
+}
+
+
+/* =====================================================
+   CIVIL
+===================================================== */
+
+function calculateArea() {
+
+    const L =
+        numberValue("rectangleLength");
+
+    const W =
+        numberValue("rectangleWidth");
+
+
+    if (isNaN(L) || isNaN(W)) return;
+
+
+    document.getElementById(
+        "areaResult"
+    ).textContent =
+        `Area = ${(L * W).toFixed(4)} m²`;
+
+}
+
+
+function calculateConcrete() {
+
+    const L =
+        numberValue("concreteLength");
+
+    const W =
+        numberValue("concreteWidth");
+
+    const H =
+        numberValue("concreteHeight");
+
+
+    if (
+        isNaN(L) ||
+        isNaN(W) ||
+        isNaN(H)
+    ) return;
+
+
+    document.getElementById(
+        "concreteResult"
+    ).textContent =
+        `Volume = ${(L * W * H).toFixed(4)} m³`;
+
+}
+
+
+function calculateCylinder() {
+
+    const r =
+        numberValue("cylinderRadius");
+
+    const h =
+        numberValue("cylinderHeight");
+
+
+    if (isNaN(r) || isNaN(h)) return;
+
+
+    const volume =
+        Math.PI * r * r * h;
+
+
+    document.getElementById(
+        "cylinderResult"
+    ).textContent =
+        `Volume = ${volume.toFixed(4)} m³`;
+
+}
+
+
+function calculateStress() {
+
+    const F =
+        numberValue("stressForce");
+
+    const A =
+        numberValue("stressArea");
+
+
+    if (
+        isNaN(F) ||
+        isNaN(A) ||
+        A === 0
+    ) return;
+
+
+    document.getElementById(
+        "stressResult"
+    ).textContent =
+        `Stress = ${(F / A).toFixed(4)} Pa`;
+
+}
+
+
+/* =====================================================
+   ENGINEERING TABS
+===================================================== */
+
+function engineeringTab(id, button) {
+
+    document
+        .querySelectorAll(".engineering-content")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".eng-tab")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    button.classList.add("active");
+
+}
+
+
+/* =====================================================
+   UNIT CONVERTER
+===================================================== */
+
+const units = {
+
+    length: {
+
+        meter: 1,
+        kilometer: 1000,
+        centimeter: 0.01,
+        millimeter: 0.001,
+        micrometer: 0.000001,
+        foot: 0.3048,
+        inch: 0.0254,
+        mile: 1609.344
+
+    },
+
+
+    mass: {
+
+        kilogram: 1,
+        gram: 0.001,
+        milligram: 0.000001,
+        pound: 0.45359237,
+        ounce: 0.0283495
+
+    },
+
+
+    area: {
+
+        "square meter": 1,
+        "square kilometer": 1000000,
+        "square centimeter": 0.0001,
+        "square foot": 0.092903,
+        "square inch": 0.00064516
+
+    },
+
+
+    volume: {
+
+        "cubic meter": 1,
+        liter: 0.001,
+        milliliter: 0.000001,
+        "cubic centimeter": 0.000001,
+        "cubic foot": 0.0283168
+
+    },
+
+
+    speed: {
+
+        "meter/second": 1,
+        "kilometer/hour": 0.2777778,
+        "mile/hour": 0.44704,
+        "foot/second": 0.3048
+
+    },
+
+
+    force: {
+
+        newton: 1,
+        kilonewton: 1000,
+        dyne: 0.00001,
+        "kilogram-force": 9.80665
+
+    },
+
+
+    pressure: {
+
+        pascal: 1,
+        kilopascal: 1000,
+        megapascal: 1000000,
+        bar: 100000,
+        atmosphere: 101325,
+        psi: 6894.76
+
+    },
+
+
+    power: {
+
+        watt: 1,
+        kilowatt: 1000,
+        megawatt: 1000000,
+        horsepower: 745.7
+
+    },
+
+
+    energy: {
+
+        joule: 1,
+        kilojoule: 1000,
+        "watt-hour": 3600,
+        "kilowatt-hour": 3600000,
+        calorie: 4.184
+
+    }
+
+};
+
+
+function loadUnits() {
+
+    const category =
+        document.getElementById(
+            "conversionCategory"
+        ).value;
+
+
+    const from =
+        document.getElementById(
+            "fromUnit"
+        );
+
+    const to =
+        document.getElementById(
+            "toUnit"
+        );
+
+
+    from.innerHTML = "";
+
+    to.innerHTML = "";
+
+
+    if (category === "temperature") {
+
+        [
+            "Celsius",
+            "Fahrenheit",
+            "Kelvin"
+        ].forEach(unit => {
+
+            from.add(
+                new Option(unit, unit)
+            );
+
+            to.add(
+                new Option(unit, unit)
+            );
+
+        });
+
+    }
+
+    else {
+
+        Object.keys(
+            units[category]
+        ).forEach(unit => {
+
+            from.add(
+                new Option(unit, unit)
+            );
+
+            to.add(
+                new Option(unit, unit)
+            );
+
+        });
+
+    }
+
+
+    if (to.options.length > 1) {
+
+        to.selectedIndex = 1;
+
+    }
+
+
+    convertUnits();
+
+}
+
+
+function convertUnits() {
+
+    const category =
+        document.getElementById(
+            "conversionCategory"
+        ).value;
+
+
+    const from =
+        document.getElementById(
+            "fromUnit"
+        ).value;
+
+
+    const to =
+        document.getElementById(
+            "toUnit"
+        ).value;
+
+
+    const value =
+        parseFloat(
+            document.getElementById(
+                "fromValue"
+            ).value
+        );
+
+
+    if (isNaN(value)) {
+
+        document.getElementById(
+            "toValue"
+        ).value = "";
+
+        return;
+
+    }
+
+
+    let result;
+
+
+    if (category === "temperature") {
+
+        let celsius;
+
+
+        if (from === "Celsius") {
+
+            celsius = value;
+
+        }
+
+        else if (
+            from === "Fahrenheit"
+        ) {
+
+            celsius =
+                (value - 32) * 5 / 9;
+
+        }
+
+        else {
+
+            celsius =
+                value - 273.15;
+
+        }
+
+
+        if (to === "Celsius") {
+
+            result = celsius;
+
+        }
+
+        else if (
+            to === "Fahrenheit"
+        ) {
+
+            result =
+                celsius * 9 / 5 + 32;
+
+        }
+
+        else {
+
+            result =
+                celsius + 273.15;
+
+        }
+
+    }
+
+    else {
+
+        const base =
+            value *
+            units[category][from];
+
+
+        result =
+            base /
+            units[category][to];
+
+    }
+
+
+    document.getElementById(
+        "toValue"
+    ).value =
+        Number(
+            result.toPrecision(10)
+        );
+
+}
+
+
+/* =====================================================
+   ADVANCED TABS
+===================================================== */
+
+function advancedTab(id, button) {
+
+    document
+        .querySelectorAll(".advanced-content")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".advanced-tab")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    button.classList.add("active");
+
+}
+
+
+/* =====================================================
+   COMPLEX NUMBERS
+===================================================== */
+
+function parseComplex(value) {
+
+    value =
+        value
+            .replace(/\s+/g, "")
+            .replace(/i/g, "");
+
+
+    let real = 0;
+
+    let imaginary = 0;
+
+
+    const match =
+        value.match(
+            /^([+-]?\d*\.?\d+)?([+-]\d*\.?\d+)?$/
+        );
+
+
+    if (!match) {
+
+        throw new Error(
+            "Invalid complex number"
+        );
+
+    }
+
+
+    if (match[1]) {
+
+        real =
+            parseFloat(match[1]);
+
+    }
+
+
+    if (match[2]) {
+
+        imaginary =
+            parseFloat(match[2]);
+
+    }
+
+
+    return {
+        real,
+        imaginary
+    };
+
+}
+
+
+function formatComplex(z) {
+
+    const r =
+        Math.abs(z.real) < 1e-12
+            ? 0
+            : z.real;
+
+    const i =
+        Math.abs(z.imaginary) < 1e-12
+            ? 0
+            : z.imaginary;
+
+
+    if (i === 0) {
+
+        return r.toFixed(6);
+
+    }
+
+
+    if (r === 0) {
+
+        return `${i.toFixed(6)}i`;
+
+    }
+
+
+    return `${r.toFixed(6)} ${i >= 0 ? "+" : "-"} ${Math.abs(i).toFixed(6)}i`;
+
+}
+
+
+function complexOperation(operation) {
+
+    try {
+
+        const A =
+            parseComplex(
+                document.getElementById(
+                    "complexA"
+                ).value
+            );
+
+
+        const B =
+            parseComplex(
+                document.getElementById(
+                    "complexB"
+                ).value
+            );
+
+
+        let result;
+
+
+        if (operation === "+") {
+
+            result = {
+
+                real:
+                    A.real + B.real,
+
+                imaginary:
+                    A.imaginary +
+                    B.imaginary
+
+            };
+
+        }
+
+
+        else if (operation === "-") {
+
+            result = {
+
+                real:
+                    A.real - B.real,
+
+                imaginary:
+                    A.imaginary -
+                    B.imaginary
+
+            };
+
+        }
+
+
+        else if (operation === "*") {
+
+            result = {
+
+                real:
+                    A.real * B.real -
+                    A.imaginary * B.imaginary,
+
+                imaginary:
+                    A.real * B.imaginary +
+                    A.imaginary * B.real
+
+            };
+
+        }
+
+
+        else {
+
+            const denominator =
+                B.real * B.real +
+                B.imaginary *
+                B.imaginary;
+
+
+            if (denominator === 0) {
+
+                throw new Error();
+
+            }
+
+
+            result = {
+
+                real:
                     (
-                </button>
+                        A.real * B.real +
+                        A.imaginary * B.imaginary
+                    ) / denominator,
 
-                <button onclick="addValue(')')">
-                    )
-                </button>
+                imaginary:
+                    (
+                        A.imaginary * B.real -
+                        A.real * B.imaginary
+                    ) / denominator
 
-                <button onclick="addValue('%')">
-                    %
-                </button>
+            };
 
-
-                <button onclick="addValue('7')">
-                    7
-                </button>
-
-                <button onclick="addValue('8')">
-                    8
-                </button>
-
-                <button onclick="addValue('9')">
-                    9
-                </button>
-
-                <button class="operator"
-                        onclick="addValue('/')">
-                    ÷
-                </button>
-
-                <button onclick="addFunction('abs(')">
-                    |x|
-                </button>
+        }
 
 
-                <button onclick="addValue('4')">
-                    4
-                </button>
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            `Result = ${formatComplex(result)}`;
 
-                <button onclick="addValue('5')">
-                    5
-                </button>
+    }
 
-                <button onclick="addValue('6')">
-                    6
-                </button>
+    catch {
 
-                <button class="operator"
-                        onclick="addValue('*')">
-                    ×
-                </button>
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            "Invalid complex number. Example: 3+4i";
 
-                <button onclick="square()">
-                    x²
-                </button>
+    }
+
+}
 
 
-                <button onclick="addValue('1')">
-                    1
-                </button>
+function complexConjugate() {
 
-                <button onclick="addValue('2')">
+    try {
+
+        const A =
+            parseComplex(
+                document.getElementById(
+                    "complexA"
+                ).value
+            );
+
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            `Conjugate = ${formatComplex({
+                real: A.real,
+                imaginary: -A.imaginary
+            })}`;
+
+    }
+
+    catch {
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            "Invalid complex number.";
+
+    }
+
+}
+
+
+function complexMagnitude() {
+
+    try {
+
+        const A =
+            parseComplex(
+                document.getElementById(
+                    "complexA"
+                ).value
+            );
+
+
+        const magnitude =
+            Math.sqrt(
+                A.real * A.real +
+                A.imaginary *
+                A.imaginary
+            );
+
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            `|A| = ${magnitude.toFixed(6)}`;
+
+    }
+
+    catch {
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            "Invalid complex number.";
+
+    }
+
+}
+
+
+/* =====================================================
+   MATRIX
+===================================================== */
+
+function getMatrix(prefix) {
+
+    return [
+
+        [
+            Number(
+                document.getElementById(
+                    prefix + "11"
+                ).value
+            ),
+
+            Number(
+                document.getElementById(
+                    prefix + "12"
+                ).value
+            )
+
+        ],
+
+        [
+
+            Number(
+                document.getElementById(
+                    prefix + "21"
+                ).value
+            ),
+
+            Number(
+                document.getElementById(
+                    prefix + "22"
+                ).value
+            )
+
+        ]
+
+    ];
+
+}
+
+
+function formatMatrix(M) {
+
+    return `
+
+        <div style="
+            font-size:18px;
+            line-height:2;
+            font-family:monospace;
+        ">
+
+            [ ${M[0][0].toFixed(4)}
+              &nbsp;&nbsp;
+              ${M[0][1].toFixed(4)} ]
+
+            <br>
+
+            [ ${M[1][0].toFixed(4)}
+              &nbsp;&nbsp;
+              ${M[1][1].toFixed(4)} ]
+
+        </div>
+
+    `;
+
+}
+
+
+function matrixOperation(operation) {
+
+    const A =
+        getMatrix("a");
+
+    const B =
+        getMatrix("b");
+
+
+    let result;
+
+
+    if (operation === "add") {
+
+        result = [
+
+            [
+                A[0][0] + B[0][0],
+                A[0][1] + B[0][1]
+            ],
+
+            [
+                A[1][0] + B[1][0],
+                A[1][1] + B[1][1]
+            ]
+
+        ];
+
+    }
+
+
+    else if (
+        operation === "subtract"
+    ) {
+
+        result = [
+
+            [
+                A[0][0] - B[0][0],
+                A[0][1] - B[0][1]
+            ],
+
+            [
+                A[1][0] - B[1][0],
+                A[1][1] - B[1][1]
+            ]
+
+        ];
+
+    }
+
+
+    else {
+
+        result = [
+
+            [
+
+                A[0][0] * B[0][0] +
+                A[0][1] * B[1][0],
+
+                A[0][0] * B[0][1] +
+                A[0][1] * B[1][1]
+
+            ],
+
+            [
+
+                A[1][0] * B[0][0] +
+                A[1][1] * B[1][0],
+
+                A[1][0] * B[0][1] +
+                A[1][1] * B[1][1]
+
+            ]
+
+        ];
+
+    }
+
+
+    document.getElementById(
+        "matrixResult"
+    ).innerHTML =
+        formatMatrix(result);
+
+}
+
+
+function matrixDeterminant(prefix) {
+
+    const M =
+        getMatrix(
+            prefix === "A"
+                ? "a"
+                : "b"
+        );
+
+
+    const determinant =
+        M[0][0] * M[1][1] -
+        M[0][1] * M[1][0];
+
+
+    document.getElementById(
+        "matrixResult"
+    ).textContent =
+        `det(${prefix}) = ${determinant.toFixed(6)}`;
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+function calculateStatistics() {
+
+    const values =
+        getCommaNumbers(
+            "statisticsInput"
+        );
+
+
+    if (!values.length) {
+
+        return;
+
+    }
+
+
+    const sorted =
+        [...values].sort(
+            (a,b) => a-b
+        );
+
+
+    const count =
+        values.length;
+
+
+    const sum =
+        values.reduce(
+            (a,b) => a+b,
+            0
+        );
+
+
+    const mean =
+        sum / count;
+
+
+    let median;
+
+
+    if (count % 2 === 0) {
+
+        median =
+            (
+                sorted[count / 2 - 1] +
+                sorted[count / 2]
+            ) / 2;
+
+    }
+
+    else {
+
+        median =
+            sorted[
+                Math.floor(count / 2)
+            ];
+
+    }
+
+
+    const variance =
+        values.reduce(
+            (sum, value) =>
+                sum +
+                Math.pow(
+                    value - mean,
                     2
-                </button>
+                ),
+            0
+        ) / count;
 
-                <button onclick="addValue('3')">
-                    3
-                </button>
 
-                <button class="operator"
-                        onclick="addValue('-')">
-                    −
-                </button>
+    const standardDeviation =
+        Math.sqrt(variance);
 
-                <button onclick="power()">
-                    xʸ
-                </button>
 
+    document.getElementById(
+        "statCount"
+    ).textContent =
+        count;
 
-                <button class="zero"
-                        onclick="addValue('0')">
-                    0
-                </button>
 
-                <button onclick="addValue('.')">
-                    .
-                </button>
+    document.getElementById(
+        "statMean"
+    ).textContent =
+        mean.toFixed(4);
 
-                <button class="operator"
-                        onclick="addValue('+')">
-                    +
-                </button>
 
-                <button onclick="factorial()">
-                    x!
-                </button>
+    document.getElementById(
+        "statMedian"
+    ).textContent =
+        median.toFixed(4);
 
 
-                <button onclick="reciprocal()">
-                    1/x
-                </button>
+    document.getElementById(
+        "statMin"
+    ).textContent =
+        Math.min(...values).toFixed(4);
 
-                <button onclick="addValue('Math.E')">
-                    e
-                </button>
 
-                <button class="equals"
-                        onclick="calculate()">
-                    =
-                </button>
+    document.getElementById(
+        "statMax"
+    ).textContent =
+        Math.max(...values).toFixed(4);
 
-            </div>
 
-        </div>
+    document.getElementById(
+        "statStd"
+    ).textContent =
+        standardDeviation.toFixed(4);
 
+}
 
-        <div class="history-panel">
 
-            <div class="history-header">
+/* =====================================================
+   FORMULA SEARCH
+===================================================== */
 
-                <h3>🕘 Recent Calculations</h3>
+function searchFormulas() {
 
-                <button onclick="clearHistory()">
-                    Clear
-                </button>
+    const query =
+        document.getElementById(
+            "formulaSearch"
+        ).value
+        .toLowerCase();
 
-            </div>
 
-            <div id="historyList">
-                No calculations yet.
-            </div>
+    document
+        .querySelectorAll(".formula-card")
+        .forEach(card => {
 
-        </div>
+            const text =
+                card.textContent
+                    .toLowerCase();
 
-    </div>
 
-</section>
+            card.style.display =
+                text.includes(query)
+                    ? ""
+                    : "none";
 
+        });
 
+}
 
-<!-- =====================================================
-     ENGINEERING TOOLS
-===================================================== -->
 
-<section id="engineering" class="section">
+/* =====================================================
+   QUIZ
+===================================================== */
 
-    <div class="section-title">
+const quizQuestions = [
 
-        <span>⚙️</span>
+    {
 
-        <div>
-            <h2>Engineering Calculators</h2>
-            <p>Electrical, Mechanical and Civil tools</p>
-        </div>
+        question:
+            "What is the SI unit of resistance?",
 
-    </div>
+        options:
+            [
+                "Volt",
+                "Ampere",
+                "Ohm",
+                "Watt"
+            ],
 
+        answer: 2
 
-    <div class="engineering-tabs">
+    },
 
-        <button class="eng-tab active"
-                onclick="engineeringTab('electrical', this)">
-            ⚡ Electrical
-        </button>
 
-        <button class="eng-tab"
-                onclick="engineeringTab('mechanical', this)">
-            ⚙️ Mechanical
-        </button>
+    {
 
-        <button class="eng-tab"
-                onclick="engineeringTab('civil', this)">
-            🏗️ Civil
-        </button>
+        question:
+            "Which equation represents Newton's Second Law?",
 
-    </div>
+        options:
+            [
+                "V = IR",
+                "F = ma",
+                "P = VI",
+                "E = mc²"
+            ],
 
+        answer: 1
 
-    <!-- ELECTRICAL -->
+    },
 
-    <div id="electrical"
-         class="engineering-content active">
 
-        <div class="tool-card">
+    {
 
-            <h3>⚡ Ohm's Law</h3>
+        question:
+            "What is the SI unit of power?",
 
-            <div class="formula-box">
-                V = I × R
-            </div>
+        options:
+            [
+                "Joule",
+                "Newton",
+                "Watt",
+                "Pascal"
+            ],
 
-            <label>Voltage (V)</label>
+        answer: 2
 
-            <input id="voltage"
-                   type="number"
-                   placeholder="Voltage">
+    },
 
-            <label>Current (A)</label>
 
-            <input id="current"
-                   type="number"
-                   placeholder="Current">
+    {
 
-            <label>Resistance (Ω)</label>
+        question:
+            "Which formula is used for electrical power?",
 
-            <input id="resistance"
-                   type="number"
-                   placeholder="Resistance">
+        options:
+            [
+                "P = VI",
+                "F = ma",
+                "W = Fd",
+                "P = F/A"
+            ],
 
-            <button class="calculate-btn"
-                    onclick="calculateOhm()">
-                Calculate
-            </button>
+        answer: 0
 
-            <div id="ohmResult"
-                 class="tool-result">
-                Enter any two values.
-            </div>
+    },
 
-        </div>
 
+    {
 
-        <div class="tool-card">
+        question:
+            "What is the SI unit of pressure?",
 
-            <h3>⚡ Electrical Power</h3>
+        options:
+            [
+                "Pascal",
+                "Watt",
+                "Ohm",
+                "Joule"
+            ],
 
-            <div class="formula-box">
-                P = V × I
-            </div>
+        answer: 0
 
-            <label>Voltage (V)</label>
+    },
 
-            <input id="powerVoltage"
-                   type="number">
 
-            <label>Current (A)</label>
+    {
 
-            <input id="powerCurrent"
-                   type="number">
+        question:
+            "What is the area of a rectangle?",
 
-            <button class="calculate-btn"
-                    onclick="calculatePower()">
-                Calculate
-            </button>
+        options:
+            [
+                "L + W",
+                "L × W",
+                "L / W",
+                "2L + 2W"
+            ],
 
-            <div id="powerResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+        answer: 1
 
-        </div>
+    },
 
 
-        <div class="tool-card">
+    {
 
-            <h3>🔗 Series Resistance</h3>
+        question:
+            "What is the formula for torque?",
 
-            <div class="formula-box">
-                R = R₁ + R₂ + R₃...
-            </div>
+        options:
+            [
+                "τ = Fr",
+                "τ = F/r",
+                "τ = mr",
+                "τ = ma"
+            ],
 
-            <input id="seriesResistance"
-                   placeholder="Example: 10,20,30">
+        answer: 0
 
-            <button class="calculate-btn"
-                    onclick="calculateSeries()">
-                Calculate
-            </button>
+    },
 
-            <div id="seriesResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
 
-        </div>
+    {
 
+        question:
+            "What is the volume of a cylinder?",
 
-        <div class="tool-card">
+        options:
+            [
+                "πr²h",
+                "2πr",
+                "πr",
+                "r²h"
+            ],
 
-            <h3>🔗 Parallel Resistance</h3>
+        answer: 0
 
-            <div class="formula-box">
-                1/R = Σ(1/R)
-            </div>
+    },
 
-            <input id="parallelResistance"
-                   placeholder="Example: 10,20,30">
 
-            <button class="calculate-btn"
-                    onclick="calculateParallel()">
-                Calculate
-            </button>
+    {
 
-            <div id="parallelResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+        question:
+            "What does V = IR represent?",
 
-        </div>
+        options:
+            [
+                "Newton's Law",
+                "Ohm's Law",
+                "Power Law",
+                "Hooke's Law"
+            ],
 
+        answer: 1
 
-        <div class="tool-card">
+    },
 
-            <h3>🔋 Capacitor Energy</h3>
 
-            <div class="formula-box">
-                E = ½CV²
-            </div>
+    {
 
-            <label>Capacitance (F)</label>
+        question:
+            "What is the mathematical value of π approximately?",
 
-            <input id="capacitance"
-                   type="number">
+        options:
+            [
+                "2.14",
+                "3.14",
+                "4.14",
+                "1.41"
+            ],
 
-            <label>Voltage (V)</label>
+        answer: 1
 
-            <input id="capacitorVoltage"
-                   type="number">
+    }
 
-            <button class="calculate-btn"
-                    onclick="calculateCapacitorEnergy()">
-                Calculate
-            </button>
+];
 
-            <div id="capacitorResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
 
-        </div>
+let currentQuestion = 0;
 
+let quizScore = 0;
 
-        <div class="tool-card">
+let quizAnswered = false;
 
-            <h3>📡 Frequency & Time</h3>
 
-            <div class="formula-box">
-                f = 1/T
-            </div>
+function loadQuestion() {
 
-            <label>Time Period (s)</label>
+    const q =
+        quizQuestions[
+            currentQuestion
+        ];
 
-            <input id="timePeriod"
-                   type="number">
 
-            <button class="calculate-btn"
-                    onclick="calculateFrequency()">
-                Calculate
-            </button>
+    document.getElementById(
+        "quizProgress"
+    ).textContent =
+        `Question ${currentQuestion + 1} / ${quizQuestions.length}`;
 
-            <div id="frequencyResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
 
-        </div>
+    document.getElementById(
+        "quizScore"
+    ).textContent =
+        `Score: ${quizScore}`;
 
-    </div>
 
+    document.getElementById(
+        "quizQuestion"
+    ).textContent =
+        q.question;
 
-    <!-- MECHANICAL -->
 
-    <div id="mechanical"
-         class="engineering-content">
+    const options =
+        document.getElementById(
+            "quizOptions"
+        );
 
-        <div class="tool-card">
 
-            <h3>⚙️ Force</h3>
+    options.innerHTML = "";
 
-            <div class="formula-box">
-                F = m × a
-            </div>
+    quizAnswered = false;
 
-            <input id="mass"
-                   type="number"
-                   placeholder="Mass (kg)">
 
-            <input id="acceleration"
-                   type="number"
-                   placeholder="Acceleration (m/s²)">
+    q.options.forEach(
+        (option,index) => {
 
-            <button class="calculate-btn"
-                    onclick="calculateForce()">
-                Calculate
-            </button>
+            const button =
+                document.createElement(
+                    "button"
+                );
 
-            <div id="forceResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
 
-        </div>
+            button.className =
+                "quiz-option";
 
 
-        <div class="tool-card">
+            button.textContent =
+                option;
 
-            <h3>⚙️ Work</h3>
 
-            <div class="formula-box">
-                W = F × d
-            </div>
+            button.onclick =
+                () =>
+                    selectAnswer(
+                        index,
+                        button
+                    );
 
-            <input id="workForce"
-                   type="number"
-                   placeholder="Force (N)">
 
-            <input id="distance"
-                   type="number"
-                   placeholder="Distance (m)">
+            options.appendChild(
+                button
+            );
 
-            <button class="calculate-btn"
-                    onclick="calculateWork()">
-                Calculate
-            </button>
+        }
+    );
 
-            <div id="workResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
 
-        </div>
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
 
+}
 
-        <div class="tool-card">
 
-            <h3>⚙️ Mechanical Power</h3>
+function selectAnswer(index, button) {
 
-            <div class="formula-box">
-                P = W / t
-            </div>
+    if (quizAnswered) return;
 
-            <input id="mechanicalWork"
-                   type="number"
-                   placeholder="Work (J)">
 
-            <input id="mechanicalTime"
-                   type="number"
-                   placeholder="Time (s)">
+    quizAnswered = true;
 
-            <button class="calculate-btn"
-                    onclick="calculateMechanicalPower()">
-                Calculate
-            </button>
 
-            <div id="mechanicalPowerResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+    const q =
+        quizQuestions[
+            currentQuestion
+        ];
 
-        </div>
 
+    const options =
+        document.querySelectorAll(
+            ".quiz-option"
+        );
 
-        <div class="tool-card">
 
-            <h3>🔩 Torque</h3>
+    if (index === q.answer) {
 
-            <div class="formula-box">
-                τ = F × r
-            </div>
+        button.classList.add(
+            "correct"
+        );
 
-            <input id="torqueForce"
-                   type="number"
-                   placeholder="Force (N)">
+        quizScore++;
 
-            <input id="torqueRadius"
-                   type="number"
-                   placeholder="Radius (m)">
+    }
 
-            <button class="calculate-btn"
-                    onclick="calculateTorque()">
-                Calculate
-            </button>
+    else {
 
-            <div id="torqueResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+        button.classList.add(
+            "wrong"
+        );
 
-        </div>
+        options[
+            q.answer
+        ].classList.add(
+            "correct"
+        );
 
+    }
 
-        <div class="tool-card">
 
-            <h3>💨 Pressure</h3>
+    document.getElementById(
+        "quizScore"
+    ).textContent =
+        `Score: ${quizScore}`;
 
-            <div class="formula-box">
-                P = F / A
-            </div>
+}
 
-            <input id="pressureForce"
-                   type="number"
-                   placeholder="Force (N)">
 
-            <input id="pressureArea"
-                   type="number"
-                   placeholder="Area (m²)">
+function nextQuestion() {
 
-            <button class="calculate-btn"
-                    onclick="calculatePressure()">
-                Calculate
-            </button>
+    if (!quizAnswered) {
 
-            <div id="mechanicalPressureResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+        return;
 
-        </div>
+    }
 
-    </div>
 
+    currentQuestion++;
 
-    <!-- CIVIL -->
 
-    <div id="civil"
-         class="engineering-content">
+    if (
+        currentQuestion >=
+        quizQuestions.length
+    ) {
 
-        <div class="tool-card">
+        document.getElementById(
+            "quizQuestion"
+        ).textContent =
+            "🎉 Quiz Complete!";
 
-            <h3>🏗️ Rectangle Area</h3>
 
-            <div class="formula-box">
-                A = L × W
-            </div>
+        document.getElementById(
+            "quizOptions"
+        ).innerHTML = "";
 
-            <input id="rectangleLength"
-                   type="number"
-                   placeholder="Length (m)">
 
-            <input id="rectangleWidth"
-                   type="number"
-                   placeholder="Width (m)">
+        document.getElementById(
+            "nextQuiz"
+        ).style.display =
+            "none";
 
-            <button class="calculate-btn"
-                    onclick="calculateArea()">
-                Calculate
-            </button>
 
-            <div id="areaResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+        document.getElementById(
+            "quizResult"
+        ).textContent =
+            `Final Score: ${quizScore} / ${quizQuestions.length}`;
 
-        </div>
+        return;
 
+    }
 
-        <div class="tool-card">
 
-            <h3>🏗️ Concrete Volume</h3>
+    loadQuestion();
 
-            <div class="formula-box">
-                V = L × W × H
-            </div>
+}
 
-            <input id="concreteLength"
-                   type="number"
-                   placeholder="Length (m)">
 
-            <input id="concreteWidth"
-                   type="number"
-                   placeholder="Width (m)">
+/* =====================================================
+   KEYBOARD SUPPORT
+===================================================== */
 
-            <input id="concreteHeight"
-                   type="number"
-                   placeholder="Height (m)">
+document.addEventListener(
+    "keydown",
+    event => {
 
-            <button class="calculate-btn"
-                    onclick="calculateConcrete()">
-                Calculate
-            </button>
+        const scientific =
+            document.getElementById(
+                "scientific"
+            );
 
-            <div id="concreteResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
 
-        </div>
+        if (
+            !scientific.classList.contains(
+                "active"
+            )
+        ) return;
 
 
-        <div class="tool-card">
+        if (
+            /[0-9.+\-*/%()]/.test(
+                event.key
+            )
+        ) {
 
-            <h3>⭕ Cylinder Volume</h3>
+            addValue(event.key);
 
-            <div class="formula-box">
-                V = πr²h
-            </div>
+        }
 
-            <input id="cylinderRadius"
-                   type="number"
-                   placeholder="Radius (m)">
 
-            <input id="cylinderHeight"
-                   type="number"
-                   placeholder="Height (m)">
+        else if (
+            event.key === "Enter"
+        ) {
 
-            <button class="calculate-btn"
-                    onclick="calculateCylinder()">
-                Calculate
-            </button>
+            calculate();
 
-            <div id="cylinderResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+        }
 
-        </div>
 
+        else if (
+            event.key === "Backspace"
+        ) {
 
-        <div class="tool-card">
+            deleteLast();
 
-            <h3>🏗️ Stress</h3>
+        }
 
-            <div class="formula-box">
-                σ = F / A
-            </div>
 
-            <input id="stressForce"
-                   type="number"
-                   placeholder="Force (N)">
+        else if (
+            event.key === "Escape"
+        ) {
 
-            <input id="stressArea"
-                   type="number"
-                   placeholder="Area (m²)">
+            clearCalculator();
 
-            <button class="calculate-btn"
-                    onclick="calculateStress()">
-                Calculate
-            </button>
+        }
 
-            <div id="stressResult"
-                 class="tool-result">
-                Result will appear here.
-            </div>
+    }
+);
 
-        </div>
 
-    </div>
+/* =====================================================
+   INITIALIZE
+===================================================== */
 
-</section>
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
+        renderHistory();
 
+        loadUnits();
 
-<!-- =====================================================
-     UNIT CONVERTER
-===================================================== -->
+        loadQuestion();
 
-<section id="converter" class="section">
-
-    <div class="section-title">
-
-        <span>📐</span>
-
-        <div>
-            <h2>Unit Converter</h2>
-            <p>Engineering unit conversion made easy</p>
-        </div>
-
-    </div>
-
-
-    <div class="converter-card">
-
-        <label>Category</label>
-
-        <select id="conversionCategory"
-                onchange="loadUnits()">
-
-            <option value="length">Length</option>
-            <option value="mass">Mass</option>
-            <option value="temperature">Temperature</option>
-            <option value="area">Area</option>
-            <option value="volume">Volume</option>
-            <option value="speed">Speed</option>
-            <option value="force">Force</option>
-            <option value="pressure">Pressure</option>
-            <option value="power">Power</option>
-            <option value="energy">Energy</option>
-
-        </select>
-
-
-        <div class="converter-grid">
-
-            <div>
-
-                <label>From</label>
-
-                <select id="fromUnit"
-                        onchange="convertUnits()">
-                </select>
-
-                <input id="fromValue"
-                       type="number"
-                       value="1"
-                       oninput="convertUnits()">
-
-            </div>
-
-
-            <div class="swap">
-                ⇄
-            </div>
-
-
-            <div>
-
-                <label>To</label>
-
-                <select id="toUnit"
-                        onchange="convertUnits()">
-                </select>
-
-                <input id="toValue"
-                       readonly>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     ADVANCED TOOLS
-===================================================== -->
-
-<section id="advanced" class="section">
-
-    <div class="section-title">
-
-        <span>🔬</span>
-
-        <div>
-            <h2>Advanced Mathematics</h2>
-            <p>Complex numbers, matrices and statistics</p>
-        </div>
-
-    </div>
-
-
-    <div class="advanced-tabs">
-
-        <button class="advanced-tab active"
-                onclick="advancedTab('complex', this)">
-            🔢 Complex Numbers
-        </button>
-
-        <button class="advanced-tab"
-                onclick="advancedTab('matrix', this)">
-            ▦ Matrix
-        </button>
-
-        <button class="advanced-tab"
-                onclick="advancedTab('statistics', this)">
-            📊 Statistics
-        </button>
-
-    </div>
-
-
-    <!-- COMPLEX -->
-
-    <div id="complex"
-         class="advanced-content active">
-
-        <div class="advanced-card">
-
-            <h3>Complex Number Calculator</h3>
-
-            <p class="muted">
-                Enter numbers in the form a + bi.
-            </p>
-
-            <div class="two-column">
-
-                <input id="complexA"
-                       placeholder="Example: 3+4i">
-
-                <input id="complexB"
-                       placeholder="Example: 2+5i">
-
-            </div>
-
-
-            <div class="operation-buttons">
-
-                <button onclick="complexOperation('+')">
-                    A + B
-                </button>
-
-                <button onclick="complexOperation('-')">
-                    A − B
-                </button>
-
-                <button onclick="complexOperation('*')">
-                    A × B
-                </button>
-
-                <button onclick="complexOperation('/')">
-                    A ÷ B
-                </button>
-
-                <button onclick="complexConjugate()">
-                    Conjugate A
-                </button>
-
-                <button onclick="complexMagnitude()">
-                    |A|
-                </button>
-
-            </div>
-
-
-            <div id="complexResult"
-                 class="advanced-result">
-                Result will appear here.
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- MATRIX -->
-
-    <div id="matrix"
-         class="advanced-content">
-
-        <div class="advanced-card">
-
-            <h3>2 × 2 Matrix Calculator</h3>
-
-            <p class="muted">
-                Enter values for Matrix A and Matrix B.
-            </p>
-
-
-            <div class="matrix-area">
-
-                <div>
-
-                    <h4>Matrix A</h4>
-
-                    <div class="matrix-grid">
-
-                        <input id="a11" value="1">
-                        <input id="a12" value="2">
-                        <input id="a21" value="3">
-                        <input id="a22" value="4">
-
-                    </div>
-
-                </div>
-
-
-                <div>
-
-                    <h4>Matrix B</h4>
-
-                    <div class="matrix-grid">
-
-                        <input id="b11" value="5">
-                        <input id="b12" value="6">
-                        <input id="b21" value="7">
-                        <input id="b22" value="8">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="operation-buttons">
-
-                <button onclick="matrixOperation('add')">
-                    A + B
-                </button>
-
-                <button onclick="matrixOperation('subtract')">
-                    A − B
-                </button>
-
-                <button onclick="matrixOperation('multiply')">
-                    A × B
-                </button>
-
-                <button onclick="matrixDeterminant('A')">
-                    det(A)
-                </button>
-
-                <button onclick="matrixDeterminant('B')">
-                    det(B)
-                </button>
-
-            </div>
-
-
-            <div id="matrixResult"
-                 class="advanced-result">
-                Result will appear here.
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- STATISTICS -->
-
-    <div id="statistics"
-         class="advanced-content">
-
-        <div class="advanced-card">
-
-            <h3>📊 Statistics Calculator</h3>
-
-            <p class="muted">
-                Enter numbers separated by commas.
-            </p>
-
-            <input id="statisticsInput"
-                   placeholder="Example: 10,20,30,40,50">
-
-            <button class="calculate-btn"
-                    onclick="calculateStatistics()">
-                Calculate Statistics
-            </button>
-
-
-            <div class="statistics-grid">
-
-                <div>
-                    <span>Count</span>
-                    <strong id="statCount">—</strong>
-                </div>
-
-                <div>
-                    <span>Mean</span>
-                    <strong id="statMean">—</strong>
-                </div>
-
-                <div>
-                    <span>Median</span>
-                    <strong id="statMedian">—</strong>
-                </div>
-
-                <div>
-                    <span>Minimum</span>
-                    <strong id="statMin">—</strong>
-                </div>
-
-                <div>
-                    <span>Maximum</span>
-                    <strong id="statMax">—</strong>
-                </div>
-
-                <div>
-                    <span>Std. Deviation</span>
-                    <strong id="statStd">—</strong>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     FORMULAS
-===================================================== -->
-
-<section id="formulas" class="section">
-
-    <div class="section-title">
-
-        <span>📚</span>
-
-        <div>
-            <h2>Engineering Formula Library</h2>
-            <p>Search important formulas</p>
-        </div>
-
-    </div>
-
-
-    <input id="formulaSearch"
-           class="formula-search"
-           placeholder="🔍 Search formulas..."
-           oninput="searchFormulas()">
-
-
-    <div id="formulaGrid"
-         class="formula-grid">
-
-
-        <div class="formula-card">
-
-            <span>⚡ ELECTRICAL</span>
-
-            <h3>Ohm's Law</h3>
-
-            <div>V = I × R</div>
-
-            <p>
-                Voltage = Current × Resistance
-            </p>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>⚡ ELECTRICAL</span>
-
-            <h3>Electrical Power</h3>
-
-            <div>P = V × I</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>⚡ ELECTRICAL</span>
-
-            <h3>Electrical Energy</h3>
-
-            <div>E = P × t</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>⚡ ELECTRICAL</span>
-
-            <h3>Capacitor Energy</h3>
-
-            <div>E = ½CV²</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>⚙️ MECHANICAL</span>
-
-            <h3>Newton's Second Law</h3>
-
-            <div>F = ma</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>⚙️ MECHANICAL</span>
-
-            <h3>Work</h3>
-
-            <div>W = Fd</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>⚙️ MECHANICAL</span>
-
-            <h3>Power</h3>
-
-            <div>P = W/t</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>⚙️ MECHANICAL</span>
-
-            <h3>Torque</h3>
-
-            <div>τ = Fr</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>🏗️ CIVIL</span>
-
-            <h3>Rectangle Area</h3>
-
-            <div>A = LW</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>🏗️ CIVIL</span>
-
-            <h3>Rectangle Volume</h3>
-
-            <div>V = LWH</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>🏗️ CIVIL</span>
-
-            <h3>Cylinder Volume</h3>
-
-            <div>V = πr²h</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>🏗️ CIVIL</span>
-
-            <h3>Stress</h3>
-
-            <div>σ = F/A</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>📐 MATHEMATICS</span>
-
-            <h3>Pythagorean Theorem</h3>
-
-            <div>a² + b² = c²</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>📐 MATHEMATICS</span>
-
-            <h3>Quadratic Equation</h3>
-
-            <div>
-                x = (-b ± √(b²−4ac))/2a
-            </div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>📐 MATHEMATICS</span>
-
-            <h3>Circle Area</h3>
-
-            <div>A = πr²</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>📐 MATHEMATICS</span>
-
-            <h3>Circle Circumference</h3>
-
-            <div>C = 2πr</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>🌡️ THERMODYNAMICS</span>
-
-            <h3>Ideal Gas Law</h3>
-
-            <div>PV = nRT</div>
-
-        </div>
-
-
-        <div class="formula-card">
-
-            <span>💧 FLUID</span>
-
-            <h3>Pressure</h3>
-
-            <div>P = F/A</div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     QUIZ
-===================================================== -->
-
-<section id="quiz" class="section">
-
-    <div class="section-title">
-
-        <span>🧠</span>
-
-        <div>
-            <h2>Engineering Quiz</h2>
-            <p>Test your engineering knowledge</p>
-        </div>
-
-    </div>
-
-
-    <div class="quiz-card">
-
-        <div class="quiz-top">
-
-            <span id="quizProgress">
-                Question 1 / 10
-            </span>
-
-            <span id="quizScore">
-                Score: 0
-            </span>
-
-        </div>
-
-
-        <h2 id="quizQuestion">
-            Loading...
-        </h2>
-
-
-        <div id="quizOptions"
-             class="quiz-options">
-        </div>
-
-
-        <button id="nextQuiz"
-                class="primary-btn"
-                onclick="nextQuestion()">
-
-            Next Question →
-
-        </button>
-
-
-        <div id="quizResult"
-             class="quiz-result">
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     HISTORY
-===================================================== -->
-
-<section id="history" class="section">
-
-    <div class="section-title">
-
-        <span>🕘</span>
-
-        <div>
-            <h2>Calculation History</h2>
-            <p>Your saved scientific calculations</p>
-        </div>
-
-    </div>
-
-
-    <div class="full-history"
-         id="fullHistory">
-
-        No calculation history.
-
-    </div>
-
-</section>
-
-</main>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <div class="footer-brand">
-
-        <img src="logo.png"
-             alt="ENGICALC">
-
-        <div>
-
-            <h2>ENGICALC</h2>
-
-            <p>ENGINEERING CALCULATOR</p>
-
-        </div>
-
-    </div>
-
-
-    <div class="footer-links">
-
-        <button onclick="showSection('home')">
-            Home
-        </button>
-
-        <button onclick="showSection('scientific')">
-            Calculator
-        </button>
-
-        <button onclick="showSection('engineering')">
-            Engineering
-        </button>
-
-        <button onclick="showSection('formulas')">
-            Formulas
-        </button>
-
-    </div>
-
-
-    <p class="copyright">
-        © 2026 ENGICALC — Engineering Student Toolkit
-    </p>
-
-</footer>
-
-
-<script src="script.js"></script>
-
-</body>
-</html>
+    }
+);
