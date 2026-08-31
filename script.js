@@ -7,13 +7,20 @@ const DATA = {
     questions: JSON.parse(localStorage.getItem('engicalc_questions')) || [],
     formulas: JSON.parse(localStorage.getItem('engicalc_formulas')) || [],
     history: JSON.parse(localStorage.getItem('engicalc_history')) || [],
-    topics: JSON.parse(localStorage.getItem('engicalc_topics')) || ['Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering', 'Engineering Mathematics', 'Computer Science'],
-    subtopics: JSON.parse(localStorage.getItem('engicalc_subtopics')) || {
+    subjects: JSON.parse(localStorage.getItem('engicalc_subjects')) || ['Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering', 'Engineering Mathematics', 'Computer Science'],
+    topics: JSON.parse(localStorage.getItem('engicalc_topics')) || {
         'Electrical Engineering': ['Circuit Theory', 'Network Theory', 'Electrical Machines', 'Power Systems'],
         'Mechanical Engineering': ['Thermodynamics', 'Fluid Mechanics', 'Strength of Materials', 'Dynamics'],
         'Civil Engineering': ['Structural Analysis', 'Fluid Mechanics', 'Soil Mechanics', 'Transportation'],
         'Engineering Mathematics': ['Calculus', 'Linear Algebra', 'Differential Equations', 'Statistics'],
         'Computer Science': ['Data Structures', 'Algorithms', 'Discrete Math', 'Programming']
+    },
+    subtopics: JSON.parse(localStorage.getItem('engicalc_subtopics')) || {
+        'Circuit Theory': ['AC Circuits', 'DC Circuits', 'Network Theorems'],
+        'Network Theory': ['Two-port Networks', 'Network Functions', 'Filters'],
+        'Thermodynamics': ['Laws of Thermodynamics', 'Heat Transfer', 'Thermodynamic Cycles'],
+        'Calculus': ['Differentiation', 'Integration', 'Differential Equations'],
+        'Data Structures': ['Arrays', 'Linked Lists', 'Trees', 'Graphs']
     },
     settings: JSON.parse(localStorage.getItem('engicalc_settings')) || {
         easy: { questions: 10, time: 10 },
@@ -22,22 +29,28 @@ const DATA = {
     }
 };
 
+// ===== SAVE DATA =====
+function saveData() {
+    localStorage.setItem('engicalc_questions', JSON.stringify(DATA.questions));
+    localStorage.setItem('engicalc_formulas', JSON.stringify(DATA.formulas));
+    localStorage.setItem('engicalc_history', JSON.stringify(DATA.history));
+    localStorage.setItem('engicalc_subjects', JSON.stringify(DATA.subjects));
+    localStorage.setItem('engicalc_topics', JSON.stringify(DATA.topics));
+    localStorage.setItem('engicalc_subtopics', JSON.stringify(DATA.subtopics));
+    localStorage.setItem('engicalc_settings', JSON.stringify(DATA.settings));
+}
+
 // ===== INITIALIZE SAMPLE DATA =====
 function initSampleData() {
     if (DATA.questions.length === 0) {
         DATA.questions = [
-            { id: 1, topic: 'Electrical Engineering', subtopic: 'Circuit Theory', difficulty: 'easy', question: 'What is Ohm\'s Law?', options: ['V = IR', 'V = I/R', 'I = VR', 'R = VI'], correct: 0 },
-            { id: 2, topic: 'Electrical Engineering', subtopic: 'Circuit Theory', difficulty: 'easy', question: 'What is the unit of resistance?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], correct: 2 },
-            { id: 3, topic: 'Electrical Engineering', subtopic: 'Network Theory', difficulty: 'medium', question: 'What is the equivalent resistance of two 10Ω resistors in parallel?', options: ['20Ω', '10Ω', '5Ω', '2Ω'], correct: 2 },
-            { id: 4, topic: 'Electrical Engineering', subtopic: 'Circuit Theory', difficulty: 'hard', question: 'What is the power dissipated by a 10Ω resistor with 5A current?', options: ['50W', '100W', '250W', '500W'], correct: 2 },
-            { id: 5, topic: 'Mechanical Engineering', subtopic: 'Thermodynamics', difficulty: 'easy', question: 'What is the First Law of Thermodynamics?', options: ['Energy is created', 'Energy is destroyed', 'Energy is conserved', 'Entropy always increases'], correct: 2 },
-            { id: 6, topic: 'Mechanical Engineering', subtopic: 'Fluid Mechanics', difficulty: 'medium', question: 'What is Bernoulli\'s equation used for?', options: ['Solid mechanics', 'Fluid flow', 'Heat transfer', 'Thermodynamics'], correct: 1 },
-            { id: 7, topic: 'Engineering Mathematics', subtopic: 'Calculus', difficulty: 'easy', question: 'What is the derivative of x²?', options: ['x', '2x', 'x²', '2x²'], correct: 1 },
-            { id: 8, topic: 'Engineering Mathematics', subtopic: 'Linear Algebra', difficulty: 'medium', question: 'What is the determinant of [[1,2],[3,4]]?', options: ['-2', '2', '4', '-4'], correct: 0 },
-            { id: 9, topic: 'Computer Science', subtopic: 'Data Structures', difficulty: 'easy', question: 'What is the time complexity of binary search?', options: ['O(n)', 'O(log n)', 'O(n²)', 'O(1)'], correct: 1 },
-            { id: 10, topic: 'Computer Science', subtopic: 'Algorithms', difficulty: 'medium', question: 'What sorting algorithm has O(n log n) average case?', options: ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Selection Sort'], correct: 2 },
-            { id: 11, topic: 'Civil Engineering', subtopic: 'Structural Analysis', difficulty: 'easy', question: 'What is a beam?', options: ['Column', 'Horizontal member', 'Vertical member', 'Foundation'], correct: 1 },
-            { id: 12, topic: 'Civil Engineering', subtopic: 'Soil Mechanics', difficulty: 'medium', question: 'What is the unit weight of water?', options: ['9.81 kN/m³', '9.81 N/m³', '981 kN/m³', '1 kN/m³'], correct: 0 }
+            { id: 1, subject: 'Electrical Engineering', topic: 'Circuit Theory', subtopic: 'DC Circuits', difficulty: 'easy', question: 'What is Ohm\'s Law?', options: ['V = IR', 'V = I/R', 'I = VR', 'R = VI'], correct: 0 },
+            { id: 2, subject: 'Electrical Engineering', topic: 'Circuit Theory', subtopic: 'DC Circuits', difficulty: 'easy', question: 'What is the unit of resistance?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], correct: 2 },
+            { id: 3, subject: 'Electrical Engineering', topic: 'Network Theory', subtopic: 'Two-port Networks', difficulty: 'medium', question: 'What is the equivalent resistance of two 10Ω resistors in parallel?', options: ['20Ω', '10Ω', '5Ω', '2Ω'], correct: 2 },
+            { id: 4, subject: 'Mechanical Engineering', topic: 'Thermodynamics', subtopic: 'Laws of Thermodynamics', difficulty: 'easy', question: 'What is the First Law of Thermodynamics?', options: ['Energy is created', 'Energy is destroyed', 'Energy is conserved', 'Entropy always increases'], correct: 2 },
+            { id: 5, subject: 'Engineering Mathematics', topic: 'Calculus', subtopic: 'Differentiation', difficulty: 'easy', question: 'What is the derivative of x²?', options: ['x', '2x', 'x²', '2x²'], correct: 1 },
+            { id: 6, subject: 'Computer Science', topic: 'Data Structures', subtopic: 'Arrays', difficulty: 'easy', question: 'What is the time complexity of binary search?', options: ['O(n)', 'O(log n)', 'O(n²)', 'O(1)'], correct: 1 },
+            { id: 7, subject: 'Civil Engineering', topic: 'Structural Analysis', subtopic: 'Beams', difficulty: 'easy', question: 'What is a beam?', options: ['Column', 'Horizontal member', 'Vertical member', 'Foundation'], correct: 1 }
         ];
         saveData();
     }
@@ -47,31 +60,18 @@ function initSampleData() {
             { id: 1, subject: 'Electrical Engineering', name: 'Ohm\'s Law', equation: 'V = I × R', description: 'Voltage = Current × Resistance' },
             { id: 2, subject: 'Electrical Engineering', name: 'Power Formula', equation: 'P = V × I', description: 'Power = Voltage × Current' },
             { id: 3, subject: 'Mechanical Engineering', name: 'Newton\'s Second Law', equation: 'F = m × a', description: 'Force = Mass × Acceleration' },
-            { id: 4, subject: 'Mechanical Engineering', name: 'Work Done', equation: 'W = F × d', description: 'Work = Force × Distance' },
-            { id: 5, subject: 'Civil Engineering', name: 'Stress Formula', equation: 'σ = F / A', description: 'Stress = Force / Area' },
-            { id: 6, subject: 'Engineering Mathematics', name: 'Quadratic Formula', equation: 'x = (-b ± √(b² - 4ac)) / 2a', description: 'Solution for ax² + bx + c = 0' },
-            { id: 7, subject: 'Computer Science', name: 'Big O Notation', equation: 'O(f(n))', description: 'Upper bound of algorithm complexity' },
-            { id: 8, subject: 'Electrical Engineering', name: 'Resistance in Series', equation: 'R_total = R₁ + R₂ + R₃', description: 'Sum of all resistances in series' }
+            { id: 4, subject: 'Civil Engineering', name: 'Stress Formula', equation: 'σ = F / A', description: 'Stress = Force / Area' },
+            { id: 5, subject: 'Engineering Mathematics', name: 'Quadratic Formula', equation: 'x = (-b ± √(b² - 4ac)) / 2a', description: 'Solution for ax² + bx + c = 0' },
+            { id: 6, subject: 'Computer Science', name: 'Big O Notation', equation: 'O(f(n))', description: 'Upper bound of algorithm complexity' }
         ];
         saveData();
     }
-}
-
-// ===== SAVE DATA =====
-function saveData() {
-    localStorage.setItem('engicalc_questions', JSON.stringify(DATA.questions));
-    localStorage.setItem('engicalc_formulas', JSON.stringify(DATA.formulas));
-    localStorage.setItem('engicalc_history', JSON.stringify(DATA.history));
-    localStorage.setItem('engicalc_topics', JSON.stringify(DATA.topics));
-    localStorage.setItem('engicalc_subtopics', JSON.stringify(DATA.subtopics));
-    localStorage.setItem('engicalc_settings', JSON.stringify(DATA.settings));
 }
 
 // ===== NAVIGATION =====
 document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
         const section = this.dataset.section;
-        
         if (section === 'admin') {
             if (isAdminLoggedIn) {
                 switchToSection(section);
@@ -97,7 +97,6 @@ function switchToSection(section) {
     document.querySelector('.main-nav')?.classList.remove('open');
 }
 
-// Mobile menu toggle
 document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
     document.querySelector('.main-nav').classList.toggle('open');
 });
@@ -110,17 +109,17 @@ let isAdminLoggedIn = false;
 
 function verifyAdminPassword() {
     const password = document.getElementById('adminPasswordInput').value;
-    
     if (password === ADMIN_PASSWORD) {
         isAdminLoggedIn = true;
         document.getElementById('adminPasswordModal').style.display = 'none';
         document.getElementById('adminDashboard').style.display = 'block';
         document.getElementById('passwordError').style.display = 'none';
-        
         renderQuestionBank();
+        renderSubjects();
         renderTopics();
         renderAdminFormulas();
         loadSettings();
+        populateSubjectSelects();
         switchToSection('admin');
     } else {
         document.getElementById('passwordError').style.display = 'block';
@@ -142,6 +141,99 @@ function adminLogout() {
     isAdminLoggedIn = false;
     document.getElementById('adminDashboard').style.display = 'none';
     switchToSection('home');
+}
+
+// ============================================
+// QUIZ - Subject/Topic/Subtopic Functions
+// ============================================
+function populateQuizSubjects() {
+    const select = document.getElementById('quizSubject');
+    select.innerHTML = DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    updateQuizTopics();
+}
+
+function updateQuizTopics() {
+    const subject = document.getElementById('quizSubject').value;
+    const select = document.getElementById('quizTopic');
+    const topics = DATA.topics[subject] || ['General'];
+    select.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
+    updateQuizSubtopics();
+}
+
+function updateQuizSubtopics() {
+    const topic = document.getElementById('quizTopic').value;
+    const select = document.getElementById('quizSubtopic');
+    const subtopics = DATA.subtopics[topic] || ['General'];
+    select.innerHTML = subtopics.map(st => `<option value="${st}">${st}</option>`).join('');
+}
+
+// ============================================
+// ADMIN - Subjects Management
+// ============================================
+function renderSubjects() {
+    const container = document.getElementById('subjectList');
+    container.innerHTML = DATA.subjects.map(s => `<span class="topic-tag">${s}</span>`).join('');
+}
+
+function addSubject() {
+    const input = document.getElementById('newSubject');
+    const subject = input.value.trim();
+    if (subject && !DATA.subjects.includes(subject)) {
+        DATA.subjects.push(subject);
+        DATA.topics[subject] = ['General'];
+        saveData();
+        renderSubjects();
+        populateSubjectSelects();
+        populateQuizSubjects();
+        input.value = '';
+    } else {
+        alert('Subject already exists or invalid.');
+    }
+}
+
+// ============================================
+// ADMIN - Topics Management
+// ============================================
+function populateSubjectSelects() {
+    const selects = document.querySelectorAll('#topicSubjectSelect, #qtSubject');
+    selects.forEach(sel => {
+        if (sel) {
+            sel.innerHTML = DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+        }
+    });
+}
+
+function renderTopics() {
+    const container = document.getElementById('topicList');
+    let html = '';
+    DATA.subjects.forEach(subject => {
+        const topics = DATA.topics[subject] || [];
+        topics.forEach(topic => {
+            html += `<span class="topic-tag">${subject} › ${topic}</span>`;
+        });
+    });
+    container.innerHTML = html || '<p>No topics added yet.</p>';
+}
+
+function addTopic() {
+    const subject = document.getElementById('topicSubjectSelect').value;
+    const input = document.getElementById('newTopic');
+    const topic = input.value.trim();
+    if (topic) {
+        if (!DATA.topics[subject]) DATA.topics[subject] = [];
+        if (!DATA.topics[subject].includes(topic)) {
+            DATA.topics[subject].push(topic);
+            DATA.subtopics[topic] = ['General'];
+            saveData();
+            renderTopics();
+            populateQuizSubjects();
+            input.value = '';
+        } else {
+            alert('Topic already exists in this subject.');
+        }
+    } else {
+        alert('Please enter a topic name.');
+    }
 }
 
 // ============================================
@@ -301,13 +393,9 @@ function updateConverterUnits() {
     const data = conversionData[category];
     const fromSelect = document.getElementById('convFrom');
     const toSelect = document.getElementById('convTo');
-    
     fromSelect.innerHTML = data.units.map(u => `<option value="${u}">${u}</option>`).join('');
     toSelect.innerHTML = data.units.map(u => `<option value="${u}">${u}</option>`).join('');
-    
-    if (data.units.length > 1) {
-        toSelect.value = data.units[1];
-    }
+    if (data.units.length > 1) toSelect.value = data.units[1];
     convertUnit();
 }
 
@@ -316,12 +404,10 @@ function convertUnit() {
     const from = document.getElementById('convFrom').value;
     const to = document.getElementById('convTo').value;
     const value = parseFloat(document.getElementById('convValue').value);
-    
     if (isNaN(value)) {
         document.getElementById('convResult').value = 'Enter a valid number';
         return;
     }
-    
     let result;
     if (category === 'temperature') {
         result = convertTemperature(value, from, to);
@@ -330,7 +416,6 @@ function convertUnit() {
         const baseValue = value / data.factors[from];
         result = baseValue * data.factors[to];
     }
-    
     document.getElementById('convResult').value = result.toFixed(6);
 }
 
@@ -339,7 +424,6 @@ function convertTemperature(value, from, to) {
     if (from === '°C') celsius = value;
     else if (from === '°F') celsius = (value - 32) * 5/9;
     else if (from === 'K') celsius = value - 273.15;
-    
     if (to === '°C') return celsius;
     else if (to === '°F') return celsius * 9/5 + 32;
     else if (to === 'K') return celsius + 273.15;
@@ -369,12 +453,10 @@ function solveLinear() {
     const a = parseFloat(document.getElementById('linA').value);
     const b = parseFloat(document.getElementById('linB').value);
     const result = document.getElementById('linearResult');
-    
     if (a === 0) {
         result.innerHTML = b === 0 ? '✅ Infinite solutions' : '❌ No solution';
     } else {
-        const x = -b / a;
-        result.innerHTML = `✅ x = ${x.toFixed(4)}`;
+        result.innerHTML = `✅ x = ${(-b / a).toFixed(4)}`;
     }
     result.classList.add('show');
 }
@@ -384,13 +466,11 @@ function solveQuadratic() {
     const b = parseFloat(document.getElementById('quadB').value);
     const c = parseFloat(document.getElementById('quadC').value);
     const result = document.getElementById('quadraticResult');
-    
     if (a === 0) {
         result.innerHTML = '❌ Not a quadratic (a = 0)';
         result.classList.add('show');
         return;
     }
-    
     const d = b*b - 4*a*c;
     if (d < 0) {
         const real = -b/(2*a);
@@ -414,14 +494,11 @@ function solveSystem2() {
     const b2 = parseFloat(document.getElementById('s2b2').value);
     const c2 = parseFloat(document.getElementById('s2c2').value);
     const result = document.getElementById('system2Result');
-    
     const det = a1*b2 - a2*b1;
     if (det === 0) {
         result.innerHTML = '❌ No unique solution';
     } else {
-        const x = (c1*b2 - c2*b1) / det;
-        const y = (a1*c2 - a2*c1) / det;
-        result.innerHTML = `✅ x = ${x.toFixed(4)}, y = ${y.toFixed(4)}`;
+        result.innerHTML = `✅ x = ${((c1*b2 - c2*b1)/det).toFixed(4)}, y = ${((a1*c2 - a2*c1)/det).toFixed(4)}`;
     }
     result.classList.add('show');
 }
@@ -440,18 +517,15 @@ function solveSystem3() {
     const c3 = parseFloat(document.getElementById('s3c3').value);
     const d3 = parseFloat(document.getElementById('s3d3').value);
     const result = document.getElementById('system3Result');
-    
     const det = a1*(b2*c3 - b3*c2) - b1*(a2*c3 - a3*c2) + c1*(a2*b3 - a3*b2);
     if (det === 0) {
         result.innerHTML = '❌ No unique solution';
         result.classList.add('show');
         return;
     }
-    
     const detX = d1*(b2*c3 - b3*c2) - b1*(d2*c3 - d3*c2) + c1*(d2*b3 - d3*b2);
     const detY = a1*(d2*c3 - d3*c2) - d1*(a2*c3 - a3*c2) + c1*(a2*d3 - a3*d2);
     const detZ = a1*(b2*d3 - b3*d2) - b1*(a2*d3 - a3*d2) + d1*(a2*b3 - a3*b2);
-    
     result.innerHTML = `✅ x = ${(detX/det).toFixed(4)}, y = ${(detY/det).toFixed(4)}, z = ${(detZ/det).toFixed(4)}`;
     result.classList.add('show');
 }
@@ -471,7 +545,6 @@ function calculateOhmsLaw() {
     const i = parseFloat(document.getElementById('ohmI').value);
     const r = parseFloat(document.getElementById('ohmR').value);
     const result = document.getElementById('ohmsResult');
-    
     let output = '';
     if (!isNaN(v) && !isNaN(i) && !isNaN(r)) {
         output = '⚠️ Only leave one field empty!';
@@ -498,7 +571,6 @@ function calculatePower() {
     const i = parseFloat(document.getElementById('powI').value);
     const p = parseFloat(document.getElementById('powP').value);
     const result = document.getElementById('powerResult');
-    
     let output = '';
     if (!isNaN(v) && !isNaN(i) && !isNaN(p)) {
         output = '⚠️ Only leave one field empty!';
@@ -526,13 +598,11 @@ function calculateResistance() {
     const r2 = parseFloat(document.getElementById('resR2').value);
     const r3 = parseFloat(document.getElementById('resR3').value);
     const result = document.getElementById('resistanceResult');
-    
     if (isNaN(r1) || isNaN(r2) || isNaN(r3)) {
         result.innerHTML = '⚠️ Enter all resistance values!';
         result.classList.add('show');
         return;
     }
-    
     let total = type === 'series' ? r1 + r2 + r3 : 1 / (1/r1 + 1/r2 + 1/r3);
     result.innerHTML = `✅ Total ${type} resistance: ${total.toFixed(4)} Ω`;
     result.classList.add('show');
@@ -544,11 +614,9 @@ function calculateColorCode() {
     const multiplier = parseInt(document.getElementById('ccMultiplier').value);
     const tolerance = parseInt(document.getElementById('ccTolerance').value);
     const result = document.getElementById('colorCodeResult');
-    
     const value = (band1 * 10 + band2) * multiplier;
     const min = value - (value * tolerance / 100);
     const max = value + (value * tolerance / 100);
-    
     result.innerHTML = `✅ ${value.toLocaleString()} Ω ±${tolerance}%<br>📊 Range: ${min.toLocaleString()} — ${max.toLocaleString()} Ω`;
     result.classList.add('show');
 }
@@ -575,6 +643,7 @@ function shuffleArray(arr) {
 }
 
 function startQuiz(source) {
+    const subject = document.getElementById('quizSubject').value;
     const topic = document.getElementById('quizTopic').value;
     const subtopic = document.getElementById('quizSubtopic').value;
     const difficulty = document.getElementById('quizDifficulty').value;
@@ -583,10 +652,15 @@ function startQuiz(source) {
     
     let questions = [];
     if (source === 'bank') {
-        questions = DATA.questions.filter(q => q.topic === topic && q.subtopic === subtopic && q.difficulty === difficulty);
+        questions = DATA.questions.filter(q => 
+            q.subject === subject && 
+            q.topic === topic && 
+            q.subtopic === subtopic && 
+            q.difficulty === difficulty
+        );
         questions = shuffleArray(questions).slice(0, count);
     } else {
-        questions = generateAIQuestions(topic, subtopic, difficulty, count);
+        questions = generateAIQuestions(subject, topic, subtopic, difficulty, count);
         questions = shuffleArray(questions);
     }
     
@@ -610,14 +684,13 @@ function startQuiz(source) {
     startTimer();
 }
 
-function generateAIQuestions(topic, subtopic, difficulty, count) {
+function generateAIQuestions(subject, topic, subtopic, difficulty, count) {
     const templates = [
         { q: `What is a fundamental principle in ${subtopic}?`, opts: ['Principle A', 'Principle B', 'Principle C', 'Principle D'], correct: 0 },
-        { q: `Which equation is used in ${topic}?`, opts: ['Equation 1', 'Equation 2', 'Equation 3', 'Equation 4'], correct: 1 },
-        { q: `How is ${subtopic} applied?`, opts: ['Application X', 'Application Y', 'Application Z', 'Application W'], correct: 2 },
-        { q: `What is the main concept of ${subtopic}?`, opts: ['Concept 1', 'Concept 2', 'Concept 3', 'Concept 4'], correct: 0 }
+        { q: `Which equation is used in ${subject} for ${topic}?`, opts: ['Equation 1', 'Equation 2', 'Equation 3', 'Equation 4'], correct: 1 },
+        { q: `How is ${subtopic} applied in engineering?`, opts: ['Application X', 'Application Y', 'Application Z', 'Application W'], correct: 2 },
+        { q: `What is the main concept of ${topic}?`, opts: ['Concept 1', 'Concept 2', 'Concept 3', 'Concept 4'], correct: 0 }
     ];
-    
     const questions = [];
     for (let i = 0; i < Math.min(count, templates.length); i++) {
         const template = templates[i];
@@ -625,7 +698,7 @@ function generateAIQuestions(topic, subtopic, difficulty, count) {
         const correctIdx = shuffledOpts.indexOf(template.opts[template.correct]);
         questions.push({
             id: Date.now() + i,
-            topic, subtopic, difficulty,
+            subject, topic, subtopic, difficulty,
             question: template.q,
             options: shuffledOpts,
             correct: correctIdx,
@@ -639,15 +712,12 @@ function renderQuestion() {
     const q = currentQuiz.questions[currentQuiz.currentIndex];
     const total = currentQuiz.questions.length;
     const idx = currentQuiz.currentIndex;
-    
     document.getElementById('questionCounter').textContent = `Question ${idx + 1}/${total}`;
     document.getElementById('progressFill').style.width = `${((idx) / total) * 100}%`;
     document.getElementById('questionText').textContent = q.question;
-    
     const container = document.getElementById('optionsContainer');
     container.innerHTML = q.options.map((opt, i) => `
-        <button class="option-btn ${currentQuiz.answers[idx] === i ? 'selected' : ''}" 
-                onclick="selectOption(${i})">
+        <button class="option-btn ${currentQuiz.answers[idx] === i ? 'selected' : ''}" onclick="selectOption(${i})">
             ${String.fromCharCode(65 + i)}. ${opt}
         </button>
     `).join('');
@@ -694,19 +764,15 @@ function submitQuiz() {
     currentQuiz.questions.forEach((q, i) => {
         if (currentQuiz.answers[i] === q.correct) correct++;
     });
-    
     currentQuiz.score = correct;
     const total = currentQuiz.questions.length;
     const percentage = Math.round((correct / total) * 100);
-    
     document.getElementById('quizInterface').style.display = 'none';
     document.getElementById('quizResult').style.display = 'block';
-    
     document.getElementById('resultTotal').textContent = total;
     document.getElementById('resultCorrect').textContent = correct;
     document.getElementById('resultWrong').textContent = total - correct;
     document.getElementById('resultScore').textContent = percentage + '%';
-    
     let msg = percentage >= 90 ? '🌟 Excellent! Engineering genius!' :
               percentage >= 70 ? '👏 Great job! Keep practicing!' :
               percentage >= 50 ? '💪 Good effort!' : '📚 Keep learning!';
@@ -756,7 +822,8 @@ document.querySelectorAll('.admin-tab').forEach(tab => {
         document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
         this.classList.add('active');
         document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById('admin' + this.dataset.tab.charAt(0).toUpperCase() + this.dataset.tab.slice(1)).classList.add('active');
+        const id = 'admin' + this.dataset.tab.charAt(0).toUpperCase() + this.dataset.tab.slice(1);
+        document.getElementById(id).classList.add('active');
     });
 });
 
@@ -766,7 +833,7 @@ function renderQuestionBank() {
         <div class="question-item">
             <div class="q-info">
                 <div class="q-text">${q.question}</div>
-                <div class="q-meta">${q.topic} › ${q.subtopic} • ${q.difficulty}</div>
+                <div class="q-meta">${q.subject} › ${q.topic} › ${q.subtopic} • ${q.difficulty}</div>
             </div>
             <div class="q-actions">
                 <button class="btn-edit" onclick="editQuestion(${i})">Edit</button>
@@ -781,22 +848,30 @@ function showAddQuestion() {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Add Question</h3>
-        <div class="form-group"><label>Topic</label><select id="mqTopic">${DATA.topics.map(t => `<option value="${t}">${t}</option>`).join('')}</select></div>
-        <div class="form-group"><label>Sub-topic</label><select id="mqSubtopic">${DATA.subtopics[DATA.topics[0]].map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="mqSubject">${DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Topic</label><select id="mqTopic">${DATA.topics[DATA.subjects[0]]?.map(t => `<option value="${t}">${t}</option>`).join('') || '<option>General</option>'}</select></div>
+        <div class="form-group"><label>Sub-topic</label><select id="mqSubtopic"><option>General</option></select></div>
         <div class="form-group"><label>Difficulty</label><select id="mqDifficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div>
         <div class="form-group"><label>Question</label><textarea id="mqQuestion" placeholder="Enter your question..."></textarea></div>
         <div class="form-group"><label>Options</label><div class="options-grid"><input type="text" id="mqOpt0" placeholder="Option A"><input type="text" id="mqOpt1" placeholder="Option B"><input type="text" id="mqOpt2" placeholder="Option C"><input type="text" id="mqOpt3" placeholder="Option D"></div></div>
         <div class="form-group"><label>Correct Answer</label><div class="radio-group"><label><input type="radio" name="mqCorrect" value="0"> A</label><label><input type="radio" name="mqCorrect" value="1"> B</label><label><input type="radio" name="mqCorrect" value="2"> C</label><label><input type="radio" name="mqCorrect" value="3"> D</label></div></div>
         <button class="btn-primary" onclick="addQuestion()">Add Question</button>
     `;
+    document.getElementById('mqSubject').addEventListener('change', function() {
+        const topicSelect = document.getElementById('mqTopic');
+        const topics = DATA.topics[this.value] || ['General'];
+        topicSelect.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
+    });
     document.getElementById('mqTopic').addEventListener('change', function() {
-        const select = document.getElementById('mqSubtopic');
-        select.innerHTML = (DATA.subtopics[this.value] || ['General']).map(s => `<option value="${s}">${s}</option>`).join('');
+        const subtopicSelect = document.getElementById('mqSubtopic');
+        const subtopics = DATA.subtopics[this.value] || ['General'];
+        subtopicSelect.innerHTML = subtopics.map(st => `<option value="${st}">${st}</option>`).join('');
     });
     modal.style.display = 'flex';
 }
 
 function addQuestion() {
+    const subject = document.getElementById('mqSubject').value;
     const topic = document.getElementById('mqTopic').value;
     const subtopic = document.getElementById('mqSubtopic').value;
     const difficulty = document.getElementById('mqDifficulty').value;
@@ -804,7 +879,7 @@ function addQuestion() {
     const options = [0,1,2,3].map(i => document.getElementById('mqOpt'+i).value);
     const correct = parseInt(document.querySelector('input[name="mqCorrect"]:checked')?.value);
     if (!question || options.some(o => !o) || isNaN(correct)) { alert('Please fill all fields.'); return; }
-    DATA.questions.push({ id: Date.now(), topic, subtopic, difficulty, question, options, correct });
+    DATA.questions.push({ id: Date.now(), subject, topic, subtopic, difficulty, question, options, correct });
     saveData(); renderQuestionBank(); closeModal(); alert('Question added!');
 }
 
@@ -818,18 +893,30 @@ function editQuestion(index) {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Edit Question</h3>
-        <div class="form-group"><label>Topic</label><select id="eqTopic">${DATA.topics.map(t => `<option value="${t}" ${t===q.topic?'selected':''}>${t}</option>`).join('')}</select></div>
-        <div class="form-group"><label>Sub-topic</label><select id="eqSubtopic">${DATA.subtopics[q.topic].map(s => `<option value="${s}" ${s===q.subtopic?'selected':''}>${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="eqSubject">${DATA.subjects.map(s => `<option value="${s}" ${s===q.subject?'selected':''}>${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Topic</label><select id="eqTopic">${(DATA.topics[q.subject] || ['General']).map(t => `<option value="${t}" ${t===q.topic?'selected':''}>${t}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Sub-topic</label><select id="eqSubtopic">${(DATA.subtopics[q.topic] || ['General']).map(st => `<option value="${st}" ${st===q.subtopic?'selected':''}>${st}</option>`).join('')}</select></div>
         <div class="form-group"><label>Difficulty</label><select id="eqDifficulty"><option value="easy" ${q.difficulty==='easy'?'selected':''}>Easy</option><option value="medium" ${q.difficulty==='medium'?'selected':''}>Medium</option><option value="hard" ${q.difficulty==='hard'?'selected':''}>Hard</option></select></div>
         <div class="form-group"><label>Question</label><textarea id="eqQuestion">${q.question}</textarea></div>
         <div class="form-group"><label>Options</label><div class="options-grid">${q.options.map((o,i) => `<input type="text" id="eqOpt${i}" value="${o}" placeholder="Option ${String.fromCharCode(65+i)}">`).join('')}</div></div>
         <div class="form-group"><label>Correct Answer</label><div class="radio-group">${q.options.map((_,i) => `<label><input type="radio" name="eqCorrect" value="${i}" ${q.correct===i?'checked':''}> ${String.fromCharCode(65+i)}</label>`).join('')}</div></div>
         <button class="btn-primary" onclick="saveEditQuestion(${index})">Save Changes</button>
     `;
+    document.getElementById('eqSubject').addEventListener('change', function() {
+        const topicSelect = document.getElementById('eqTopic');
+        const topics = DATA.topics[this.value] || ['General'];
+        topicSelect.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
+    });
+    document.getElementById('eqTopic').addEventListener('change', function() {
+        const subtopicSelect = document.getElementById('eqSubtopic');
+        const subtopics = DATA.subtopics[this.value] || ['General'];
+        subtopicSelect.innerHTML = subtopics.map(st => `<option value="${st}">${st}</option>`).join('');
+    });
     modal.style.display = 'flex';
 }
 
 function saveEditQuestion(index) {
+    const subject = document.getElementById('eqSubject').value;
     const topic = document.getElementById('eqTopic').value;
     const subtopic = document.getElementById('eqSubtopic').value;
     const difficulty = document.getElementById('eqDifficulty').value;
@@ -837,26 +924,13 @@ function saveEditQuestion(index) {
     const options = [0,1,2,3].map(i => document.getElementById('eqOpt'+i).value);
     const correct = parseInt(document.querySelector('input[name="eqCorrect"]:checked')?.value);
     if (!question || options.some(o => !o) || isNaN(correct)) { alert('Please fill all fields.'); return; }
-    DATA.questions[index] = { ...DATA.questions[index], topic, subtopic, difficulty, question, options, correct };
+    DATA.questions[index] = { ...DATA.questions[index], subject, topic, subtopic, difficulty, question, options, correct };
     saveData(); renderQuestionBank(); closeModal(); alert('Updated!');
 }
 
-function renderTopics() {
-    document.getElementById('topicList').innerHTML = DATA.topics.map(t => `<span class="topic-tag">${t}</span>`).join('');
-}
-
-function addTopic() {
-    const topic = document.getElementById('newTopic').value.trim();
-    if (topic && !DATA.topics.includes(topic)) {
-        DATA.topics.push(topic);
-        DATA.subtopics[topic] = ['General'];
-        saveData(); renderTopics();
-        document.getElementById('newTopic').value = '';
-    } else { alert('Topic exists or invalid.'); }
-}
-
 function renderAdminFormulas() {
-    document.getElementById('adminFormulaList').innerHTML = DATA.formulas.map((f, i) => `
+    const container = document.getElementById('adminFormulaList');
+    container.innerHTML = DATA.formulas.map((f, i) => `
         <div class="question-item">
             <div class="q-info"><div class="q-text"><strong>${f.name}</strong> — ${f.equation}</div><div class="q-meta">${f.subject}</div></div>
             <div class="q-actions"><button class="btn-edit" onclick="editAdminFormula(${i})">Edit</button><button class="btn-delete" onclick="deleteAdminFormula(${i})">Delete</button></div>
@@ -869,7 +943,7 @@ function showAddFormula() {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Add Formula</h3>
-        <div class="form-group"><label>Subject</label><select id="mfSubject">${DATA.topics.map(t => `<option value="${t}">${t}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="mfSubject">${DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
         <div class="form-group"><label>Formula Name</label><input type="text" id="mfName" placeholder="e.g., Ohm's Law"></div>
         <div class="form-group"><label>Equation</label><input type="text" id="mfEquation" placeholder="e.g., V = I × R"></div>
         <div class="form-group"><label>Description</label><textarea id="mfDesc" placeholder="Brief explanation..."></textarea></div>
@@ -898,7 +972,7 @@ function editAdminFormula(index) {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Edit Formula</h3>
-        <div class="form-group"><label>Subject</label><select id="efSubject">${DATA.topics.map(t => `<option value="${t}" ${t===f.subject?'selected':''}>${t}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="efSubject">${DATA.subjects.map(s => `<option value="${s}" ${s===f.subject?'selected':''}>${s}</option>`).join('')}</select></div>
         <div class="form-group"><label>Formula Name</label><input type="text" id="efName" value="${f.name}"></div>
         <div class="form-group"><label>Equation</label><input type="text" id="efEquation" value="${f.equation}"></div>
         <div class="form-group"><label>Description</label><textarea id="efDesc">${f.description || ''}</textarea></div>
@@ -953,18 +1027,13 @@ function init() {
     initSampleData();
     renderFormulas();
     renderQuestionBank();
+    renderSubjects();
     renderTopics();
     renderAdminFormulas();
     loadSettings();
+    populateSubjectSelects();
+    populateQuizSubjects();
     updateConverterUnits();
-    
-    const topicSelect = document.getElementById('quizTopic');
-    const subtopicSelect = document.getElementById('quizSubtopic');
-    topicSelect.addEventListener('change', function() {
-        const subtopics = DATA.subtopics[this.value] || ['General'];
-        subtopicSelect.innerHTML = subtopics.map(s => `<option value="${s}">${s}</option>`).join('');
-    });
-    topicSelect.dispatchEvent(new Event('change'));
     
     document.getElementById('adminDashboard').style.display = 'none';
     console.log('🚀 ENGICALC initialized!');
