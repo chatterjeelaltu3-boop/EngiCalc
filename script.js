@@ -24,18 +24,6 @@ const DATA = {
         'Electronics & Communication': ['Signals & Systems', 'Digital Electronics', 'Communication Systems']
     },
     
-    topics: JSON.parse(localStorage.getItem('engicalc_topics')) || {
-        'Engineering Chemistry': ['Electrochemistry', 'Thermodynamics', 'Organic Chemistry'],
-        'Engineering Physics': ['Optics', 'Thermodynamics', 'Quantum Physics'],
-        'Circuit Theory': ['DC Circuits', 'AC Circuits', 'Network Theorems'],
-        'Network Theory': ['Two-port Networks', 'Network Functions'],
-        'Engineering Mechanics': ['Statics', 'Dynamics', 'Strength of Materials'],
-        'Thermodynamics': ['Laws of Thermodynamics', 'Heat Transfer'],
-        'Fluid Mechanics': ['Fluid Properties', 'Flow Dynamics'],
-        'Data Structures': ['Arrays', 'Linked Lists', 'Trees', 'Graphs'],
-        'Algorithms': ['Sorting', 'Searching', 'Dynamic Programming']
-    },
-    
     difficulties: JSON.parse(localStorage.getItem('engicalc_difficulties')) || ['Easy', 'Medium', 'Hard'],
     
     quizSettings: JSON.parse(localStorage.getItem('engicalc_quizSettings')) || {
@@ -54,7 +42,6 @@ function saveData() {
     localStorage.setItem('engicalc_history', JSON.stringify(DATA.history));
     localStorage.setItem('engicalc_departments', JSON.stringify(DATA.departments));
     localStorage.setItem('engicalc_subjects', JSON.stringify(DATA.subjects));
-    localStorage.setItem('engicalc_topics', JSON.stringify(DATA.topics));
     localStorage.setItem('engicalc_difficulties', JSON.stringify(DATA.difficulties));
     localStorage.setItem('engicalc_quizSettings', JSON.stringify(DATA.quizSettings));
 }
@@ -63,10 +50,10 @@ function saveData() {
 function initSampleData() {
     if (DATA.questions.length === 0) {
         DATA.questions = [
-            { id: 1, department: 'Electrical Engineering', subject: 'Engineering Chemistry', topic: 'Electrochemistry', difficulty: 'Easy', question: 'What is the unit of conductivity?', options: ['S/m', 'Ω/m', 'S/cm', 'Ω/cm'], correct: 0 },
-            { id: 2, department: 'Electrical Engineering', subject: 'Engineering Physics', topic: 'Optics', difficulty: 'Easy', question: 'What is the speed of light in vacuum?', options: ['3×10⁸ m/s', '3×10⁶ m/s', '3×10¹⁰ m/s', '3×10⁵ m/s'], correct: 0 },
-            { id: 3, department: 'Mechanical Engineering', subject: 'Engineering Mechanics', topic: 'Statics', difficulty: 'Medium', question: 'What is the moment of inertia?', options: ['Resistance to motion', 'Resistance to rotation', 'Resistance to force', 'Resistance to acceleration'], correct: 1 },
-            { id: 4, department: 'Computer Science', subject: 'Data Structures', topic: 'Arrays', difficulty: 'Easy', question: 'What is the time complexity of accessing an array element?', options: ['O(1)', 'O(n)', 'O(log n)', 'O(n²)'], correct: 0 }
+            { id: 1, department: 'Electrical Engineering', subject: 'Engineering Chemistry', difficulty: 'Easy', question: 'What is the unit of conductivity?', options: ['S/m', 'Ω/m', 'S/cm', 'Ω/cm'], correct: 0 },
+            { id: 2, department: 'Electrical Engineering', subject: 'Engineering Physics', difficulty: 'Easy', question: 'What is the speed of light in vacuum?', options: ['3×10⁸ m/s', '3×10⁶ m/s', '3×10¹⁰ m/s', '3×10⁵ m/s'], correct: 0 },
+            { id: 3, department: 'Mechanical Engineering', subject: 'Engineering Mechanics', difficulty: 'Medium', question: 'What is the moment of inertia?', options: ['Resistance to motion', 'Resistance to rotation', 'Resistance to force', 'Resistance to acceleration'], correct: 1 },
+            { id: 4, department: 'Computer Science', subject: 'Data Structures', difficulty: 'Easy', question: 'What is the time complexity of accessing an array element?', options: ['O(1)', 'O(n)', 'O(log n)', 'O(n²)'], correct: 0 }
         ];
         saveData();
     }
@@ -166,7 +153,6 @@ function populateQuizOptions() {
     const timeSelect = document.getElementById('quizTime');
     timeSelect.innerHTML = DATA.quizSettings.timeOptions.map(t => `<option value="${t}">${t}</option>`).join('');
     
-    // Set defaults
     document.getElementById('quizDifficulty').value = DATA.quizSettings.defaultDifficulty;
     document.getElementById('quizCount').value = DATA.quizSettings.defaultCount;
     document.getElementById('quizTime').value = DATA.quizSettings.defaultTime;
@@ -183,14 +169,6 @@ function updateQuizSubjects() {
     const select = document.getElementById('quizSubject');
     const subjects = DATA.subjects[department] || ['General'];
     select.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
-    updateQuizTopics();
-}
-
-function updateQuizTopics() {
-    const subject = document.getElementById('quizSubject').value;
-    const select = document.getElementById('quizTopic');
-    const topics = DATA.topics[subject] || ['General'];
-    select.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
 }
 
 // ============================================
@@ -243,20 +221,10 @@ function addDepartment() {
 // ADMIN - SUBJECTS
 // ============================================
 function populateSubjectSelects() {
-    const selects = document.querySelectorAll('#subjectDepartmentSelect, #topicDepartmentSelect');
-    selects.forEach(sel => {
-        if (sel) {
-            sel.innerHTML = DATA.departments.map(d => `<option value="${d}">${d}</option>`).join('');
-            if (sel.id === 'topicDepartmentSelect') updateTopicSubjectSelect();
-        }
-    });
-}
-
-function updateTopicSubjectSelect() {
-    const dept = document.getElementById('topicDepartmentSelect').value;
-    const select = document.getElementById('topicSubjectSelect');
-    const subjects = DATA.subjects[dept] || ['General'];
-    select.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    const select = document.getElementById('subjectDepartmentSelect');
+    if (select) {
+        select.innerHTML = DATA.departments.map(d => `<option value="${d}">${d}</option>`).join('');
+    }
 }
 
 function renderSubjects() {
@@ -279,7 +247,6 @@ function addSubject() {
         if (!DATA.subjects[dept]) DATA.subjects[dept] = [];
         if (!DATA.subjects[dept].includes(subject)) {
             DATA.subjects[dept].push(subject);
-            DATA.topics[subject] = ['General'];
             saveData();
             renderAll();
             populateAllSelects();
@@ -290,45 +257,6 @@ function addSubject() {
         }
     } else {
         alert('Please enter a subject name.');
-    }
-}
-
-// ============================================
-// ADMIN - TOPICS
-// ============================================
-function renderTopics() {
-    const container = document.getElementById('topicList');
-    let html = '';
-    DATA.departments.forEach(dept => {
-        const subjects = DATA.subjects[dept] || [];
-        subjects.forEach(sub => {
-            const topics = DATA.topics[sub] || [];
-            topics.forEach(topic => {
-                html += `<span class="topic-tag">${dept} › ${sub} › ${topic}</span>`;
-            });
-        });
-    });
-    container.innerHTML = html || '<p>No topics added yet.</p>';
-}
-
-function addTopic() {
-    const dept = document.getElementById('topicDepartmentSelect').value;
-    const subject = document.getElementById('topicSubjectSelect').value;
-    const input = document.getElementById('newTopic');
-    const topic = input.value.trim();
-    if (topic) {
-        if (!DATA.topics[subject]) DATA.topics[subject] = [];
-        if (!DATA.topics[subject].includes(topic)) {
-            DATA.topics[subject].push(topic);
-            saveData();
-            renderAll();
-            populateQuizDepartments();
-            input.value = '';
-        } else {
-            alert('Topic already exists in this subject.');
-        }
-    } else {
-        alert('Please enter a topic name.');
     }
 }
 
@@ -781,7 +709,6 @@ function shuffleArray(arr) {
 function startQuiz(source) {
     const department = document.getElementById('quizDepartment').value;
     const subject = document.getElementById('quizSubject').value;
-    const topic = document.getElementById('quizTopic').value;
     const difficulty = document.getElementById('quizDifficulty').value;
     const count = parseInt(document.getElementById('quizCount').value);
     const time = parseInt(document.getElementById('quizTime').value);
@@ -791,12 +718,11 @@ function startQuiz(source) {
         questions = DATA.questions.filter(q => 
             q.department === department && 
             q.subject === subject && 
-            q.topic === topic && 
             q.difficulty === difficulty
         );
         questions = shuffleArray(questions).slice(0, count);
     } else {
-        questions = generateAIQuestions(department, subject, topic, difficulty, count);
+        questions = generateAIQuestions(department, subject, difficulty, count);
         questions = shuffleArray(questions);
     }
     
@@ -820,12 +746,12 @@ function startQuiz(source) {
     startTimer();
 }
 
-function generateAIQuestions(department, subject, topic, difficulty, count) {
+function generateAIQuestions(department, subject, difficulty, count) {
     const templates = [
-        { q: `What is a fundamental concept in ${topic}?`, opts: ['Concept A', 'Concept B', 'Concept C', 'Concept D'], correct: 0 },
+        { q: `What is a fundamental concept in ${subject}?`, opts: ['Concept A', 'Concept B', 'Concept C', 'Concept D'], correct: 0 },
         { q: `Which principle applies to ${subject} in ${department}?`, opts: ['Principle 1', 'Principle 2', 'Principle 3', 'Principle 4'], correct: 1 },
-        { q: `How is ${topic} used in ${subject}?`, opts: ['Application X', 'Application Y', 'Application Z', 'Application W'], correct: 2 },
-        { q: `What is the main equation for ${topic}?`, opts: ['Equation 1', 'Equation 2', 'Equation 3', 'Equation 4'], correct: 0 }
+        { q: `How is ${subject} used in engineering?`, opts: ['Application X', 'Application Y', 'Application Z', 'Application W'], correct: 2 },
+        { q: `What is the main equation for ${subject}?`, opts: ['Equation 1', 'Equation 2', 'Equation 3', 'Equation 4'], correct: 0 }
     ];
     const questions = [];
     for (let i = 0; i < Math.min(count, templates.length); i++) {
@@ -834,7 +760,7 @@ function generateAIQuestions(department, subject, topic, difficulty, count) {
         const correctIdx = shuffledOpts.indexOf(template.opts[template.correct]);
         questions.push({
             id: Date.now() + i,
-            department, subject, topic, difficulty,
+            department, subject, difficulty,
             question: template.q,
             options: shuffledOpts,
             correct: correctIdx,
@@ -970,7 +896,7 @@ function renderQuestionBank() {
         <div class="question-item">
             <div class="q-info">
                 <div class="q-text">${q.question}</div>
-                <div class="q-meta">${q.department} › ${q.subject} › ${q.topic} • ${q.difficulty}</div>
+                <div class="q-meta">${q.department} › ${q.subject} • ${q.difficulty}</div>
             </div>
             <div class="q-actions">
                 <button class="btn-edit" onclick="editQuestion(${i})">Edit</button>
@@ -987,7 +913,6 @@ function showAddQuestion() {
         <h3>Add Question</h3>
         <div class="form-group"><label>Department</label><select id="mqDepartment">${DATA.departments.map(d => `<option value="${d}">${d}</option>`).join('')}</select></div>
         <div class="form-group"><label>Subject</label><select id="mqSubject">${(DATA.subjects[DATA.departments[0]] || ['General']).map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
-        <div class="form-group"><label>Topic</label><select id="mqTopic"><option>General</option></select></div>
         <div class="form-group"><label>Difficulty</label><select id="mqDifficulty">${DATA.difficulties.map(d => `<option value="${d}">${d}</option>`).join('')}</select></div>
         <div class="form-group"><label>Question</label><textarea id="mqQuestion" placeholder="Enter your question..."></textarea></div>
         <div class="form-group"><label>Options</label><div class="options-grid"><input type="text" id="mqOpt0" placeholder="Option A"><input type="text" id="mqOpt1" placeholder="Option B"><input type="text" id="mqOpt2" placeholder="Option C"><input type="text" id="mqOpt3" placeholder="Option D"></div></div>
@@ -999,24 +924,18 @@ function showAddQuestion() {
         const subjects = DATA.subjects[this.value] || ['General'];
         subjectSelect.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
     });
-    document.getElementById('mqSubject').addEventListener('change', function() {
-        const topicSelect = document.getElementById('mqTopic');
-        const topics = DATA.topics[this.value] || ['General'];
-        topicSelect.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
-    });
     modal.style.display = 'flex';
 }
 
 function addQuestion() {
     const department = document.getElementById('mqDepartment').value;
     const subject = document.getElementById('mqSubject').value;
-    const topic = document.getElementById('mqTopic').value;
     const difficulty = document.getElementById('mqDifficulty').value;
     const question = document.getElementById('mqQuestion').value;
     const options = [0,1,2,3].map(i => document.getElementById('mqOpt'+i).value);
     const correct = parseInt(document.querySelector('input[name="mqCorrect"]:checked')?.value);
     if (!question || options.some(o => !o) || isNaN(correct)) { alert('Please fill all fields.'); return; }
-    DATA.questions.push({ id: Date.now(), department, subject, topic, difficulty, question, options, correct });
+    DATA.questions.push({ id: Date.now(), department, subject, difficulty, question, options, correct });
     saveData(); renderQuestionBank(); closeModal(); alert('Question added!');
 }
 
@@ -1032,7 +951,6 @@ function editQuestion(index) {
         <h3>Edit Question</h3>
         <div class="form-group"><label>Department</label><select id="eqDepartment">${DATA.departments.map(d => `<option value="${d}" ${d===q.department?'selected':''}>${d}</option>`).join('')}</select></div>
         <div class="form-group"><label>Subject</label><select id="eqSubject">${(DATA.subjects[q.department] || ['General']).map(s => `<option value="${s}" ${s===q.subject?'selected':''}>${s}</option>`).join('')}</select></div>
-        <div class="form-group"><label>Topic</label><select id="eqTopic">${(DATA.topics[q.subject] || ['General']).map(t => `<option value="${t}" ${t===q.topic?'selected':''}>${t}</option>`).join('')}</select></div>
         <div class="form-group"><label>Difficulty</label><select id="eqDifficulty">${DATA.difficulties.map(d => `<option value="${d}" ${d===q.difficulty?'selected':''}>${d}</option>`).join('')}</select></div>
         <div class="form-group"><label>Question</label><textarea id="eqQuestion">${q.question}</textarea></div>
         <div class="form-group"><label>Options</label><div class="options-grid">${q.options.map((o,i) => `<input type="text" id="eqOpt${i}" value="${o}" placeholder="Option ${String.fromCharCode(65+i)}">`).join('')}</div></div>
@@ -1044,24 +962,18 @@ function editQuestion(index) {
         const subjects = DATA.subjects[this.value] || ['General'];
         subjectSelect.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
     });
-    document.getElementById('eqSubject').addEventListener('change', function() {
-        const topicSelect = document.getElementById('eqTopic');
-        const topics = DATA.topics[this.value] || ['General'];
-        topicSelect.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
-    });
     modal.style.display = 'flex';
 }
 
 function saveEditQuestion(index) {
     const department = document.getElementById('eqDepartment').value;
     const subject = document.getElementById('eqSubject').value;
-    const topic = document.getElementById('eqTopic').value;
     const difficulty = document.getElementById('eqDifficulty').value;
     const question = document.getElementById('eqQuestion').value;
     const options = [0,1,2,3].map(i => document.getElementById('eqOpt'+i).value);
     const correct = parseInt(document.querySelector('input[name="eqCorrect"]:checked')?.value);
     if (!question || options.some(o => !o) || isNaN(correct)) { alert('Please fill all fields.'); return; }
-    DATA.questions[index] = { ...DATA.questions[index], department, subject, topic, difficulty, question, options, correct };
+    DATA.questions[index] = { ...DATA.questions[index], department, subject, difficulty, question, options, correct };
     saveData(); renderQuestionBank(); closeModal(); alert('Updated!');
 }
 
@@ -1161,7 +1073,6 @@ function renderAll() {
     renderQuestionBank();
     renderDepartments();
     renderSubjects();
-    renderTopics();
     renderDifficulties();
     renderAdminFormulas();
     loadQuizSettings();
@@ -1180,7 +1091,7 @@ function init() {
     document.getElementById('adminDashboard').style.display = 'none';
     console.log('🚀 ENGICALC initialized!');
     console.log('🔐 Admin Password: 1234');
-    console.log('📚 Structure: Department → Subject → Topic');
+    console.log('📚 Structure: Department → Subject');
     console.log('⚙️ Quiz Settings: Difficulty, Count, Time all customizable from Admin');
 }
 
