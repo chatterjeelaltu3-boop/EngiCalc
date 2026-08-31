@@ -12,9 +12,7 @@
     <header class="main-header">
         <div class="header-container">
             <div class="logo-section">
-                <div class="logo-placeholder">
-                    <span class="logo-icon">⚡</span>
-                </div>
+                <img src="engicalc-logo.png" alt="ENGICALC Logo" class="site-logo">
                 <div class="brand-text">
                     <h1>ENGICALC</h1>
                     <span class="subtitle">Engineering Student Platform</span>
@@ -212,106 +210,49 @@
                         <button class="solver-tab" data-stype="system3" onclick="switchSolver('system3')">3 Variables</button>
                     </div>
 
-                    <!-- Linear: ax + b = 0 -->
                     <div id="solverLinear" class="solver-panel active">
                         <h4>Linear Equation: ax + b = 0</h4>
                         <div class="solver-row">
-                            <div class="form-group">
-                                <label>a</label>
-                                <input type="number" id="linA" value="2" step="any">
-                            </div>
-                            <div class="form-group">
-                                <label>b</label>
-                                <input type="number" id="linB" value="-4" step="any">
-                            </div>
+                            <div class="form-group"><label>a</label><input type="number" id="linA" value="2" step="any"></div>
+                            <div class="form-group"><label>b</label><input type="number" id="linB" value="-4" step="any"></div>
                         </div>
                         <button class="btn-primary" onclick="solveLinear()">Solve</button>
                         <div id="linearResult" class="solver-result"></div>
                     </div>
 
-                    <!-- Quadratic: ax² + bx + c = 0 -->
                     <div id="solverQuadratic" class="solver-panel" style="display:none;">
                         <h4>Quadratic Equation: ax² + bx + c = 0</h4>
                         <div class="solver-row">
-                            <div class="form-group">
-                                <label>a</label>
-                                <input type="number" id="quadA" value="1" step="any">
-                            </div>
-                            <div class="form-group">
-                                <label>b</label>
-                                <input type="number" id="quadB" value="-5" step="any">
-                            </div>
-                            <div class="form-group">
-                                <label>c</label>
-                                <input type="number" id="quadC" value="6" step="any">
-                            </div>
+                            <div class="form-group"><label>a</label><input type="number" id="quadA" value="1" step="any"></div>
+                            <div class="form-group"><label>b</label><input type="number" id="quadB" value="-5" step="any"></div>
+                            <div class="form-group"><label>c</label><input type="number" id="quadC" value="6" step="any"></div>
                         </div>
                         <button class="btn-primary" onclick="solveQuadratic()">Solve</button>
                         <div id="quadraticResult" class="solver-result"></div>
                     </div>
 
-                    <!-- System of 2 Variables -->
                     <div id="solverSystem2" class="solver-panel" style="display:none;">
                         <h4>System of 2 Equations</h4>
                         <div class="solver-row">
-                            <div class="form-group">
-                                <label>a₁x + b₁y = c₁</label>
-                                <div style="display:flex;gap:0.5rem;">
-                                    <input type="number" id="s2a1" value="2" step="any" placeholder="a₁">
-                                    <input type="number" id="s2b1" value="3" step="any" placeholder="b₁">
-                                    <input type="number" id="s2c1" value="8" step="any" placeholder="c₁">
-                                </div>
-                            </div>
+                            <div class="form-group"><label>a₁x + b₁y = c₁</label><div style="display:flex;gap:0.5rem;"><input type="number" id="s2a1" value="2" step="any" placeholder="a₁"><input type="number" id="s2b1" value="3" step="any" placeholder="b₁"><input type="number" id="s2c1" value="8" step="any" placeholder="c₁"></div></div>
                         </div>
                         <div class="solver-row">
-                            <div class="form-group">
-                                <label>a₂x + b₂y = c₂</label>
-                                <div style="display:flex;gap:0.5rem;">
-                                    <input type="number" id="s2a2" value="3" step="any" placeholder="a₂">
-                                    <input type="number" id="s2b2" value="-1" step="any" placeholder="b₂">
-                                    <input type="number" id="s2c2" value="1" step="any" placeholder="c₂">
-                                </div>
-                            </div>
+                            <div class="form-group"><label>a₂x + b₂y = c₂</label><div style="display:flex;gap:0.5rem;"><input type="number" id="s2a2" value="3" step="any" placeholder="a₂"><input type="number" id="s2b2" value="-1" step="any" placeholder="b₂"><input type="number" id="s2c2" value="1" step="any" placeholder="c₂"></div></div>
                         </div>
                         <button class="btn-primary" onclick="solveSystem2()">Solve</button>
                         <div id="system2Result" class="solver-result"></div>
                     </div>
 
-                    <!-- System of 3 Variables -->
                     <div id="solverSystem3" class="solver-panel" style="display:none;">
                         <h4>System of 3 Equations</h4>
                         <div class="solver-row">
-                            <div class="form-group">
-                                <label>a₁x + b₁y + c₁z = d₁</label>
-                                <div style="display:flex;gap:0.5rem;">
-                                    <input type="number" id="s3a1" value="1" step="any" placeholder="a₁">
-                                    <input type="number" id="s3b1" value="2" step="any" placeholder="b₁">
-                                    <input type="number" id="s3c1" value="3" step="any" placeholder="c₁">
-                                    <input type="number" id="s3d1" value="14" step="any" placeholder="d₁">
-                                </div>
-                            </div>
+                            <div class="form-group"><label>a₁x + b₁y + c₁z = d₁</label><div style="display:flex;gap:0.5rem;"><input type="number" id="s3a1" value="1" step="any" placeholder="a₁"><input type="number" id="s3b1" value="2" step="any" placeholder="b₁"><input type="number" id="s3c1" value="3" step="any" placeholder="c₁"><input type="number" id="s3d1" value="14" step="any" placeholder="d₁"></div></div>
                         </div>
                         <div class="solver-row">
-                            <div class="form-group">
-                                <label>a₂x + b₂y + c₂z = d₂</label>
-                                <div style="display:flex;gap:0.5rem;">
-                                    <input type="number" id="s3a2" value="3" step="any" placeholder="a₂">
-                                    <input type="number" id="s3b2" value="-2" step="any" placeholder="b₂">
-                                    <input type="number" id="s3c2" value="1" step="any" placeholder="c₂">
-                                    <input type="number" id="s3d2" value="1" step="any" placeholder="d₂">
-                                </div>
-                            </div>
+                            <div class="form-group"><label>a₂x + b₂y + c₂z = d₂</label><div style="display:flex;gap:0.5rem;"><input type="number" id="s3a2" value="3" step="any" placeholder="a₂"><input type="number" id="s3b2" value="-2" step="any" placeholder="b₂"><input type="number" id="s3c2" value="1" step="any" placeholder="c₂"><input type="number" id="s3d2" value="1" step="any" placeholder="d₂"></div></div>
                         </div>
                         <div class="solver-row">
-                            <div class="form-group">
-                                <label>a₃x + b₃y + c₃z = d₃</label>
-                                <div style="display:flex;gap:0.5rem;">
-                                    <input type="number" id="s3a3" value="2" step="any" placeholder="a₃">
-                                    <input type="number" id="s3b3" value="1" step="any" placeholder="b₃">
-                                    <input type="number" id="s3c3" value="-1" step="any" placeholder="c₃">
-                                    <input type="number" id="s3d3" value="5" step="any" placeholder="d₃">
-                                </div>
-                            </div>
+                            <div class="form-group"><label>a₃x + b₃y + c₃z = d₃</label><div style="display:flex;gap:0.5rem;"><input type="number" id="s3a3" value="2" step="any" placeholder="a₃"><input type="number" id="s3b3" value="1" step="any" placeholder="b₃"><input type="number" id="s3c3" value="-1" step="any" placeholder="c₃"><input type="number" id="s3d3" value="5" step="any" placeholder="d₃"></div></div>
                         </div>
                         <button class="btn-primary" onclick="solveSystem3()">Solve</button>
                         <div id="system3Result" class="solver-result"></div>
@@ -332,22 +273,12 @@
                         <button class="electrical-tab" data-etype="colorcode" onclick="switchElectrical('colorcode')">Color Code</button>
                     </div>
 
-                    <!-- Ohm's Law -->
                     <div id="elecOhms" class="electrical-panel active">
                         <h4>Ohm's Law: V = I × R</h4>
                         <div class="electrical-row">
-                            <div class="form-group">
-                                <label>Voltage (V)</label>
-                                <input type="number" id="ohmV" step="any" placeholder="V">
-                            </div>
-                            <div class="form-group">
-                                <label>Current (I) in Amps</label>
-                                <input type="number" id="ohmI" step="any" placeholder="I">
-                            </div>
-                            <div class="form-group">
-                                <label>Resistance (R) in Ω</label>
-                                <input type="number" id="ohmR" step="any" placeholder="R">
-                            </div>
+                            <div class="form-group"><label>Voltage (V)</label><input type="number" id="ohmV" step="any" placeholder="V"></div>
+                            <div class="form-group"><label>Current (I) in Amps</label><input type="number" id="ohmI" step="any" placeholder="I"></div>
+                            <div class="form-group"><label>Resistance (R) in Ω</label><input type="number" id="ohmR" step="any" placeholder="R"></div>
                         </div>
                         <div class="electrical-row">
                             <button class="btn-primary" onclick="calculateOhmsLaw()">Calculate</button>
@@ -356,22 +287,12 @@
                         <div id="ohmsResult" class="electrical-result"></div>
                     </div>
 
-                    <!-- Power Calculator -->
                     <div id="elecPower" class="electrical-panel" style="display:none;">
                         <h4>Power Calculator: P = V × I</h4>
                         <div class="electrical-row">
-                            <div class="form-group">
-                                <label>Voltage (V)</label>
-                                <input type="number" id="powV" step="any" placeholder="V">
-                            </div>
-                            <div class="form-group">
-                                <label>Current (I) in Amps</label>
-                                <input type="number" id="powI" step="any" placeholder="I">
-                            </div>
-                            <div class="form-group">
-                                <label>Power (P) in Watts</label>
-                                <input type="number" id="powP" step="any" placeholder="P">
-                            </div>
+                            <div class="form-group"><label>Voltage (V)</label><input type="number" id="powV" step="any" placeholder="V"></div>
+                            <div class="form-group"><label>Current (I) in Amps</label><input type="number" id="powI" step="any" placeholder="I"></div>
+                            <div class="form-group"><label>Power (P) in Watts</label><input type="number" id="powP" step="any" placeholder="P"></div>
                         </div>
                         <div class="electrical-row">
                             <button class="btn-primary" onclick="calculatePower()">Calculate</button>
@@ -380,92 +301,27 @@
                         <div id="powerResult" class="electrical-result"></div>
                     </div>
 
-                    <!-- Resistance Calculator -->
                     <div id="elecResistance" class="electrical-panel" style="display:none;">
                         <h4>Resistance Calculator</h4>
                         <div class="electrical-row">
-                            <div class="form-group">
-                                <label>Type</label>
-                                <select id="resType" onchange="updateResistanceUI()">
-                                    <option value="series">Series</option>
-                                    <option value="parallel">Parallel</option>
-                                </select>
-                            </div>
+                            <div class="form-group"><label>Type</label><select id="resType"><option value="series">Series</option><option value="parallel">Parallel</option></select></div>
                         </div>
                         <div class="electrical-row">
-                            <div class="form-group">
-                                <label>R₁ (Ω)</label>
-                                <input type="number" id="resR1" value="10" step="any">
-                            </div>
-                            <div class="form-group">
-                                <label>R₂ (Ω)</label>
-                                <input type="number" id="resR2" value="20" step="any">
-                            </div>
-                            <div class="form-group">
-                                <label>R₃ (Ω)</label>
-                                <input type="number" id="resR3" value="30" step="any">
-                            </div>
+                            <div class="form-group"><label>R₁ (Ω)</label><input type="number" id="resR1" value="10" step="any"></div>
+                            <div class="form-group"><label>R₂ (Ω)</label><input type="number" id="resR2" value="20" step="any"></div>
+                            <div class="form-group"><label>R₃ (Ω)</label><input type="number" id="resR3" value="30" step="any"></div>
                         </div>
-                        <div class="electrical-row">
-                            <button class="btn-primary" onclick="calculateResistance()">Calculate</button>
-                        </div>
+                        <button class="btn-primary" onclick="calculateResistance()">Calculate</button>
                         <div id="resistanceResult" class="electrical-result"></div>
                     </div>
 
-                    <!-- Color Code -->
                     <div id="elecColorCode" class="electrical-panel" style="display:none;">
                         <h4>Resistor Color Code</h4>
                         <div class="electrical-row">
-                            <div class="form-group">
-                                <label>Band 1</label>
-                                <select id="ccBand1" onchange="calculateColorCode()">
-                                    <option value="0">Black</option>
-                                    <option value="1">Brown</option>
-                                    <option value="2">Red</option>
-                                    <option value="3">Orange</option>
-                                    <option value="4">Yellow</option>
-                                    <option value="5">Green</option>
-                                    <option value="6">Blue</option>
-                                    <option value="7">Violet</option>
-                                    <option value="8">Gray</option>
-                                    <option value="9">White</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Band 2</label>
-                                <select id="ccBand2" onchange="calculateColorCode()">
-                                    <option value="0">Black</option>
-                                    <option value="1">Brown</option>
-                                    <option value="2">Red</option>
-                                    <option value="3">Orange</option>
-                                    <option value="4">Yellow</option>
-                                    <option value="5">Green</option>
-                                    <option value="6">Blue</option>
-                                    <option value="7">Violet</option>
-                                    <option value="8">Gray</option>
-                                    <option value="9">White</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Multiplier</label>
-                                <select id="ccMultiplier" onchange="calculateColorCode()">
-                                    <option value="1">Black (×1)</option>
-                                    <option value="10" selected>Brown (×10)</option>
-                                    <option value="100">Red (×100)</option>
-                                    <option value="1000">Orange (×1K)</option>
-                                    <option value="10000">Yellow (×10K)</option>
-                                    <option value="100000">Green (×100K)</option>
-                                    <option value="1000000">Blue (×1M)</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Tolerance</label>
-                                <select id="ccTolerance" onchange="calculateColorCode()">
-                                    <option value="5">Gold (±5%)</option>
-                                    <option value="10">Silver (±10%)</option>
-                                    <option value="20">None (±20%)</option>
-                                </select>
-                            </div>
+                            <div class="form-group"><label>Band 1</label><select id="ccBand1" onchange="calculateColorCode()"><option value="0">Black</option><option value="1">Brown</option><option value="2">Red</option><option value="3">Orange</option><option value="4">Yellow</option><option value="5">Green</option><option value="6">Blue</option><option value="7">Violet</option><option value="8">Gray</option><option value="9">White</option></select></div>
+                            <div class="form-group"><label>Band 2</label><select id="ccBand2" onchange="calculateColorCode()"><option value="0">Black</option><option value="1">Brown</option><option value="2">Red</option><option value="3">Orange</option><option value="4">Yellow</option><option value="5">Green</option><option value="6">Blue</option><option value="7">Violet</option><option value="8">Gray</option><option value="9">White</option></select></div>
+                            <div class="form-group"><label>Multiplier</label><select id="ccMultiplier" onchange="calculateColorCode()"><option value="1">Black (×1)</option><option value="10" selected>Brown (×10)</option><option value="100">Red (×100)</option><option value="1000">Orange (×1K)</option><option value="10000">Yellow (×10K)</option><option value="100000">Green (×100K)</option><option value="1000000">Blue (×1M)</option></select></div>
+                            <div class="form-group"><label>Tolerance</label><select id="ccTolerance" onchange="calculateColorCode()"><option value="5">Gold (±5%)</option><option value="10">Silver (±10%)</option><option value="20">None (±20%)</option></select></div>
                         </div>
                         <div id="colorCodeResult" class="electrical-result"></div>
                     </div>
@@ -480,18 +336,22 @@
                     <h2>🎯 Quiz Setup</h2>
                     <div class="quiz-form">
                         <div class="form-group">
+                            <label>Subject</label>
+                            <select id="quizSubject" onchange="updateQuizTopics()">
+                                <!-- Dynamic from JS -->
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Topic</label>
-                            <select id="quizTopic">
-                                <option value="Electrical Engineering">Electrical Engineering</option>
-                                <option value="Mechanical Engineering">Mechanical Engineering</option>
-                                <option value="Civil Engineering">Civil Engineering</option>
-                                <option value="Engineering Mathematics">Engineering Mathematics</option>
-                                <option value="Computer Science">Computer Science</option>
+                            <select id="quizTopic" onchange="updateQuizSubtopics()">
+                                <!-- Dynamic from JS -->
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Sub-topic</label>
-                            <select id="quizSubtopic"></select>
+                            <select id="quizSubtopic">
+                                <!-- Dynamic from JS -->
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Difficulty</label>
@@ -533,13 +393,9 @@
                     <div class="quiz-header">
                         <div class="quiz-progress">
                             <span id="questionCounter">Question 1/10</span>
-                            <div class="progress-bar">
-                                <div id="progressFill" style="width:0%"></div>
-                            </div>
+                            <div class="progress-bar"><div id="progressFill" style="width:0%"></div></div>
                         </div>
-                        <div class="quiz-timer">
-                            ⏱️ <span id="timerDisplay">10:00</span>
-                        </div>
+                        <div class="quiz-timer">⏱️ <span id="timerDisplay">10:00</span></div>
                     </div>
                     <div id="questionContainer" class="question-container">
                         <h3 id="questionText">Loading question...</h3>
@@ -554,22 +410,10 @@
                 <div id="quizResult" class="quiz-result" style="display:none;">
                     <h2>Quiz Complete! 🎉</h2>
                     <div class="result-stats">
-                        <div class="stat-card">
-                            <span class="stat-label">Total Questions</span>
-                            <span id="resultTotal" class="stat-value">0</span>
-                        </div>
-                        <div class="stat-card correct">
-                            <span class="stat-label">Correct</span>
-                            <span id="resultCorrect" class="stat-value">0</span>
-                        </div>
-                        <div class="stat-card wrong">
-                            <span class="stat-label">Wrong</span>
-                            <span id="resultWrong" class="stat-value">0</span>
-                        </div>
-                        <div class="stat-card score">
-                            <span class="stat-label">Score</span>
-                            <span id="resultScore" class="stat-value">0%</span>
-                        </div>
+                        <div class="stat-card"><span class="stat-label">Total</span><span id="resultTotal" class="stat-value">0</span></div>
+                        <div class="stat-card correct"><span class="stat-label">Correct</span><span id="resultCorrect" class="stat-value">0</span></div>
+                        <div class="stat-card wrong"><span class="stat-label">Wrong</span><span id="resultWrong" class="stat-value">0</span></div>
+                        <div class="stat-card score"><span class="stat-label">Score</span><span id="resultScore" class="stat-value">0%</span></div>
                     </div>
                     <p id="resultMessage" class="result-message"></p>
                     <button class="btn-primary" onclick="resetQuiz()">Retake Quiz</button>
@@ -601,6 +445,7 @@
                     
                     <div class="admin-tabs">
                         <button class="admin-tab active" data-tab="questions">Questions</button>
+                        <button class="admin-tab" data-tab="subjects">Subjects</button>
                         <button class="admin-tab" data-tab="topics">Topics</button>
                         <button class="admin-tab" data-tab="formulas">Formulas</button>
                         <button class="admin-tab" data-tab="settings">Settings</button>
@@ -612,9 +457,19 @@
                         <div id="questionBank" class="question-bank"></div>
                     </div>
 
+                    <div id="adminSubjects" class="admin-panel">
+                        <h3>Manage Subjects</h3>
+                        <div class="topic-form">
+                            <input type="text" id="newSubject" placeholder="New Subject Name">
+                            <button class="btn-primary" onclick="addSubject()">Add Subject</button>
+                        </div>
+                        <div id="subjectList" class="topic-list"></div>
+                    </div>
+
                     <div id="adminTopics" class="admin-panel">
                         <h3>Manage Topics</h3>
                         <div class="topic-form">
+                            <select id="topicSubjectSelect"></select>
                             <input type="text" id="newTopic" placeholder="New Topic Name">
                             <button class="btn-primary" onclick="addTopic()">Add Topic</button>
                         </div>
