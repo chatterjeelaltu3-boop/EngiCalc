@@ -336,51 +336,28 @@
                     <h2>🎯 Quiz Setup</h2>
                     <div class="quiz-form">
                         <div class="form-group">
+                            <label>Department</label>
+                            <select id="quizDepartment" onchange="updateQuizSubjects()"></select>
+                        </div>
+                        <div class="form-group">
                             <label>Subject</label>
-                            <select id="quizSubject" onchange="updateQuizTopics()">
-                                <!-- Dynamic from JS -->
-                            </select>
+                            <select id="quizSubject" onchange="updateQuizTopics()"></select>
                         </div>
                         <div class="form-group">
                             <label>Topic</label>
-                            <select id="quizTopic" onchange="updateQuizSubtopics()">
-                                <!-- Dynamic from JS -->
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Sub-topic</label>
-                            <select id="quizSubtopic">
-                                <!-- Dynamic from JS -->
-                            </select>
+                            <select id="quizTopic"></select>
                         </div>
                         <div class="form-group">
                             <label>Difficulty</label>
-                            <select id="quizDifficulty">
-                                <option value="easy">Easy</option>
-                                <option value="medium">Medium</option>
-                                <option value="hard">Hard</option>
-                            </select>
+                            <select id="quizDifficulty"></select>
                         </div>
                         <div class="form-group">
                             <label>Number of Questions</label>
-                            <select id="quizCount">
-                                <option value="5">5</option>
-                                <option value="10" selected>10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                            </select>
+                            <select id="quizCount"></select>
                         </div>
                         <div class="form-group">
                             <label>Time (minutes)</label>
-                            <select id="quizTime">
-                                <option value="5">5</option>
-                                <option value="10" selected>10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                                <option value="30">30</option>
-                                <option value="45">45</option>
-                                <option value="60">60</option>
-                            </select>
+                            <select id="quizTime"></select>
                         </div>
                         <div class="quiz-actions">
                             <button class="btn-primary" onclick="startQuiz('bank')">Start from Bank</button>
@@ -445,30 +422,47 @@
                     
                     <div class="admin-tabs">
                         <button class="admin-tab active" data-tab="questions">Questions</button>
+                        <button class="admin-tab" data-tab="departments">Departments</button>
                         <button class="admin-tab" data-tab="subjects">Subjects</button>
                         <button class="admin-tab" data-tab="topics">Topics</button>
+                        <button class="admin-tab" data-tab="difficulties">Difficulties</button>
+                        <button class="admin-tab" data-tab="quizsettings">Quiz Settings</button>
                         <button class="admin-tab" data-tab="formulas">Formulas</button>
-                        <button class="admin-tab" data-tab="settings">Settings</button>
                     </div>
 
+                    <!-- Questions -->
                     <div id="adminQuestions" class="admin-panel active">
                         <h3>Manage Questions</h3>
                         <button class="btn-primary" onclick="showAddQuestion()">+ Add Question</button>
                         <div id="questionBank" class="question-bank"></div>
                     </div>
 
+                    <!-- Departments -->
+                    <div id="adminDepartments" class="admin-panel">
+                        <h3>Manage Departments</h3>
+                        <div class="topic-form">
+                            <input type="text" id="newDepartment" placeholder="New Department Name">
+                            <button class="btn-primary" onclick="addDepartment()">Add Department</button>
+                        </div>
+                        <div id="departmentList" class="topic-list"></div>
+                    </div>
+
+                    <!-- Subjects -->
                     <div id="adminSubjects" class="admin-panel">
                         <h3>Manage Subjects</h3>
                         <div class="topic-form">
+                            <select id="subjectDepartmentSelect"></select>
                             <input type="text" id="newSubject" placeholder="New Subject Name">
                             <button class="btn-primary" onclick="addSubject()">Add Subject</button>
                         </div>
                         <div id="subjectList" class="topic-list"></div>
                     </div>
 
+                    <!-- Topics -->
                     <div id="adminTopics" class="admin-panel">
                         <h3>Manage Topics</h3>
                         <div class="topic-form">
+                            <select id="topicDepartmentSelect" onchange="updateTopicSubjectSelect()"></select>
                             <select id="topicSubjectSelect"></select>
                             <input type="text" id="newTopic" placeholder="New Topic Name">
                             <button class="btn-primary" onclick="addTopic()">Add Topic</button>
@@ -476,36 +470,57 @@
                         <div id="topicList" class="topic-list"></div>
                     </div>
 
+                    <!-- Difficulties -->
+                    <div id="adminDifficulties" class="admin-panel">
+                        <h3>Manage Difficulties</h3>
+                        <div class="topic-form">
+                            <input type="text" id="newDifficulty" placeholder="New Difficulty (e.g., Very Easy)">
+                            <button class="btn-primary" onclick="addDifficulty()">Add Difficulty</button>
+                        </div>
+                        <div id="difficultyList" class="topic-list"></div>
+                    </div>
+
+                    <!-- Quiz Settings -->
+                    <div id="adminQuizsettings" class="admin-panel">
+                        <h3>Quiz Settings</h3>
+                        
+                        <div class="settings-group">
+                            <h4>Question Count Options</h4>
+                            <div class="setting-row">
+                                <label>Count Options (comma separated):</label>
+                                <input type="text" id="questionCountOptions" style="width:300px;" placeholder="5,10,15,20">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h4>Time Options (minutes)</h4>
+                            <div class="setting-row">
+                                <label>Time Options (comma separated):</label>
+                                <input type="text" id="timeOptions" style="width:300px;" placeholder="5,10,15,20,30,45,60">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h4>Default Quiz Settings</h4>
+                            <div class="setting-row">
+                                <label>Default Difficulty: <select id="defaultDifficulty"></select></label>
+                            </div>
+                            <div class="setting-row">
+                                <label>Default Question Count: <select id="defaultCount"></select></label>
+                            </div>
+                            <div class="setting-row">
+                                <label>Default Time: <select id="defaultTime"></select></label>
+                            </div>
+                        </div>
+
+                        <button class="btn-primary" onclick="saveQuizSettings()">Save Quiz Settings</button>
+                    </div>
+
+                    <!-- Formulas -->
                     <div id="adminFormulas" class="admin-panel">
                         <h3>Manage Formulas</h3>
                         <button class="btn-primary" onclick="showAddFormula()">+ Add Formula</button>
                         <div id="adminFormulaList" class="formula-admin-list"></div>
-                    </div>
-
-                    <div id="adminSettings" class="admin-panel">
-                        <h3>Quiz Settings</h3>
-                        <div class="settings-group">
-                            <h4>Easy Quiz</h4>
-                            <div class="setting-row">
-                                <label>Questions: <input type="number" id="easyQuestions" value="10"></label>
-                                <label>Time (min): <input type="number" id="easyTime" value="10"></label>
-                            </div>
-                        </div>
-                        <div class="settings-group">
-                            <h4>Medium Quiz</h4>
-                            <div class="setting-row">
-                                <label>Questions: <input type="number" id="mediumQuestions" value="20"></label>
-                                <label>Time (min): <input type="number" id="mediumTime" value="20"></label>
-                            </div>
-                        </div>
-                        <div class="settings-group">
-                            <h4>Hard Quiz</h4>
-                            <div class="setting-row">
-                                <label>Questions: <input type="number" id="hardQuestions" value="30"></label>
-                                <label>Time (min): <input type="number" id="hardTime" value="45"></label>
-                            </div>
-                        </div>
-                        <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
                     </div>
                 </div>
             </div>
