@@ -1,29 +1,71 @@
+/* --- CSS VARIABLES FOR THEMES --- */
+:root {
+    --bg-color: #f0f2f5;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --btn-bg: #e4e6eb;
+    --btn-text: #000000;
+    --btn-hover: #d8dadf;
+    --border-color: #cccccc;
+}
+
+[data-theme="dark"] {
+    --bg-color: #18191a;
+    --card-bg: #242526;
+    --text-color: #e4e6eb;
+    --btn-bg: #3a3b3c;
+    --btn-text: #ffffff;
+    --btn-hover: #4e4f50;
+    --border-color: #3e4042;
+}
+
 body {
-    background-color: #f0f2f5;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: Arial, sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 20px 0;
+    transition: background-color 0.3s;
 }
-.calculator-container {
-    background-color: #ffffff;
-    padding: 25px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
-    text-align: center;
-    width: 320px;
-}
-.logo {
-    width: 120px;
+
+.theme-toggle {
     margin-bottom: 15px;
 }
-h1 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 20px;
+#mode-btn {
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    font-weight: bold;
 }
+
+.calculator-container {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+    text-align: center;
+    width: 320px;
+    transition: background-color 0.3s;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
 #screen {
     width: 100%;
     height: 50px;
@@ -32,26 +74,97 @@ h1 {
     padding: 5px 10px;
     box-sizing: border-box;
     margin-bottom: 20px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
+
 .buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
+
 .btn {
     padding: 15px;
-    font-size: 18px;
+    font-size: 16px;
     border: none;
-    background-color: #e4e6eb;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
     border-radius: 5px;
     cursor: pointer;
+    transition: background 0.2s;
 }
-.btn:hover { background-color: #d8dadf; }
+
+.btn:hover { background-color: var(--btn-hover); }
 .oper { background-color: #007bff; color: white; }
 .oper:hover { background-color: #0056b3; }
-.equal { background-color: #28a745; color: white; grid-row: span 2; height: 100%; }
+.equal { background-color: #28a745; color: white; }
 .equal:hover { background-color: #218838; }
 .clear { background-color: #dc3545; color: white; }
 .clear:hover { background-color: #bd2130; }
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--border-color);
+    margin: 20px 0;
+}
+
+/* --- CONVERTER & HISTORY --- */
+.converter-section h3, .history-section h3 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+#converter-type {
+    width: 100%;
+    padding: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    margin-bottom: 12px;
+}
+.converter-inputs {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.converter-inputs input {
+    width: 42%;
+    padding: 8px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    text-align: center;
+}
+
+#history-list {
+    list-style: none;
+    padding: 0;
+    max-height: 80px;
+    overflow-y: auto;
+    text-align: left;
+    font-size: 13px;
+    background: var(--bg-color);
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid var(--border-color);
+}
+#history-list li {
+    padding: 3px 5px;
+    border-bottom: 1px dashed var(--border-color);
+}
+.empty-msg { color: #888; text-align: center; }
+#clear-history {
+    margin-top: 5px;
+    font-size: 11px;
+    padding: 4px 8px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
