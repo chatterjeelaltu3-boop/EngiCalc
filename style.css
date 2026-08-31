@@ -1,303 +1,689 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-body {
-    background: #eef5fa;
-    color: #12344d;
-}
+    <title>ENGICALC | Engineering Student Platform</title>
 
-.header {
-    background: white;
-    padding: 20px;
-    box-shadow: 0 3px 15px rgba(0,0,0,.1);
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
-.brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-}
+<body>
 
-.brand img {
-    width: 90px;
-    height: 90px;
-    object-fit: contain;
-}
+<!-- ================= HEADER ================= -->
 
-.brand h1 {
-    font-size: 42px;
-    color: #0b4267;
-    letter-spacing: 2px;
-}
+<header class="header">
 
-.brand p {
-    color: #647783;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
+    <div class="brand">
 
+        <!--
+        IMPORTANT:
+        Put your logo file in the same GitHub repository.
+        Rename it to: engicalc-logo.png
+        -->
 
-.tabs {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 18px;
-}
+        <img
+            src="engicalc-logo.png"
+            alt="ENGICALC"
+            class="logo"
+            onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex';"
+        >
 
-.tabs button {
-    border: none;
-    background: white;
-    color: #174b6b;
-    padding: 12px 20px;
-    border-radius: 12px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 3px 10px rgba(0,0,0,.1);
-}
+        <div id="logoFallback" class="logo-fallback">
+            🧮
+        </div>
 
-.tabs button:hover {
-    transform: translateY(-2px);
-}
+        <div class="brand-text">
+            <h1>ENGICALC</h1>
+            <p>ENGINEERING STUDENT PLATFORM</p>
+        </div>
 
-.tabs .active {
-    background: #116da1;
-    color: white;
-}
+    </div>
+
+</header>
 
 
-.page {
-    display: none;
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px;
-}
+<!-- ================= NAVIGATION ================= -->
 
-.active-page {
-    display: block;
-}
+<nav class="navigation">
 
+    <button class="nav-button active" onclick="openPage('calculator', this)">
+        🧮 Calculator
+    </button>
 
-.calculator {
-    max-width: 700px;
-    margin: auto;
-    background: white;
-    padding: 22px;
-    border-radius: 20px;
-    box-shadow: 0 8px 30px rgba(0,0,0,.12);
-}
+    <button class="nav-button" onclick="openPage('quiz', this)">
+        📝 Quiz
+    </button>
 
-.mode-row {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 12px;
-}
+    <button class="nav-button" onclick="openPage('formulas', this)">
+        📚 Formulas
+    </button>
 
-.mode-row button {
-    flex: 1;
-    border: none;
-    padding: 12px;
-    border-radius: 10px;
-    cursor: pointer;
-    background: #dcecf5;
-    color: #123e59;
-    font-weight: bold;
-}
+    <button class="nav-button" onclick="openPage('admin', this)">
+        👨‍💼 Admin
+    </button>
 
-#display {
-    width: 100%;
-    height: 80px;
-    font-size: 30px;
-    text-align: right;
-    padding: 15px;
-    border: 2px solid #d5e4ed;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    color: #12344d;
-}
-
-.answer {
-    text-align: right;
-    color: #607886;
-    margin-bottom: 15px;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 9px;
-}
-
-.buttons button {
-    min-height: 55px;
-    border: none;
-    border-radius: 11px;
-    background: #e7f0f5;
-    color: #123c57;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: .15s;
-}
-
-.buttons button:hover {
-    transform: scale(1.04);
-    background: #d0e5f0;
-}
-
-.buttons button:active {
-    transform: scale(.96);
-}
-
-.buttons .equals {
-    grid-column: span 2;
-    background: #126d9f;
-    color: white;
-}
-
-.history-box {
-    max-width: 700px;
-    margin: 25px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 18px;
-}
-
-.history-box h2 {
-    margin-bottom: 15px;
-}
-
-.clear-history {
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    background: #e8eef2;
-    cursor: pointer;
-}
-
-.history-item {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-}
-
-.history-item:hover {
-    background: #eef7fc;
-}
+</nav>
 
 
-.tool-card {
-    max-width: 650px;
-    margin: 20px auto;
-    background: white;
-    padding: 25px;
-    border-radius: 18px;
-    box-shadow: 0 6px 25px rgba(0,0,0,.1);
-}
+<!-- ================= MAIN ================= -->
 
-.tool-card h2 {
-    margin-bottom: 15px;
-}
-
-.tool-card input,
-.tool-card select,
-.tool-card textarea {
-    width: 100%;
-    padding: 13px;
-    margin: 8px 0;
-    border: 1px solid #cbdde7;
-    border-radius: 9px;
-    font-size: 16px;
-}
-
-.tool-card textarea {
-    height: 130px;
-}
-
-.tool-card button {
-    width: 100%;
-    margin-top: 10px;
-    padding: 13px;
-    border: none;
-    border-radius: 10px;
-    background: #126d9f;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-.result {
-    margin-top: 20px;
-    padding: 15px;
-    background: #eef7fb;
-    border-radius: 10px;
-    font-weight: bold;
-    white-space: pre-wrap;
-}
-
-.matrix-input {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
+<main>
 
 
-.formula-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 15px;
-}
+<!-- ======================================================
+                    CALCULATOR
+====================================================== -->
 
-.formula-container h2 {
-    grid-column: 1 / -1;
-}
+<section id="calculator" class="page active-page">
 
-.formula {
-    background: white;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0,0,0,.08);
-}
+    <div class="calculator-area">
 
-.formula h3 {
-    margin-bottom: 10px;
-    color: #126d9f;
-}
+        <div class="calculator">
 
-.formula p {
-    font-size: 20px;
-}
+            <div class="calculator-display">
+
+                <div id="expression"></div>
+
+                <div id="display">
+                    0
+                </div>
+
+            </div>
 
 
-footer {
-    text-align: center;
-    padding: 25px;
-    color: #657983;
-}
+            <!-- Top controls -->
+
+            <div class="calc-top-buttons">
+
+                <button onclick="toggleAngle()" id="angleBtn">
+                    DEG
+                </button>
+
+                <button onclick="clearCalculator()">
+                    AC
+                </button>
+
+                <button onclick="backspace()">
+                    ⌫
+                </button>
+
+            </div>
 
 
-@media(max-width:600px) {
+            <!-- Scientific -->
 
-    .brand h1 {
-        font-size: 28px;
-    }
+            <div class="scientific-grid">
 
-    .brand img {
-        width: 65px;
-        height: 65px;
-    }
+                <button onclick="insertValue('sin(')">sin</button>
+                <button onclick="insertValue('cos(')">cos</button>
+                <button onclick="insertValue('tan(')">tan</button>
+                <button onclick="insertValue('asin(')">sin⁻¹</button>
+                <button onclick="insertValue('acos(')">cos⁻¹</button>
 
-    .buttons {
-        grid-template-columns: repeat(4, 1fr);
-    }
+                <button onclick="insertValue('atan(')">tan⁻¹</button>
+                <button onclick="insertValue('log(')">log</button>
+                <button onclick="insertValue('ln(')">ln</button>
+                <button onclick="insertValue('sqrt(')">√</button>
+                <button onclick="factorial()">x!</button>
 
-    .buttons button {
-        font-size: 14px;
-    }
+                <button onclick="insertValue('π')">π</button>
+                <button onclick="insertValue('e')">e</button>
+                <button onclick="insertValue('^')">xʸ</button>
+                <button onclick="square()">x²</button>
+                <button onclick="insertValue('10^')">10ˣ</button>
 
-}
+            </div>
+
+
+            <!-- NORMAL CALCULATOR
+                 DO NOT CHANGE THIS ORDER -->
+
+            <div class="number-grid">
+
+                <button onclick="insertValue('(')">(</button>
+                <button onclick="insertValue(')')">)</button>
+                <button onclick="insertValue('%')">%</button>
+                <button class="operator" onclick="insertValue('/')">÷</button>
+
+                <button onclick="insertValue('7')">7</button>
+                <button onclick="insertValue('8')">8</button>
+                <button onclick="insertValue('9')">9</button>
+                <button class="operator" onclick="insertValue('*')">×</button>
+
+                <button onclick="insertValue('4')">4</button>
+                <button onclick="insertValue('5')">5</button>
+                <button onclick="insertValue('6')">6</button>
+                <button class="operator" onclick="insertValue('-')">−</button>
+
+                <button onclick="insertValue('1')">1</button>
+                <button onclick="insertValue('2')">2</button>
+                <button onclick="insertValue('3')">3</button>
+                <button class="operator" onclick="insertValue('+')">+</button>
+
+                <button class="zero" onclick="insertValue('0')">0</button>
+                <button onclick="insertValue('.')">.</button>
+                <button class="equals" onclick="calculate()">=</button>
+
+            </div>
+
+
+            <div class="answer">
+                Ans:
+                <span id="answer">0</span>
+            </div>
+
+        </div>
+
+
+        <!-- History -->
+
+        <div class="history">
+
+            <div class="history-title">
+
+                <h3>History</h3>
+
+                <button onclick="clearHistory()">
+                    Clear
+                </button>
+
+            </div>
+
+            <div id="historyList">
+                <p class="empty">
+                    No calculations yet.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+                         QUIZ
+====================================================== -->
+
+<section id="quiz" class="page">
+
+    <div class="page-heading">
+
+        <h2>📝 Quiz Generator</h2>
+
+        <p>
+            Generate engineering quizzes using topic,
+            sub-topic, difficulty and time.
+        </p>
+
+    </div>
+
+
+    <!-- Quiz setup -->
+
+    <div id="quizSetup" class="quiz-box">
+
+        <h3>Create Quiz</h3>
+
+
+        <label>Topic</label>
+
+        <select id="quizTopic">
+        </select>
+
+
+        <label>Sub-topic</label>
+
+        <select id="quizSubtopic">
+        </select>
+
+
+        <label>Difficulty</label>
+
+        <div class="difficulty">
+
+            <button
+                class="difficulty-button selected"
+                onclick="chooseDifficulty('Easy', this)"
+            >
+                Easy
+            </button>
+
+            <button
+                class="difficulty-button"
+                onclick="chooseDifficulty('Medium', this)"
+            >
+                Medium
+            </button>
+
+            <button
+                class="difficulty-button"
+                onclick="chooseDifficulty('Hard', this)"
+            >
+                Hard
+            </button>
+
+        </div>
+
+
+        <label>Number of Questions</label>
+
+        <select id="questionNumberSelect">
+
+            <option value="5">5 Questions</option>
+            <option value="10">10 Questions</option>
+            <option value="15">15 Questions</option>
+            <option value="20">20 Questions</option>
+
+        </select>
+
+
+        <label>Time Limit</label>
+
+        <select id="quizTimeSelect">
+
+            <option value="5">5 Minutes</option>
+            <option value="10">10 Minutes</option>
+            <option value="15">15 Minutes</option>
+            <option value="20">20 Minutes</option>
+            <option value="30">30 Minutes</option>
+            <option value="45">45 Minutes</option>
+            <option value="60">60 Minutes</option>
+
+        </select>
+
+
+        <div class="quiz-generation-buttons">
+
+            <button
+                class="ai-button"
+                onclick="generateAIQuiz()"
+            >
+                🤖 Generate with AI
+            </button>
+
+            <button
+                class="local-button"
+                onclick="generateLocalQuiz()"
+            >
+                📚 Generate from Question Bank
+            </button>
+
+        </div>
+
+
+        <p class="ai-status" id="aiStatus"></p>
+
+    </div>
+
+
+    <!-- Quiz game -->
+
+    <div id="quizGame" class="quiz-box hidden">
+
+        <div class="quiz-header">
+
+            <span id="questionCounter">
+                Question 1 / 5
+            </span>
+
+            <span id="quizTimer">
+                05:00
+            </span>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div id="progressBar"></div>
+
+        </div>
+
+
+        <h2 id="quizQuestion">
+            Question
+        </h2>
+
+
+        <div id="options" class="options">
+        </div>
+
+
+        <button
+            class="next-question"
+            onclick="nextQuestion()"
+        >
+            Next Question →
+        </button>
+
+    </div>
+
+
+    <!-- Result -->
+
+    <div id="quizResult" class="quiz-box hidden">
+
+        <div class="result-emoji">
+            🏆
+        </div>
+
+        <h2>Quiz Completed</h2>
+
+        <div id="score" class="score">
+            0 / 0
+        </div>
+
+        <p id="resultText"></p>
+
+        <button
+            class="ai-button"
+            onclick="showQuizSetup()"
+        >
+            Create Another Quiz
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+                       FORMULA LIBRARY
+====================================================== -->
+
+<section id="formulas" class="page">
+
+    <div class="page-heading">
+
+        <h2>📚 Engineering Formula Library</h2>
+
+        <p>
+            Formulas added by the administrator.
+        </p>
+
+    </div>
+
+
+    <div id="formulaGrid" class="formula-grid">
+    </div>
+
+</section>
+
+
+
+<!-- ======================================================
+                       ADMIN PANEL
+====================================================== -->
+
+<section id="admin" class="page">
+
+    <div class="page-heading">
+
+        <h2>👨‍💼 Admin Panel</h2>
+
+        <p>
+            Manage quizzes, topics and formulas.
+        </p>
+
+    </div>
+
+
+    <!-- LOGIN -->
+
+    <div id="adminLoginBox" class="admin-box">
+
+        <h3>Administrator Login</h3>
+
+        <input
+            id="adminUsername"
+            placeholder="Username"
+        >
+
+        <input
+            id="adminPassword"
+            type="password"
+            placeholder="Password"
+        >
+
+        <button onclick="loginAdmin()">
+            Login
+        </button>
+
+        <small>
+            Demo login: admin / 1234
+        </small>
+
+    </div>
+
+
+    <!-- ADMIN DASHBOARD -->
+
+    <div id="adminDashboard" class="hidden">
+
+        <div class="admin-dashboard-header">
+
+            <h2>
+                Administrator Dashboard
+            </h2>
+
+            <button onclick="logoutAdmin()">
+                Logout
+            </button>
+
+        </div>
+
+
+        <div class="admin-grid">
+
+
+            <!-- TOPIC -->
+
+            <div class="admin-box">
+
+                <h3>➕ Add Topic & Sub-topic</h3>
+
+                <input
+                    id="newTopic"
+                    placeholder="Topic"
+                >
+
+                <input
+                    id="newSubtopic"
+                    placeholder="Sub-topic"
+                >
+
+                <button onclick="addTopic()">
+                    Add Topic
+                </button>
+
+            </div>
+
+
+            <!-- QUIZ SETTINGS -->
+
+            <div class="admin-box">
+
+                <h3>⚙️ Quiz Settings</h3>
+
+                <label>Topic</label>
+
+                <select id="adminTopic">
+                </select>
+
+                <label>Sub-topic</label>
+
+                <select id="adminSubtopic">
+                </select>
+
+                <label>Difficulty</label>
+
+                <select id="adminDifficulty">
+
+                    <option>Easy</option>
+                    <option>Medium</option>
+                    <option>Hard</option>
+
+                </select>
+
+                <label>Default Time</label>
+
+                <select id="adminDefaultTime">
+
+                    <option value="5">5 Minutes</option>
+                    <option value="10">10 Minutes</option>
+                    <option value="15">15 Minutes</option>
+                    <option value="20">20 Minutes</option>
+                    <option value="30">30 Minutes</option>
+                    <option value="45">45 Minutes</option>
+                    <option value="60">60 Minutes</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- QUESTION -->
+
+            <div class="admin-box wide">
+
+                <h3>📝 Add Question</h3>
+
+                <textarea
+                    id="adminQuestion"
+                    placeholder="Write the question..."
+                ></textarea>
+
+                <input
+                    id="adminOptionA"
+                    placeholder="Option A"
+                >
+
+                <input
+                    id="adminOptionB"
+                    placeholder="Option B"
+                >
+
+                <input
+                    id="adminOptionC"
+                    placeholder="Option C"
+                >
+
+                <input
+                    id="adminOptionD"
+                    placeholder="Option D"
+                >
+
+                <label>Correct Answer</label>
+
+                <select id="adminCorrect">
+
+                    <option value="0">Option A</option>
+                    <option value="1">Option B</option>
+                    <option value="2">Option C</option>
+                    <option value="3">Option D</option>
+
+                </select>
+
+                <button onclick="addQuestion()">
+                    Add Question
+                </button>
+
+            </div>
+
+
+            <!-- FORMULA -->
+
+            <div class="admin-box wide">
+
+                <h3>📚 Add Formula</h3>
+
+                <input
+                    id="formulaSubject"
+                    placeholder="Subject e.g. Electrical Engineering"
+                >
+
+                <input
+                    id="formulaName"
+                    placeholder="Formula name"
+                >
+
+                <input
+                    id="formulaEquation"
+                    placeholder="Formula e.g. V = IR"
+                >
+
+                <textarea
+                    id="formulaDescription"
+                    placeholder="Short explanation"
+                ></textarea>
+
+                <button onclick="addFormula()">
+                    Add Formula
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUESTION LIST -->
+
+        <div class="admin-box list-box">
+
+            <div class="list-heading">
+
+                <h3>📋 Question Bank</h3>
+
+                <button onclick="resetQuestions()">
+                    Reset Demo Questions
+                </button>
+
+            </div>
+
+            <div id="questionBank">
+            </div>
+
+        </div>
+
+
+        <!-- FORMULA LIST -->
+
+        <div class="admin-box list-box">
+
+            <h3>📚 Formula Management</h3>
+
+            <div id="adminFormulaList">
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <strong>ENGICALC</strong>
+
+    <span>
+        Engineering Student Platform © 2026
+    </span>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
