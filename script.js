@@ -1,1431 +1,2438 @@
-/* ===============================
-   ENGICALC - MAIN STYLES
-================================ */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-
-    --primary: #0879b9;
-    --primary-dark: #07527d;
-    --blue-light: #eaf7ff;
-
-    --background: #f4f8fb;
-    --card: #ffffff;
-
-    --text: #17324d;
-    --muted: #687b8c;
-
-    --border: #d9e5ed;
-
-    --shadow:
-        0 10px 30px rgba(0, 65, 100, 0.10);
-
-}
-
-body {
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: var(--background);
-
-    color: var(--text);
-
-    min-height: 100vh;
-
-    transition:
-        background .3s,
-        color .3s;
-
-}
-
-
-/* ================= HEADER ================= */
-
-.header {
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 1000;
-
-    background: rgba(255,255,255,.96);
-
-    backdrop-filter: blur(12px);
-
-    border-bottom:
-        1px solid var(--border);
-
-    padding:
-        12px 5%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-}
-
-
-.brand {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-}
-
-
-.logo {
-
-    width: 55px;
-
-    height: 55px;
-
-    object-fit: contain;
-
-}
-
-
-.brand-text h1 {
-
-    font-size: 25px;
-
-    letter-spacing: 2px;
-
-    color: var(--primary-dark);
-
-}
-
-
-.brand-text span {
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    letter-spacing: 1.5px;
-
-    color: var(--muted);
-
-}
-
-
-.navbar {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 5px;
-
-    flex-wrap: wrap;
-
-}
-
-
-.navbar button {
-
-    border: none;
-
-    background: transparent;
-
-    padding: 10px 12px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    color: var(--text);
-
-    font-weight: 600;
-
-    transition: .2s;
-
-}
-
-
-.navbar button:hover {
-
-    background: var(--blue-light);
-
-    color: var(--primary);
-
-}
-
-
-.theme-btn {
-
-    font-size: 18px;
-
-}
-
-
-/* ================= SECTIONS ================= */
-
-.section {
-
-    display: none;
-
-    max-width: 1250px;
-
-    margin: auto;
-
-    padding: 55px 5%;
-
-    min-height: 75vh;
-
-}
-
-
-.section.active {
-
-    display: block;
-
-}
-
-
-.section-title {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    margin-bottom: 30px;
-
-}
-
-
-.section-title > span {
-
-    width: 58px;
-
-    height: 58px;
-
-    border-radius: 15px;
-
-    display: grid;
-
-    place-items: center;
-
-    background: var(--blue-light);
-
-    font-size: 28px;
-
-}
-
-
-.section-title h2 {
-
-    font-size: 30px;
-
-}
-
-
-.section-title p {
-
-    margin-top: 5px;
-
-    color: var(--muted);
-
-}
-
-
-/* ================= HERO ================= */
-
-.hero {
-
-    min-height: 500px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 40px;
-
-}
-
-
-.hero-content {
-
-    max-width: 650px;
-
-}
-
-
-.badge {
-
-    display: inline-block;
-
-    background: var(--blue-light);
-
-    color: var(--primary);
-
-    border-radius: 30px;
-
-    padding: 8px 15px;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-
-    margin-bottom: 20px;
-
-}
-
-
-.hero h2 {
-
-    font-size:
-        clamp(42px, 6vw, 72px);
-
-    line-height: 1.05;
-
-    color: var(--primary-dark);
-
-}
-
-
-.hero h2 span {
-
-    color: var(--primary);
-
-}
-
-
-.hero p {
-
-    color: var(--muted);
-
-    font-size: 18px;
-
-    margin: 22px 0 30px;
-
-    line-height: 1.6;
-
-}
-
-
-.hero-buttons {
-
-    display: flex;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
-
-}
-
-
-.primary-btn,
-.secondary-btn,
-.calculate-btn {
-
-    border: none;
-
-    border-radius: 10px;
-
-    padding: 13px 20px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
-    font-size: 14px;
-
-    transition: .2s;
-
-}
-
-
-.primary-btn,
-.calculate-btn {
-
-    background: var(--primary);
-
-    color: white;
-
-}
-
-
-.primary-btn:hover,
-.calculate-btn:hover {
-
-    transform: translateY(-2px);
-
-    background: var(--primary-dark);
-
-}
-
-
-.secondary-btn {
-
-    background: white;
-
-    color: var(--primary);
-
-    border: 1px solid var(--primary);
-
-}
-
-
-.secondary-btn:hover {
-
-    background: var(--blue-light);
-
-}
-
-
-.hero-logo {
-
-    width: 360px;
-
-    height: 360px;
-
-    display: grid;
-
-    place-items: center;
-
-}
-
-
-.hero-logo img {
-
-    width: 100%;
-
-    max-width: 350px;
-
-    object-fit: contain;
-
-}
-
-
-/* ================= FEATURE CARDS ================= */
-
-.feature-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
-
-    gap: 20px;
-
-}
-
-
-.feature-card {
-
-    background: var(--card);
-
-    padding: 28px;
-
-    border-radius: 18px;
-
-    border: 1px solid var(--border);
-
-    box-shadow: var(--shadow);
-
-    cursor: pointer;
-
-    transition: .25s;
-
-}
-
-
-.feature-card:hover {
-
-    transform: translateY(-6px);
-
-    border-color: var(--primary);
-
-}
-
-
-.feature-icon {
-
-    font-size: 32px;
-
-    margin-bottom: 15px;
-
-}
-
-
-.feature-card h3 {
-
-    margin-bottom: 10px;
-
-}
-
-
-.feature-card p {
-
-    color: var(--muted);
-
-    line-height: 1.5;
-
-}
-
-
-/* ================= CALCULATOR ================= */
-
-.calculator-wrapper {
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(320px, 520px)
-        minmax(250px, 1fr);
-
-    gap: 25px;
-
-    align-items: start;
-
-}
-
-
-.calculator {
-
-    background: #102d43;
-
-    padding: 18px;
-
-    border-radius: 22px;
-
-    box-shadow:
-        0 20px 50px rgba(0,0,0,.18);
-
-}
-
-
-.calculator-top {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(6,1fr);
-
-    gap: 6px;
-
-    margin-bottom: 10px;
-
-}
-
-
-.calculator button {
-
-    min-height: 48px;
-
-    border: none;
-
-    border-radius: 9px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    transition: .15s;
-
-}
-
-
-.calculator button:hover {
-
-    transform: scale(.97);
-
-}
-
-
-.calculator-top button {
-
-    background: #23465e;
-
-    color: white;
-
-}
-
-
-.display {
-
-    background: #071b29;
-
-    color: white;
-
-    min-height: 115px;
-
-    border-radius: 12px;
-
-    padding: 18px;
-
-    margin-bottom: 10px;
-
-    text-align: right;
-
-    overflow: hidden;
-
-}
-
-
-#expression {
-
-    color: #8da8bb;
-
-    min-height: 25px;
-
-    font-size: 15px;
-
-    overflow-x: auto;
-
-}
-
-
-#result {
-
-    font-size: 34px;
-
-    font-weight: bold;
-
-    margin-top: 8px;
-
-    overflow-x: auto;
-
-}
-
-
-.calculator-mode {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(6,1fr);
-
-    gap: 6px;
-
-    margin-bottom: 8px;
-
-}
-
-
-.calculator-mode button {
-
-    background: #dceaf2;
-
-    color: #16364c;
-
-    min-height: 40px;
-
-}
-
-
-.calculator-buttons {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    gap: 7px;
-
-}
-
-
-.calculator-buttons button {
-
-    background: #f1f6f8;
-
-    color: #16364c;
-
-}
-
-
-.calculator-buttons .operator {
-
-    background: #b7dff2;
-
-    color: #064e78;
-
-}
-
-
-.calculator-buttons .equals {
-
-    background: var(--primary);
-
-    color: white;
-
-    grid-column: span 2;
-
-}
-
-
-.calculator-buttons .zero {
-
-    grid-column: span 2;
-
-}
-
-
-/* ================= HISTORY ================= */
-
-.history-panel {
-
-    background: var(--card);
-
-    border: 1px solid var(--border);
-
-    border-radius: 18px;
-
-    padding: 20px;
-
-    box-shadow: var(--shadow);
-
-}
-
-
-.history-header {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    margin-bottom: 15px;
-
-}
-
-
-.history-header button {
-
-    background: transparent;
-
-    color: var(--primary);
-
-    border: none;
-
-    cursor: pointer;
-
-}
-
-
-.history-item {
-
-    padding: 12px;
-
-    border-bottom: 1px solid var(--border);
-
-}
-
-
-.history-expression {
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-}
-
-
-.history-result {
-
-    font-weight: bold;
-
-    margin-top: 3px;
-
-}
-
-
-.empty-history {
-
-    color: var(--muted);
-
-}
-
-
-/* ================= ENGINEERING ================= */
-
-.engineering-tabs {
-
-    display: flex;
-
-    gap: 10px;
+/* =====================================================
+   ENGICALC 2.0
+   ENGINEERING CALCULATOR
+===================================================== */
 
-    margin-bottom: 25px;
 
-    flex-wrap: wrap;
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-}
-
-
-.eng-tab {
-
-    border: 1px solid var(--border);
-
-    background: white;
-
-    padding: 12px 20px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    font-weight: bold;
-
-}
-
-
-.eng-tab.active {
-
-    background: var(--primary);
-
-    color: white;
-
-}
-
-
-.engineering-content {
-
-    display: none;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(260px,1fr));
-
-    gap: 20px;
-
-}
-
-
-.engineering-content.active {
-
-    display: grid;
-
-}
-
-
-.tool-card {
-
-    background: var(--card);
-
-    padding: 25px;
-
-    border-radius: 18px;
-
-    border: 1px solid var(--border);
-
-    box-shadow: var(--shadow);
-
-}
-
-
-.tool-card h3 {
-
-    margin-bottom: 10px;
-
-}
-
-
-.formula {
-
-    background: var(--blue-light);
-
-    padding: 10px;
-
-    border-radius: 8px;
-
-    color: var(--primary-dark);
-
-    font-weight: bold;
-
-    margin-bottom: 18px;
-
-}
-
-
-.tool-card label,
-.converter-card label {
-
-    display: block;
-
-    margin: 12px 0 6px;
-
-    font-size: 13px;
-
-    font-weight: bold;
-
-}
-
-
-input,
-select {
-
-    width: 100%;
-
-    padding: 12px;
-
-    border-radius: 9px;
-
-    border: 1px solid var(--border);
-
-    background: var(--card);
-
-    color: var(--text);
-
-    outline: none;
-
-    font-size: 14px;
-
-}
-
-
-input:focus,
-select:focus {
-
-    border-color: var(--primary);
-
-}
-
-
-.calculate-btn {
-
-    width: 100%;
-
-    margin-top: 15px;
-
-}
-
-
-.tool-result {
-
-    margin-top: 15px;
-
-    background: var(--blue-light);
-
-    padding: 13px;
-
-    border-radius: 9px;
-
-    color: var(--primary-dark);
-
-    font-weight: bold;
-
-}
-
-
-/* ================= CONVERTER ================= */
-
-.converter-card {
-
-    background: var(--card);
-
-    padding: 30px;
-
-    border-radius: 20px;
-
-    border: 1px solid var(--border);
-
-    box-shadow: var(--shadow);
-
-}
-
-
-.converter-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 60px 1fr;
-
-    gap: 20px;
-
-    align-items: end;
-
-}
-
-
-.swap {
-
-    font-size: 30px;
-
-    text-align: center;
-
-    padding-bottom: 10px;
-
-    color: var(--primary);
-
-}
-
-
-/* ================= FORMULA BOOK ================= */
-
-.formula-search {
-
-    margin-bottom: 25px;
-
-}
-
-
-.formula-grid {
+function showSection(sectionId) {
 
-    display: grid;
+    const sections =
+        document.querySelectorAll(".section");
 
-    grid-template-columns:
-        repeat(auto-fit,minmax(240px,1fr));
+    sections.forEach(section => {
 
-    gap: 20px;
+        section.classList.remove("active");
 
-}
-
-
-.formula-card {
-
-    background: var(--card);
-
-    border: 1px solid var(--border);
-
-    border-radius: 17px;
-
-    padding: 22px;
-
-    box-shadow: var(--shadow);
-
-}
-
-
-.formula-card span {
-
-    color: var(--primary);
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-}
-
-
-.formula-card h3 {
-
-    margin: 10px 0 15px;
-
-}
-
-
-.formula-card > div {
-
-    background: var(--blue-light);
-
-    color: var(--primary-dark);
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    font-weight: bold;
-
-    font-size: 18px;
-
-}
-
-
-.formula-card p {
-
-    color: var(--muted);
-
-    margin-top: 12px;
-
-    line-height: 1.6;
-
-}
-
-
-/* ================= QUIZ ================= */
-
-.quiz-card {
-
-    background: var(--card);
-
-    max-width: 800px;
-
-    margin: auto;
-
-    padding: 30px;
-
-    border-radius: 20px;
-
-    box-shadow: var(--shadow);
-
-    border: 1px solid var(--border);
-
-}
-
-
-.quiz-top {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    color: var(--primary);
-
-    font-weight: bold;
-
-}
-
-
-.quiz-card h2 {
-
-    margin: 35px 0 25px;
-
-    line-height: 1.4;
-
-}
-
-
-.quiz-options {
-
-    display: grid;
-
-    gap: 12px;
-
-    margin-bottom: 25px;
-
-}
-
-
-.quiz-option {
-
-    border: 1px solid var(--border);
-
-    background: var(--card);
-
-    padding: 15px;
-
-    border-radius: 10px;
-
-    text-align: left;
-
-    cursor: pointer;
+    });
 
-    font-size: 15px;
 
-}
-
+    const target =
+        document.getElementById(sectionId);
 
-.quiz-option:hover {
+    if (!target) return;
 
-    border-color: var(--primary);
+    target.classList.add("active");
 
-    background: var(--blue-light);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 
 }
-
-
-.quiz-option.correct {
 
-    border-color: #1a9b50;
 
-    background: #e7f8ed;
+/* =====================================================
+   DARK MODE
+===================================================== */
 
-}
-
+function toggleTheme() {
 
-.quiz-option.wrong {
+    document.body.classList.toggle("dark");
 
-    border-color: #d63838;
+    const dark =
+        document.body.classList.contains("dark");
 
-    background: #ffeded;
+    localStorage.setItem(
+        "engicalcTheme",
+        dark ? "dark" : "light"
+    );
 
 }
-
-
-.quiz-result {
 
-    margin-top: 20px;
 
-    font-size: 22px;
+if (
+    localStorage.getItem("engicalcTheme")
+    === "dark"
+) {
 
-    font-weight: bold;
+    document.body.classList.add("dark");
 
-    color: var(--primary);
-
 }
-
-
-/* ================= FULL HISTORY ================= */
-
-.full-history {
-
-    background: var(--card);
-
-    border: 1px solid var(--border);
-
-    border-radius: 18px;
-
-    padding: 20px;
 
-    box-shadow: var(--shadow);
 
-}
-
+/* =====================================================
+   SCIENTIFIC CALCULATOR
+===================================================== */
 
-/* ================= FOOTER ================= */
+let expression = "";
 
-footer {
+let memory = 0;
 
-    background: #092b40;
+let angleMode = "DEG";
 
-    color: white;
 
-    padding: 35px 5%;
+function updateDisplay() {
 
-    text-align: center;
+    document.getElementById("expression")
+        .textContent =
+        expression || "0";
 
 }
-
-
-.footer-brand {
 
-    display: flex;
 
-    justify-content: center;
+function addValue(value) {
 
-    align-items: center;
+    expression += value;
 
-    gap: 12px;
+    updateDisplay();
 
-    margin-bottom: 20px;
-
 }
-
-
-.footer-brand img {
-
-    width: 60px;
 
-    height: 60px;
 
-    object-fit: contain;
+function addFunction(value) {
 
-}
-
+    expression += value;
 
-.footer-brand h2 {
+    updateDisplay();
 
-    letter-spacing: 2px;
-
 }
-
-
-.footer-brand p {
-
-    font-size: 10px;
-
-    letter-spacing: 1px;
-
-    color: #a7bdca;
 
-}
 
+function clearCalculator() {
 
-.copyright {
+    expression = "";
 
-    color: #a7bdca;
+    document.getElementById("expression")
+        .textContent = "0";
 
-    font-size: 13px;
+    document.getElementById("result")
+        .textContent = "0";
 
 }
-
-
-/* ================= DARK MODE ================= */
-
-body.dark {
-
-    --background: #071722;
-
-    --card: #102735;
-
-    --text: #e7f4fa;
-
-    --muted: #9bb0bd;
 
-    --border: #254352;
 
-    --blue-light: #153c50;
+function deleteLast() {
 
-}
-
+    expression =
+        expression.slice(0, -1);
 
-body.dark .header {
+    updateDisplay();
 
-    background: rgba(7,23,34,.96);
-
 }
-
 
-body.dark .secondary-btn,
-body.dark .eng-tab,
-body.dark .quiz-option {
 
-    background: var(--card);
+function toggleAngleMode() {
 
-    color: var(--text);
+    angleMode =
+        angleMode === "DEG"
+            ? "RAD"
+            : "DEG";
 
-}
-
 
-body.dark input,
-body.dark select {
+    document.getElementById("angleMode")
+        .textContent = angleMode;
 
-    background: #0c202d;
-
 }
-
-
-/* ================= MOBILE ================= */
 
-@media (max-width: 900px) {
 
-    .header {
+function factorialNumber(n) {
 
-        flex-direction: column;
+    if (
+        n < 0 ||
+        !Number.isInteger(n) ||
+        n > 170
+    ) {
 
-        align-items: flex-start;
+        throw new Error(
+            "Invalid factorial"
+        );
 
     }
 
-    .navbar {
 
-        width: 100%;
+    let result = 1;
 
-        overflow-x: auto;
+    for (
+        let i = 2;
+        i <= n;
+        i++
+    ) {
 
-        flex-wrap: nowrap;
-
-    }
-
-    .navbar button {
-
-        white-space: nowrap;
+        result *= i;
 
     }
 
-    .hero {
+    return result;
 
-        flex-direction: column-reverse;
+}
 
-        text-align: center;
 
-        padding-top: 20px;
+function evaluateExpression(exp) {
+
+    exp =
+        exp
+            .replace(/×/g, "*")
+            .replace(/÷/g, "/")
+            .replace(/\^/g, "**");
+
+
+    const toRad = x => {
+
+        return angleMode === "DEG"
+            ? x * Math.PI / 180
+            : x;
+
+    };
+
+
+    const fromRad = x => {
+
+        return angleMode === "DEG"
+            ? x * 180 / Math.PI
+            : x;
+
+    };
+
+
+    const funcs = {
+
+        sin: x =>
+            Math.sin(toRad(x)),
+
+        cos: x =>
+            Math.cos(toRad(x)),
+
+        tan: x =>
+            Math.tan(toRad(x)),
+
+        asin: x =>
+            fromRad(Math.asin(x)),
+
+        acos: x =>
+            fromRad(Math.acos(x)),
+
+        atan: x =>
+            fromRad(Math.atan(x)),
+
+        log: x =>
+            Math.log10(x),
+
+        ln: x =>
+            Math.log(x),
+
+        sqrt: x =>
+            Math.sqrt(x),
+
+        abs: x =>
+            Math.abs(x),
+
+        factorial: factorialNumber,
+
+        pi: Math.PI,
+
+        e: Math.E
+
+    };
+
+
+    const names =
+        Object.keys(funcs);
+
+    const values =
+        Object.values(funcs);
+
+
+    const fn =
+        new Function(
+            ...names,
+            `"use strict"; return (${exp})`
+        );
+
+
+    return fn(...values);
+
+}
+
+
+function calculate() {
+
+    if (!expression) return;
+
+
+    try {
+
+        const answer =
+            evaluateExpression(expression);
+
+
+        if (
+            typeof answer !== "number" ||
+            !Number.isFinite(answer)
+        ) {
+
+            throw new Error();
+
+        }
+
+
+        const result =
+            Number(
+                answer.toPrecision(12)
+            );
+
+
+        document.getElementById("result")
+            .textContent = result;
+
+
+        addHistory(
+            expression,
+            result
+        );
+
 
     }
 
-    .hero-buttons {
+    catch {
 
-        justify-content: center;
-
-    }
-
-    .hero-logo {
-
-        width: 260px;
-
-        height: 260px;
-
-    }
-
-    .calculator-wrapper {
-
-        grid-template-columns: 1fr;
+        document.getElementById("result")
+            .textContent = "Error";
 
     }
 
 }
 
 
-@media (max-width: 600px) {
+function square() {
 
-    .section {
+    if (!expression) return;
 
-        padding: 35px 4%;
+    expression =
+        `(${expression})^2`;
 
-    }
+    updateDisplay();
 
-    .brand-text h1 {
+}
 
-        font-size: 21px;
 
-    }
+function power() {
 
-    .hero h2 {
+    expression += "^(";
 
-        font-size: 43px;
+    updateDisplay();
 
-    }
+}
 
-    .hero-logo {
 
-        width: 220px;
+function reciprocal() {
 
-        height: 220px;
+    if (!expression) return;
 
-    }
+    expression =
+        `1/(${expression})`;
 
-    .calculator {
+    updateDisplay();
 
-        padding: 10px;
+}
 
-    }
 
-    .calculator-top {
+function factorial() {
 
-        grid-template-columns:
-            repeat(3,1fr);
+    if (!expression) return;
 
-    }
 
-    .calculator-mode {
+    expression =
+        `factorial(${expression})`;
 
-        grid-template-columns:
-            repeat(3,1fr);
+    updateDisplay();
 
-    }
+}
 
-    .calculator-buttons button {
 
-        min-height: 45px;
+/* =====================================================
+   MEMORY
+===================================================== */
 
-    }
+function getCurrentValue() {
 
-    .converter-grid {
+    try {
 
-        grid-template-columns: 1fr;
+        return Number(
+            evaluateExpression(expression)
+        );
 
-    }
+    } catch {
 
-    .swap {
-
-        transform: rotate(90deg);
+        return 0;
 
     }
 
 }
+
+
+function memoryClear() {
+
+    memory = 0;
+
+}
+
+
+function memoryRecall() {
+
+    expression += String(memory);
+
+    updateDisplay();
+
+}
+
+
+function memoryAdd() {
+
+    memory += getCurrentValue();
+
+}
+
+
+function memorySubtract() {
+
+    memory -= getCurrentValue();
+
+}
+
+
+/* =====================================================
+   HISTORY
+===================================================== */
+
+let history =
+    JSON.parse(
+        localStorage.getItem(
+            "engicalcHistory"
+        )
+    ) || [];
+
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function addHistory(exp, result) {
+
+    history.unshift({
+
+        expression: exp,
+
+        result: result,
+
+        time:
+            new Date().toLocaleString(
+                "en-IN"
+            )
+
+    });
+
+
+    if (history.length > 50) {
+
+        history.pop();
+
+    }
+
+
+    localStorage.setItem(
+        "engicalcHistory",
+        JSON.stringify(history)
+    );
+
+
+    renderHistory();
+
+}
+
+
+function renderHistory() {
+
+    const list =
+        document.getElementById(
+            "historyList"
+        );
+
+    const full =
+        document.getElementById(
+            "fullHistory"
+        );
+
+
+    if (!history.length) {
+
+        list.innerHTML =
+            "No calculations yet.";
+
+        full.innerHTML =
+            "No calculation history.";
+
+        return;
+
+    }
+
+
+    list.innerHTML =
+        history
+            .slice(0, 10)
+            .map(item => `
+
+                <div class="history-item">
+
+                    <div class="history-expression">
+                        ${escapeHTML(item.expression)}
+                    </div>
+
+                    <div class="history-result">
+                        = ${escapeHTML(item.result)}
+                    </div>
+
+                </div>
+
+            `)
+            .join("");
+
+
+    full.innerHTML =
+        history
+            .map(item => `
+
+                <div class="history-item">
+
+                    <div class="history-expression">
+                        ${escapeHTML(item.expression)}
+                    </div>
+
+                    <div class="history-result">
+                        = ${escapeHTML(item.result)}
+                    </div>
+
+                    <small>
+                        ${escapeHTML(item.time)}
+                    </small>
+
+                </div>
+
+            `)
+            .join("");
+
+}
+
+
+function clearHistory() {
+
+    history = [];
+
+    localStorage.removeItem(
+        "engicalcHistory"
+    );
+
+    renderHistory();
+
+}
+
+
+/* =====================================================
+   ELECTRICAL
+===================================================== */
+
+function numberValue(id) {
+
+    return parseFloat(
+        document.getElementById(id).value
+    );
+
+}
+
+
+function calculateOhm() {
+
+    const V = numberValue("voltage");
+
+    const I = numberValue("current");
+
+    const R = numberValue("resistance");
+
+
+    let result;
+
+
+    if (!isNaN(I) && !isNaN(R) && isNaN(V)) {
+
+        result =
+            `Voltage = ${(I * R).toFixed(4)} V`;
+
+    }
+
+    else if (!isNaN(V) && !isNaN(R) && isNaN(I)) {
+
+        result =
+            R !== 0
+                ? `Current = ${(V / R).toFixed(4)} A`
+                : "Resistance cannot be zero.";
+
+    }
+
+    else if (!isNaN(V) && !isNaN(I) && isNaN(R)) {
+
+        result =
+            I !== 0
+                ? `Resistance = ${(V / I).toFixed(4)} Ω`
+                : "Current cannot be zero.";
+
+    }
+
+    else {
+
+        result =
+            "Enter exactly two values.";
+
+    }
+
+
+    document.getElementById(
+        "ohmResult"
+    ).textContent = result;
+
+}
+
+
+function calculatePower() {
+
+    const V =
+        numberValue("powerVoltage");
+
+    const I =
+        numberValue("powerCurrent");
+
+
+    if (isNaN(V) || isNaN(I)) {
+
+        document.getElementById(
+            "powerResult"
+        ).textContent =
+            "Enter voltage and current.";
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "powerResult"
+    ).textContent =
+        `Power = ${(V * I).toFixed(4)} W`;
+
+}
+
+
+function getCommaNumbers(id) {
+
+    return document
+        .getElementById(id)
+        .value
+        .split(",")
+        .map(Number)
+        .filter(Number.isFinite);
+
+}
+
+
+function calculateSeries() {
+
+    const values =
+        getCommaNumbers(
+            "seriesResistance"
+        );
+
+
+    if (!values.length) {
+
+        document.getElementById(
+            "seriesResult"
+        ).textContent =
+            "Enter values separated by commas.";
+
+        return;
+
+    }
+
+
+    const total =
+        values.reduce(
+            (sum, value) =>
+                sum + value,
+            0
+        );
+
+
+    document.getElementById(
+        "seriesResult"
+    ).textContent =
+        `Equivalent Resistance = ${total.toFixed(4)} Ω`;
+
+}
+
+
+function calculateParallel() {
+
+    const values =
+        getCommaNumbers(
+            "parallelResistance"
+        );
+
+
+    if (
+        !values.length ||
+        values.some(v => v <= 0)
+    ) {
+
+        document.getElementById(
+            "parallelResult"
+        ).textContent =
+            "Enter positive resistance values.";
+
+        return;
+
+    }
+
+
+    const total =
+        1 /
+        values.reduce(
+            (sum, value) =>
+                sum + 1 / value,
+            0
+        );
+
+
+    document.getElementById(
+        "parallelResult"
+    ).textContent =
+        `Equivalent Resistance = ${total.toFixed(4)} Ω`;
+
+}
+
+
+function calculateCapacitorEnergy() {
+
+    const C =
+        numberValue("capacitance");
+
+    const V =
+        numberValue("capacitorVoltage");
+
+
+    if (
+        isNaN(C) ||
+        isNaN(V)
+    ) return;
+
+
+    const E =
+        0.5 * C * V * V;
+
+
+    document.getElementById(
+        "capacitorResult"
+    ).textContent =
+        `Energy = ${E.toFixed(6)} J`;
+
+}
+
+
+function calculateFrequency() {
+
+    const T =
+        numberValue("timePeriod");
+
+
+    if (
+        isNaN(T) ||
+        T <= 0
+    ) {
+
+        document.getElementById(
+            "frequencyResult"
+        ).textContent =
+            "Enter a positive time period.";
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "frequencyResult"
+    ).textContent =
+        `Frequency = ${(1 / T).toFixed(6)} Hz`;
+
+}
+
+
+/* =====================================================
+   MECHANICAL
+===================================================== */
+
+function calculateForce() {
+
+    const m =
+        numberValue("mass");
+
+    const a =
+        numberValue("acceleration");
+
+
+    if (isNaN(m) || isNaN(a)) return;
+
+
+    document.getElementById(
+        "forceResult"
+    ).textContent =
+        `Force = ${(m * a).toFixed(4)} N`;
+
+}
+
+
+function calculateWork() {
+
+    const F =
+        numberValue("workForce");
+
+    const d =
+        numberValue("distance");
+
+
+    if (isNaN(F) || isNaN(d)) return;
+
+
+    document.getElementById(
+        "workResult"
+    ).textContent =
+        `Work = ${(F * d).toFixed(4)} J`;
+
+}
+
+
+function calculateMechanicalPower() {
+
+    const W =
+        numberValue("mechanicalWork");
+
+    const t =
+        numberValue("mechanicalTime");
+
+
+    if (
+        isNaN(W) ||
+        isNaN(t) ||
+        t === 0
+    ) return;
+
+
+    document.getElementById(
+        "mechanicalPowerResult"
+    ).textContent =
+        `Power = ${(W / t).toFixed(4)} W`;
+
+}
+
+
+function calculateTorque() {
+
+    const F =
+        numberValue("torqueForce");
+
+    const r =
+        numberValue("torqueRadius");
+
+
+    if (isNaN(F) || isNaN(r)) return;
+
+
+    document.getElementById(
+        "torqueResult"
+    ).textContent =
+        `Torque = ${(F * r).toFixed(4)} N·m`;
+
+}
+
+
+function calculatePressure() {
+
+    const F =
+        numberValue("pressureForce");
+
+    const A =
+        numberValue("pressureArea");
+
+
+    if (
+        isNaN(F) ||
+        isNaN(A) ||
+        A === 0
+    ) return;
+
+
+    document.getElementById(
+        "mechanicalPressureResult"
+    ).textContent =
+        `Pressure = ${(F / A).toFixed(4)} Pa`;
+
+}
+
+
+/* =====================================================
+   CIVIL
+===================================================== */
+
+function calculateArea() {
+
+    const L =
+        numberValue("rectangleLength");
+
+    const W =
+        numberValue("rectangleWidth");
+
+
+    if (isNaN(L) || isNaN(W)) return;
+
+
+    document.getElementById(
+        "areaResult"
+    ).textContent =
+        `Area = ${(L * W).toFixed(4)} m²`;
+
+}
+
+
+function calculateConcrete() {
+
+    const L =
+        numberValue("concreteLength");
+
+    const W =
+        numberValue("concreteWidth");
+
+    const H =
+        numberValue("concreteHeight");
+
+
+    if (
+        isNaN(L) ||
+        isNaN(W) ||
+        isNaN(H)
+    ) return;
+
+
+    document.getElementById(
+        "concreteResult"
+    ).textContent =
+        `Volume = ${(L * W * H).toFixed(4)} m³`;
+
+}
+
+
+function calculateCylinder() {
+
+    const r =
+        numberValue("cylinderRadius");
+
+    const h =
+        numberValue("cylinderHeight");
+
+
+    if (isNaN(r) || isNaN(h)) return;
+
+
+    const volume =
+        Math.PI * r * r * h;
+
+
+    document.getElementById(
+        "cylinderResult"
+    ).textContent =
+        `Volume = ${volume.toFixed(4)} m³`;
+
+}
+
+
+function calculateStress() {
+
+    const F =
+        numberValue("stressForce");
+
+    const A =
+        numberValue("stressArea");
+
+
+    if (
+        isNaN(F) ||
+        isNaN(A) ||
+        A === 0
+    ) return;
+
+
+    document.getElementById(
+        "stressResult"
+    ).textContent =
+        `Stress = ${(F / A).toFixed(4)} Pa`;
+
+}
+
+
+/* =====================================================
+   ENGINEERING TABS
+===================================================== */
+
+function engineeringTab(id, button) {
+
+    document
+        .querySelectorAll(".engineering-content")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".eng-tab")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    button.classList.add("active");
+
+}
+
+
+/* =====================================================
+   UNIT CONVERTER
+===================================================== */
+
+const units = {
+
+    length: {
+
+        meter: 1,
+        kilometer: 1000,
+        centimeter: 0.01,
+        millimeter: 0.001,
+        micrometer: 0.000001,
+        foot: 0.3048,
+        inch: 0.0254,
+        mile: 1609.344
+
+    },
+
+
+    mass: {
+
+        kilogram: 1,
+        gram: 0.001,
+        milligram: 0.000001,
+        pound: 0.45359237,
+        ounce: 0.0283495
+
+    },
+
+
+    area: {
+
+        "square meter": 1,
+        "square kilometer": 1000000,
+        "square centimeter": 0.0001,
+        "square foot": 0.092903,
+        "square inch": 0.00064516
+
+    },
+
+
+    volume: {
+
+        "cubic meter": 1,
+        liter: 0.001,
+        milliliter: 0.000001,
+        "cubic centimeter": 0.000001,
+        "cubic foot": 0.0283168
+
+    },
+
+
+    speed: {
+
+        "meter/second": 1,
+        "kilometer/hour": 0.2777778,
+        "mile/hour": 0.44704,
+        "foot/second": 0.3048
+
+    },
+
+
+    force: {
+
+        newton: 1,
+        kilonewton: 1000,
+        dyne: 0.00001,
+        "kilogram-force": 9.80665
+
+    },
+
+
+    pressure: {
+
+        pascal: 1,
+        kilopascal: 1000,
+        megapascal: 1000000,
+        bar: 100000,
+        atmosphere: 101325,
+        psi: 6894.76
+
+    },
+
+
+    power: {
+
+        watt: 1,
+        kilowatt: 1000,
+        megawatt: 1000000,
+        horsepower: 745.7
+
+    },
+
+
+    energy: {
+
+        joule: 1,
+        kilojoule: 1000,
+        "watt-hour": 3600,
+        "kilowatt-hour": 3600000,
+        calorie: 4.184
+
+    }
+
+};
+
+
+function loadUnits() {
+
+    const category =
+        document.getElementById(
+            "conversionCategory"
+        ).value;
+
+
+    const from =
+        document.getElementById(
+            "fromUnit"
+        );
+
+    const to =
+        document.getElementById(
+            "toUnit"
+        );
+
+
+    from.innerHTML = "";
+
+    to.innerHTML = "";
+
+
+    if (category === "temperature") {
+
+        [
+            "Celsius",
+            "Fahrenheit",
+            "Kelvin"
+        ].forEach(unit => {
+
+            from.add(
+                new Option(unit, unit)
+            );
+
+            to.add(
+                new Option(unit, unit)
+            );
+
+        });
+
+    }
+
+    else {
+
+        Object.keys(
+            units[category]
+        ).forEach(unit => {
+
+            from.add(
+                new Option(unit, unit)
+            );
+
+            to.add(
+                new Option(unit, unit)
+            );
+
+        });
+
+    }
+
+
+    if (to.options.length > 1) {
+
+        to.selectedIndex = 1;
+
+    }
+
+
+    convertUnits();
+
+}
+
+
+function convertUnits() {
+
+    const category =
+        document.getElementById(
+            "conversionCategory"
+        ).value;
+
+
+    const from =
+        document.getElementById(
+            "fromUnit"
+        ).value;
+
+
+    const to =
+        document.getElementById(
+            "toUnit"
+        ).value;
+
+
+    const value =
+        parseFloat(
+            document.getElementById(
+                "fromValue"
+            ).value
+        );
+
+
+    if (isNaN(value)) {
+
+        document.getElementById(
+            "toValue"
+        ).value = "";
+
+        return;
+
+    }
+
+
+    let result;
+
+
+    if (category === "temperature") {
+
+        let celsius;
+
+
+        if (from === "Celsius") {
+
+            celsius = value;
+
+        }
+
+        else if (
+            from === "Fahrenheit"
+        ) {
+
+            celsius =
+                (value - 32) * 5 / 9;
+
+        }
+
+        else {
+
+            celsius =
+                value - 273.15;
+
+        }
+
+
+        if (to === "Celsius") {
+
+            result = celsius;
+
+        }
+
+        else if (
+            to === "Fahrenheit"
+        ) {
+
+            result =
+                celsius * 9 / 5 + 32;
+
+        }
+
+        else {
+
+            result =
+                celsius + 273.15;
+
+        }
+
+    }
+
+    else {
+
+        const base =
+            value *
+            units[category][from];
+
+
+        result =
+            base /
+            units[category][to];
+
+    }
+
+
+    document.getElementById(
+        "toValue"
+    ).value =
+        Number(
+            result.toPrecision(10)
+        );
+
+}
+
+
+/* =====================================================
+   ADVANCED TABS
+===================================================== */
+
+function advancedTab(id, button) {
+
+    document
+        .querySelectorAll(".advanced-content")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".advanced-tab")
+        .forEach(item => {
+
+            item.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+
+    button.classList.add("active");
+
+}
+
+
+/* =====================================================
+   COMPLEX NUMBERS
+===================================================== */
+
+function parseComplex(value) {
+
+    value =
+        value
+            .replace(/\s+/g, "")
+            .replace(/i/g, "");
+
+
+    let real = 0;
+
+    let imaginary = 0;
+
+
+    const match =
+        value.match(
+            /^([+-]?\d*\.?\d+)?([+-]\d*\.?\d+)?$/
+        );
+
+
+    if (!match) {
+
+        throw new Error(
+            "Invalid complex number"
+        );
+
+    }
+
+
+    if (match[1]) {
+
+        real =
+            parseFloat(match[1]);
+
+    }
+
+
+    if (match[2]) {
+
+        imaginary =
+            parseFloat(match[2]);
+
+    }
+
+
+    return {
+        real,
+        imaginary
+    };
+
+}
+
+
+function formatComplex(z) {
+
+    const r =
+        Math.abs(z.real) < 1e-12
+            ? 0
+            : z.real;
+
+    const i =
+        Math.abs(z.imaginary) < 1e-12
+            ? 0
+            : z.imaginary;
+
+
+    if (i === 0) {
+
+        return r.toFixed(6);
+
+    }
+
+
+    if (r === 0) {
+
+        return `${i.toFixed(6)}i`;
+
+    }
+
+
+    return `${r.toFixed(6)} ${i >= 0 ? "+" : "-"} ${Math.abs(i).toFixed(6)}i`;
+
+}
+
+
+function complexOperation(operation) {
+
+    try {
+
+        const A =
+            parseComplex(
+                document.getElementById(
+                    "complexA"
+                ).value
+            );
+
+
+        const B =
+            parseComplex(
+                document.getElementById(
+                    "complexB"
+                ).value
+            );
+
+
+        let result;
+
+
+        if (operation === "+") {
+
+            result = {
+
+                real:
+                    A.real + B.real,
+
+                imaginary:
+                    A.imaginary +
+                    B.imaginary
+
+            };
+
+        }
+
+
+        else if (operation === "-") {
+
+            result = {
+
+                real:
+                    A.real - B.real,
+
+                imaginary:
+                    A.imaginary -
+                    B.imaginary
+
+            };
+
+        }
+
+
+        else if (operation === "*") {
+
+            result = {
+
+                real:
+                    A.real * B.real -
+                    A.imaginary * B.imaginary,
+
+                imaginary:
+                    A.real * B.imaginary +
+                    A.imaginary * B.real
+
+            };
+
+        }
+
+
+        else {
+
+            const denominator =
+                B.real * B.real +
+                B.imaginary *
+                B.imaginary;
+
+
+            if (denominator === 0) {
+
+                throw new Error();
+
+            }
+
+
+            result = {
+
+                real:
+                    (
+                        A.real * B.real +
+                        A.imaginary * B.imaginary
+                    ) / denominator,
+
+                imaginary:
+                    (
+                        A.imaginary * B.real -
+                        A.real * B.imaginary
+                    ) / denominator
+
+            };
+
+        }
+
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            `Result = ${formatComplex(result)}`;
+
+    }
+
+    catch {
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            "Invalid complex number. Example: 3+4i";
+
+    }
+
+}
+
+
+function complexConjugate() {
+
+    try {
+
+        const A =
+            parseComplex(
+                document.getElementById(
+                    "complexA"
+                ).value
+            );
+
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            `Conjugate = ${formatComplex({
+                real: A.real,
+                imaginary: -A.imaginary
+            })}`;
+
+    }
+
+    catch {
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            "Invalid complex number.";
+
+    }
+
+}
+
+
+function complexMagnitude() {
+
+    try {
+
+        const A =
+            parseComplex(
+                document.getElementById(
+                    "complexA"
+                ).value
+            );
+
+
+        const magnitude =
+            Math.sqrt(
+                A.real * A.real +
+                A.imaginary *
+                A.imaginary
+            );
+
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            `|A| = ${magnitude.toFixed(6)}`;
+
+    }
+
+    catch {
+
+        document.getElementById(
+            "complexResult"
+        ).textContent =
+            "Invalid complex number.";
+
+    }
+
+}
+
+
+/* =====================================================
+   MATRIX
+===================================================== */
+
+function getMatrix(prefix) {
+
+    return [
+
+        [
+            Number(
+                document.getElementById(
+                    prefix + "11"
+                ).value
+            ),
+
+            Number(
+                document.getElementById(
+                    prefix + "12"
+                ).value
+            )
+
+        ],
+
+        [
+
+            Number(
+                document.getElementById(
+                    prefix + "21"
+                ).value
+            ),
+
+            Number(
+                document.getElementById(
+                    prefix + "22"
+                ).value
+            )
+
+        ]
+
+    ];
+
+}
+
+
+function formatMatrix(M) {
+
+    return `
+
+        <div style="
+            font-size:18px;
+            line-height:2;
+            font-family:monospace;
+        ">
+
+            [ ${M[0][0].toFixed(4)}
+              &nbsp;&nbsp;
+              ${M[0][1].toFixed(4)} ]
+
+            <br>
+
+            [ ${M[1][0].toFixed(4)}
+              &nbsp;&nbsp;
+              ${M[1][1].toFixed(4)} ]
+
+        </div>
+
+    `;
+
+}
+
+
+function matrixOperation(operation) {
+
+    const A =
+        getMatrix("a");
+
+    const B =
+        getMatrix("b");
+
+
+    let result;
+
+
+    if (operation === "add") {
+
+        result = [
+
+            [
+                A[0][0] + B[0][0],
+                A[0][1] + B[0][1]
+            ],
+
+            [
+                A[1][0] + B[1][0],
+                A[1][1] + B[1][1]
+            ]
+
+        ];
+
+    }
+
+
+    else if (
+        operation === "subtract"
+    ) {
+
+        result = [
+
+            [
+                A[0][0] - B[0][0],
+                A[0][1] - B[0][1]
+            ],
+
+            [
+                A[1][0] - B[1][0],
+                A[1][1] - B[1][1]
+            ]
+
+        ];
+
+    }
+
+
+    else {
+
+        result = [
+
+            [
+
+                A[0][0] * B[0][0] +
+                A[0][1] * B[1][0],
+
+                A[0][0] * B[0][1] +
+                A[0][1] * B[1][1]
+
+            ],
+
+            [
+
+                A[1][0] * B[0][0] +
+                A[1][1] * B[1][0],
+
+                A[1][0] * B[0][1] +
+                A[1][1] * B[1][1]
+
+            ]
+
+        ];
+
+    }
+
+
+    document.getElementById(
+        "matrixResult"
+    ).innerHTML =
+        formatMatrix(result);
+
+}
+
+
+function matrixDeterminant(prefix) {
+
+    const M =
+        getMatrix(
+            prefix === "A"
+                ? "a"
+                : "b"
+        );
+
+
+    const determinant =
+        M[0][0] * M[1][1] -
+        M[0][1] * M[1][0];
+
+
+    document.getElementById(
+        "matrixResult"
+    ).textContent =
+        `det(${prefix}) = ${determinant.toFixed(6)}`;
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+function calculateStatistics() {
+
+    const values =
+        getCommaNumbers(
+            "statisticsInput"
+        );
+
+
+    if (!values.length) {
+
+        return;
+
+    }
+
+
+    const sorted =
+        [...values].sort(
+            (a,b) => a-b
+        );
+
+
+    const count =
+        values.length;
+
+
+    const sum =
+        values.reduce(
+            (a,b) => a+b,
+            0
+        );
+
+
+    const mean =
+        sum / count;
+
+
+    let median;
+
+
+    if (count % 2 === 0) {
+
+        median =
+            (
+                sorted[count / 2 - 1] +
+                sorted[count / 2]
+            ) / 2;
+
+    }
+
+    else {
+
+        median =
+            sorted[
+                Math.floor(count / 2)
+            ];
+
+    }
+
+
+    const variance =
+        values.reduce(
+            (sum, value) =>
+                sum +
+                Math.pow(
+                    value - mean,
+                    2
+                ),
+            0
+        ) / count;
+
+
+    const standardDeviation =
+        Math.sqrt(variance);
+
+
+    document.getElementById(
+        "statCount"
+    ).textContent =
+        count;
+
+
+    document.getElementById(
+        "statMean"
+    ).textContent =
+        mean.toFixed(4);
+
+
+    document.getElementById(
+        "statMedian"
+    ).textContent =
+        median.toFixed(4);
+
+
+    document.getElementById(
+        "statMin"
+    ).textContent =
+        Math.min(...values).toFixed(4);
+
+
+    document.getElementById(
+        "statMax"
+    ).textContent =
+        Math.max(...values).toFixed(4);
+
+
+    document.getElementById(
+        "statStd"
+    ).textContent =
+        standardDeviation.toFixed(4);
+
+}
+
+
+/* =====================================================
+   FORMULA SEARCH
+===================================================== */
+
+function searchFormulas() {
+
+    const query =
+        document.getElementById(
+            "formulaSearch"
+        ).value
+        .toLowerCase();
+
+
+    document
+        .querySelectorAll(".formula-card")
+        .forEach(card => {
+
+            const text =
+                card.textContent
+                    .toLowerCase();
+
+
+            card.style.display =
+                text.includes(query)
+                    ? ""
+                    : "none";
+
+        });
+
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+const quizQuestions = [
+
+    {
+
+        question:
+            "What is the SI unit of resistance?",
+
+        options:
+            [
+                "Volt",
+                "Ampere",
+                "Ohm",
+                "Watt"
+            ],
+
+        answer: 2
+
+    },
+
+
+    {
+
+        question:
+            "Which equation represents Newton's Second Law?",
+
+        options:
+            [
+                "V = IR",
+                "F = ma",
+                "P = VI",
+                "E = mc²"
+            ],
+
+        answer: 1
+
+    },
+
+
+    {
+
+        question:
+            "What is the SI unit of power?",
+
+        options:
+            [
+                "Joule",
+                "Newton",
+                "Watt",
+                "Pascal"
+            ],
+
+        answer: 2
+
+    },
+
+
+    {
+
+        question:
+            "Which formula is used for electrical power?",
+
+        options:
+            [
+                "P = VI",
+                "F = ma",
+                "W = Fd",
+                "P = F/A"
+            ],
+
+        answer: 0
+
+    },
+
+
+    {
+
+        question:
+            "What is the SI unit of pressure?",
+
+        options:
+            [
+                "Pascal",
+                "Watt",
+                "Ohm",
+                "Joule"
+            ],
+
+        answer: 0
+
+    },
+
+
+    {
+
+        question:
+            "What is the area of a rectangle?",
+
+        options:
+            [
+                "L + W",
+                "L × W",
+                "L / W",
+                "2L + 2W"
+            ],
+
+        answer: 1
+
+    },
+
+
+    {
+
+        question:
+            "What is the formula for torque?",
+
+        options:
+            [
+                "τ = Fr",
+                "τ = F/r",
+                "τ = mr",
+                "τ = ma"
+            ],
+
+        answer: 0
+
+    },
+
+
+    {
+
+        question:
+            "What is the volume of a cylinder?",
+
+        options:
+            [
+                "πr²h",
+                "2πr",
+                "πr",
+                "r²h"
+            ],
+
+        answer: 0
+
+    },
+
+
+    {
+
+        question:
+            "What does V = IR represent?",
+
+        options:
+            [
+                "Newton's Law",
+                "Ohm's Law",
+                "Power Law",
+                "Hooke's Law"
+            ],
+
+        answer: 1
+
+    },
+
+
+    {
+
+        question:
+            "What is the mathematical value of π approximately?",
+
+        options:
+            [
+                "2.14",
+                "3.14",
+                "4.14",
+                "1.41"
+            ],
+
+        answer: 1
+
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let quizScore = 0;
+
+let quizAnswered = false;
+
+
+function loadQuestion() {
+
+    const q =
+        quizQuestions[
+            currentQuestion
+        ];
+
+
+    document.getElementById(
+        "quizProgress"
+    ).textContent =
+        `Question ${currentQuestion + 1} / ${quizQuestions.length}`;
+
+
+    document.getElementById(
+        "quizScore"
+    ).textContent =
+        `Score: ${quizScore}`;
+
+
+    document.getElementById(
+        "quizQuestion"
+    ).textContent =
+        q.question;
+
+
+    const options =
+        document.getElementById(
+            "quizOptions"
+        );
+
+
+    options.innerHTML = "";
+
+    quizAnswered = false;
+
+
+    q.options.forEach(
+        (option,index) => {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+
+            button.className =
+                "quiz-option";
+
+
+            button.textContent =
+                option;
+
+
+            button.onclick =
+                () =>
+                    selectAnswer(
+                        index,
+                        button
+                    );
+
+
+            options.appendChild(
+                button
+            );
+
+        }
+    );
+
+
+    document.getElementById(
+        "quizResult"
+    ).textContent = "";
+
+}
+
+
+function selectAnswer(index, button) {
+
+    if (quizAnswered) return;
+
+
+    quizAnswered = true;
+
+
+    const q =
+        quizQuestions[
+            currentQuestion
+        ];
+
+
+    const options =
+        document.querySelectorAll(
+            ".quiz-option"
+        );
+
+
+    if (index === q.answer) {
+
+        button.classList.add(
+            "correct"
+        );
+
+        quizScore++;
+
+    }
+
+    else {
+
+        button.classList.add(
+            "wrong"
+        );
+
+        options[
+            q.answer
+        ].classList.add(
+            "correct"
+        );
+
+    }
+
+
+    document.getElementById(
+        "quizScore"
+    ).textContent =
+        `Score: ${quizScore}`;
+
+}
+
+
+function nextQuestion() {
+
+    if (!quizAnswered) {
+
+        return;
+
+    }
+
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        quizQuestions.length
+    ) {
+
+        document.getElementById(
+            "quizQuestion"
+        ).textContent =
+            "🎉 Quiz Complete!";
+
+
+        document.getElementById(
+            "quizOptions"
+        ).innerHTML = "";
+
+
+        document.getElementById(
+            "nextQuiz"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "quizResult"
+        ).textContent =
+            `Final Score: ${quizScore} / ${quizQuestions.length}`;
+
+        return;
+
+    }
+
+
+    loadQuestion();
+
+}
+
+
+/* =====================================================
+   KEYBOARD SUPPORT
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        const scientific =
+            document.getElementById(
+                "scientific"
+            );
+
+
+        if (
+            !scientific.classList.contains(
+                "active"
+            )
+        ) return;
+
+
+        if (
+            /[0-9.+\-*/%()]/.test(
+                event.key
+            )
+        ) {
+
+            addValue(event.key);
+
+        }
+
+
+        else if (
+            event.key === "Enter"
+        ) {
+
+            calculate();
+
+        }
+
+
+        else if (
+            event.key === "Backspace"
+        ) {
+
+            deleteLast();
+
+        }
+
+
+        else if (
+            event.key === "Escape"
+        ) {
+
+            clearCalculator();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        renderHistory();
+
+        loadUnits();
+
+        loadQuestion();
+
+    }
+);
