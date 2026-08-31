@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chatterjeelaltu3-boop.github.io/EngiCalc/sitemap.xml
