@@ -17,11 +17,11 @@ const DATA = {
     ],
     
     subjects: JSON.parse(localStorage.getItem('engicalc_subjects')) || {
-        'Electrical Engineering': ['Engineering Chemistry', 'Engineering Physics', 'Circuit Theory', 'Network Theory'],
-        'Mechanical Engineering': ['Engineering Mechanics', 'Thermodynamics', 'Fluid Mechanics'],
-        'Civil Engineering': ['Structural Analysis', 'Soil Mechanics', 'Fluid Mechanics'],
-        'Computer Science': ['Data Structures', 'Algorithms', 'Discrete Math'],
-        'Electronics & Communication': ['Signals & Systems', 'Digital Electronics', 'Communication Systems']
+        'Electrical Engineering': ['Engineering Chemistry', 'Engineering Physics', 'Basic Electrical Engineering', 'Engineering Mathematics-I'],
+        'Mechanical Engineering': ['Engineering Chemistry', 'Engineering Physics', 'Engineering Mechanics', 'Engineering Mathematics-I'],
+        'Civil Engineering': ['Engineering Chemistry', 'Engineering Physics', 'Engineering Mechanics', 'Engineering Mathematics-I'],
+        'Computer Science': ['Engineering Chemistry', 'Engineering Physics', 'Programming Fundamentals', 'Engineering Mathematics-I'],
+        'Electronics & Communication': ['Engineering Chemistry', 'Engineering Physics', 'Basic Electronics', 'Engineering Mathematics-I']
     },
     
     difficulties: JSON.parse(localStorage.getItem('engicalc_difficulties')) || ['Easy', 'Medium', 'Hard'],
@@ -33,6 +33,76 @@ const DATA = {
         defaultCount: 10,
         defaultTime: 10
     }
+};
+
+// ============================================
+// SUBJECT QUESTION BANK (Auto Generate)
+// ============================================
+const SUBJECT_QUESTIONS = {
+    'Engineering Chemistry': [
+        { question: 'What is the unit of conductivity?', options: ['S/m', 'Ω/m', 'S/cm', 'Ω/cm'], correct: 0 },
+        { question: 'What is the pH of pure water?', options: ['0', '7', '14', '1'], correct: 1 },
+        { question: 'What is the chemical formula of water?', options: ['H₂O', 'CO₂', 'NaCl', 'HCl'], correct: 0 },
+        { question: 'What is the atomic number of Carbon?', options: ['4', '6', '8', '12'], correct: 1 },
+        { question: 'What is Nernst Equation used for?', options: ['Electrode potential', 'pH calculation', 'Heat transfer', 'Fluid flow'], correct: 0 },
+        { question: 'What is the unit of molarity?', options: ['mol/L', 'g/L', 'kg/L', 'mg/L'], correct: 0 },
+        { question: 'What is the valency of Oxygen?', options: ['1', '2', '3', '4'], correct: 1 },
+        { question: 'What is the formula of Caustic Soda?', options: ['NaOH', 'KOH', 'Ca(OH)₂', 'Na₂CO₃'], correct: 0 },
+        { question: 'What is the molecular weight of H₂O?', options: ['18', '16', '20', '22'], correct: 0 },
+        { question: 'What is the pH of acidic solution?', options: ['<7', '>7', '=7', '=0'], correct: 0 }
+    ],
+    'Engineering Physics': [
+        { question: 'What is the speed of light in vacuum?', options: ['3×10⁸ m/s', '3×10⁶ m/s', '3×10¹⁰ m/s', '3×10⁵ m/s'], correct: 0 },
+        { question: 'What is the unit of force?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correct: 1 },
+        { question: 'What is the SI unit of pressure?', options: ['Pascal', 'Newton', 'Joule', 'Watt'], correct: 0 },
+        { question: 'What is the refractive index of water?', options: ['1.33', '1.5', '2.4', '1.0'], correct: 0 },
+        { question: 'What is the wavelength of visible light?', options: ['400-700 nm', '100-400 nm', '700-1000 nm', '1000-2000 nm'], correct: 0 },
+        { question: 'What is the unit of frequency?', options: ['Hertz', 'Newton', 'Joule', 'Watt'], correct: 0 },
+        { question: 'What is the formula for kinetic energy?', options: ['½mv²', 'mv²', 'mgh', 'Fd'], correct: 0 },
+        { question: 'What is the value of acceleration due to gravity?', options: ['9.8 m/s²', '8.9 m/s²', '10 m/s²', '9.8 m/s'], correct: 0 },
+        { question: 'What is the unit of work?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correct: 0 }
+    ],
+    'Engineering Mathematics-I': [
+        { question: 'What is the derivative of x²?', options: ['x', '2x', 'x²', '2x²'], correct: 1 },
+        { question: 'What is the integral of 2x dx?', options: ['x² + C', '2x² + C', 'x²', 'x² + 1'], correct: 0 },
+        { question: 'What is the value of sin(90°)?', options: ['0', '1', '0.5', '√3/2'], correct: 1 },
+        { question: 'What is the value of cos(0°)?', options: ['0', '1', '0.5', '√3/2'], correct: 1 },
+        { question: 'What is the derivative of sin x?', options: ['cos x', '-cos x', 'sin x', '-sin x'], correct: 0 },
+        { question: 'What is the derivative of cos x?', options: ['cos x', '-cos x', 'sin x', '-sin x'], correct: 3 },
+        { question: 'What is the value of i²?', options: ['-1', '1', '0', 'i'], correct: 0 },
+        { question: 'What is the formula for quadratic equation roots?', options: ['(-b±√(b²-4ac))/2a', '(-b±√(b²+4ac))/2a', '(b±√(b²-4ac))/2a', '(-b±√(4ac-b²))/2a'], correct: 0 },
+        { question: 'What is log₁₀(100)?', options: ['1', '2', '3', '10'], correct: 1 }
+    ],
+    'Basic Electrical Engineering': [
+        { question: 'What is Ohm\'s Law?', options: ['V = IR', 'V = I/R', 'I = VR', 'R = VI'], correct: 0 },
+        { question: 'What is the unit of resistance?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], correct: 2 },
+        { question: 'What is the unit of power?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], correct: 3 },
+        { question: 'What is the unit of current?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], correct: 1 },
+        { question: 'What is the unit of voltage?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], correct: 0 },
+        { question: 'What is the formula for power?', options: ['P = VI', 'P = V/I', 'P = I/V', 'P = V²I'], correct: 0 },
+        { question: 'What is the equivalent resistance of two 10Ω resistors in series?', options: ['20Ω', '10Ω', '5Ω', '2Ω'], correct: 0 },
+        { question: 'What is the equivalent resistance of two 10Ω resistors in parallel?', options: ['20Ω', '10Ω', '5Ω', '2Ω'], correct: 2 }
+    ],
+    'Engineering Mechanics': [
+        { question: 'What is Newton\'s First Law?', options: ['Inertia', 'F = ma', 'Action-Reaction', 'Energy Conservation'], correct: 0 },
+        { question: 'What is the unit of force?', options: ['Joule', 'Newton', 'Watt', 'Pascal'], correct: 1 },
+        { question: 'What is the formula for force?', options: ['F = ma', 'F = m/a', 'F = a/m', 'F = m+a'], correct: 0 },
+        { question: 'What is the moment of inertia?', options: ['Resistance to rotation', 'Resistance to motion', 'Resistance to force', 'Resistance to acceleration'], correct: 0 },
+        { question: 'What is the unit of moment?', options: ['N·m', 'N/m', 'N', 'Joule'], correct: 0 }
+    ],
+    'Programming Fundamentals': [
+        { question: 'What is the time complexity of binary search?', options: ['O(n)', 'O(log n)', 'O(n²)', 'O(1)'], correct: 1 },
+        { question: 'What is a variable in programming?', options: ['A container', 'A function', 'A loop', 'A condition'], correct: 0 },
+        { question: 'What is the base of binary numbers?', options: ['2', '8', '10', '16'], correct: 0 },
+        { question: 'What is an algorithm?', options: ['A set of steps', 'A program', 'A language', 'A compiler'], correct: 0 },
+        { question: 'What is the output of 2 + 2 in Python?', options: ['4', '22', '2+2', 'Error'], correct: 0 }
+    ],
+    'Basic Electronics': [
+        { question: 'What is a diode used for?', options: ['Rectification', 'Amplification', 'Switching', 'Oscillation'], correct: 0 },
+        { question: 'What is a transistor used for?', options: ['Amplification', 'Rectification', 'Filtering', 'Oscillation'], correct: 0 },
+        { question: 'What is the unit of capacitance?', options: ['Farad', 'Henry', 'Ohm', 'Volt'], correct: 0 },
+        { question: 'What is the unit of inductance?', options: ['Farad', 'Henry', 'Ohm', 'Volt'], correct: 1 }
+    ]
 };
 
 // ===== SAVE DATA =====
@@ -53,7 +123,7 @@ function initSampleData() {
             { id: 1, department: 'Electrical Engineering', subject: 'Engineering Chemistry', difficulty: 'Easy', question: 'What is the unit of conductivity?', options: ['S/m', 'Ω/m', 'S/cm', 'Ω/cm'], correct: 0 },
             { id: 2, department: 'Electrical Engineering', subject: 'Engineering Physics', difficulty: 'Easy', question: 'What is the speed of light in vacuum?', options: ['3×10⁸ m/s', '3×10⁶ m/s', '3×10¹⁰ m/s', '3×10⁵ m/s'], correct: 0 },
             { id: 3, department: 'Mechanical Engineering', subject: 'Engineering Mechanics', difficulty: 'Medium', question: 'What is the moment of inertia?', options: ['Resistance to motion', 'Resistance to rotation', 'Resistance to force', 'Resistance to acceleration'], correct: 1 },
-            { id: 4, department: 'Computer Science', subject: 'Data Structures', difficulty: 'Easy', question: 'What is the time complexity of accessing an array element?', options: ['O(1)', 'O(n)', 'O(log n)', 'O(n²)'], correct: 0 }
+            { id: 4, department: 'Computer Science', subject: 'Programming Fundamentals', difficulty: 'Easy', question: 'What is the time complexity of accessing an array element?', options: ['O(1)', 'O(n)', 'O(log n)', 'O(n²)'], correct: 0 }
         ];
         saveData();
     }
@@ -169,6 +239,92 @@ function updateQuizSubjects() {
     const select = document.getElementById('quizSubject');
     const subjects = DATA.subjects[department] || ['General'];
     select.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    updateQuizDescription();
+}
+
+function updateQuizDescription() {
+    const subject = document.getElementById('quizSubject').value;
+    const desc = document.getElementById('quizDescription');
+    const count = document.getElementById('quizCount').value;
+    const time = document.getElementById('quizTime').value;
+    const diff = document.getElementById('quizDifficulty').value;
+    
+    const hasQuestions = SUBJECT_QUESTIONS[subject] && SUBJECT_QUESTIONS[subject].length > 0;
+    const qCount = hasQuestions ? Math.min(parseInt(count), SUBJECT_QUESTIONS[subject].length) : 0;
+    
+    if (hasQuestions) {
+        desc.innerHTML = `📚 <strong>${subject}</strong> — ${SUBJECT_QUESTIONS[subject].length} questions available • ${diff} • ${count} Q • ${time} min`;
+        desc.style.display = 'block';
+    } else {
+        desc.innerHTML = `⚠️ No questions available for <strong>${subject}</strong>. Add questions from Admin Panel.`;
+        desc.style.display = 'block';
+        desc.style.background = '#FEF3C7';
+        desc.style.color = '#92400E';
+    }
+}
+
+// ============================================
+// AUTO GENERATE QUIZ
+// ============================================
+function autoGenerateQuiz() {
+    const subject = document.getElementById('quizSubject').value;
+    const difficulty = document.getElementById('quizDifficulty').value;
+    const count = parseInt(document.getElementById('quizCount').value);
+    const time = parseInt(document.getElementById('quizTime').value);
+    const department = document.getElementById('quizDepartment').value;
+    
+    // Get questions from subject bank
+    let questions = [];
+    if (SUBJECT_QUESTIONS[subject]) {
+        const allQ = SUBJECT_QUESTIONS[subject];
+        // Shuffle and take count
+        const shuffled = shuffleArray([...allQ]);
+        questions = shuffled.slice(0, Math.min(count, shuffled.length)).map(q => ({
+            id: Date.now() + Math.random() * 1000,
+            department: department,
+            subject: subject,
+            difficulty: difficulty,
+            question: q.question,
+            options: q.options,
+            correct: q.correct,
+            _autoGenerated: true
+        }));
+    }
+    
+    // Also add from database questions
+    const dbQuestions = DATA.questions.filter(q => 
+        q.subject === subject && 
+        q.department === department &&
+        q.difficulty === difficulty
+    );
+    
+    // Combine and shuffle
+    const allQuestions = [...questions, ...dbQuestions];
+    const finalQuestions = shuffleArray(allQuestions).slice(0, count);
+    
+    if (finalQuestions.length === 0) {
+        alert('No questions available for this subject. Please add questions from Admin Panel or try another subject.');
+        return;
+    }
+    
+    // Start quiz
+    startQuizWithQuestions(finalQuestions, time);
+}
+
+function startQuizWithQuestions(questions, time) {
+    currentQuiz.questions = questions;
+    currentQuiz.currentIndex = 0;
+    currentQuiz.answers = new Array(questions.length).fill(null);
+    currentQuiz.score = 0;
+    currentQuiz.totalTime = time * 60;
+    currentQuiz.timeLeft = time * 60;
+    
+    document.getElementById('quizSetup').style.display = 'none';
+    document.getElementById('quizInterface').style.display = 'block';
+    document.getElementById('quizResult').style.display = 'none';
+    
+    renderQuestion();
+    startTimer();
 }
 
 // ============================================
@@ -233,7 +389,8 @@ function renderSubjects() {
     DATA.departments.forEach(dept => {
         const subjects = DATA.subjects[dept] || [];
         subjects.forEach(sub => {
-            html += `<span class="topic-tag">${dept} › ${sub}</span>`;
+            const hasQ = SUBJECT_QUESTIONS[sub] ? '✅' : '❌';
+            html += `<span class="topic-tag">${dept} › ${sub} ${hasQ}</span>`;
         });
     });
     container.innerHTML = html || '<p>No subjects added yet.</p>';
@@ -247,6 +404,10 @@ function addSubject() {
         if (!DATA.subjects[dept]) DATA.subjects[dept] = [];
         if (!DATA.subjects[dept].includes(subject)) {
             DATA.subjects[dept].push(subject);
+            // Add empty question bank for new subject
+            if (!SUBJECT_QUESTIONS[subject]) {
+                SUBJECT_QUESTIONS[subject] = [];
+            }
             saveData();
             renderAll();
             populateAllSelects();
@@ -722,6 +883,7 @@ function startQuiz(source) {
         );
         questions = shuffleArray(questions).slice(0, count);
     } else {
+        // AI Generate
         questions = generateAIQuestions(department, subject, difficulty, count);
         questions = shuffleArray(questions);
     }
@@ -731,19 +893,7 @@ function startQuiz(source) {
         return;
     }
     
-    currentQuiz.questions = questions;
-    currentQuiz.currentIndex = 0;
-    currentQuiz.answers = new Array(questions.length).fill(null);
-    currentQuiz.score = 0;
-    currentQuiz.totalTime = time * 60;
-    currentQuiz.timeLeft = time * 60;
-    
-    document.getElementById('quizSetup').style.display = 'none';
-    document.getElementById('quizInterface').style.display = 'block';
-    document.getElementById('quizResult').style.display = 'none';
-    
-    renderQuestion();
-    startTimer();
+    startQuizWithQuestions(questions, time);
 }
 
 function generateAIQuestions(department, subject, difficulty, count) {
@@ -1088,11 +1238,17 @@ function init() {
     populateQuizOptions();
     updateConverterUnits();
     
+    // Auto generate quiz on subject change
+    document.getElementById('quizSubject').addEventListener('change', updateQuizDescription);
+    document.getElementById('quizCount').addEventListener('change', updateQuizDescription);
+    document.getElementById('quizTime').addEventListener('change', updateQuizDescription);
+    document.getElementById('quizDifficulty').addEventListener('change', updateQuizDescription);
+    
     document.getElementById('adminDashboard').style.display = 'none';
     console.log('🚀 ENGICALC initialized!');
     console.log('🔐 Admin Password: 1234');
     console.log('📚 Structure: Department → Subject');
-    console.log('⚙️ Quiz Settings: Difficulty, Count, Time all customizable from Admin');
+    console.log('🎯 Auto Quiz Generate available for 1st Year subjects!');
 }
 
 document.addEventListener('DOMContentLoaded', init);
