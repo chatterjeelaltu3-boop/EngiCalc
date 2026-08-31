@@ -3,10 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering Scientific Calculator</title>
+    <title>All-in-One Engineering Calc</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Theme Toggle Controller -->
+    <div class="theme-toggle">
+        <button id="mode-btn">🌙 Dark Mode</button>
+    </div>
+
     <div class="calculator-container">
         <!-- Logo -->
         <img src="Screenshot 2026-08-31 093047.png" alt="EngiCalc Logo" class="logo">
@@ -17,19 +22,16 @@
         
         <!-- Buttons Grid -->
         <div class="buttons">
-            <!-- Scientific Row 1 -->
             <button class="btn sci">sin</button>
             <button class="btn sci">cos</button>
             <button class="btn sci">tan</button>
             <button class="btn clear">C</button>
             
-            <!-- Scientific Row 2 -->
             <button class="btn sci">√</button>
             <button class="btn sci">^</button>
             <button class="btn sci">π</button>
             <button class="btn oper">/</button>
             
-            <!-- Numbers & Operators -->
             <button class="btn">7</button>
             <button class="btn">8</button>
             <button class="btn">9</button>
@@ -48,6 +50,34 @@
             <button class="btn">0</button>
             <button class="btn">.</button>
             <button class="btn equal">=</button>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 📊 Engineering Unit Converter Section -->
+        <div class="converter-section">
+            <h3>📊 Unit Converter</h3>
+            <select id="converter-type">
+                <option value="length">Length (Meter to Km)</option>
+                <option value="weight">Weight (Kg to Pound)</option>
+                <option value="temp">Temp (Celsius to Fahr)</option>
+            </select>
+            <div class="converter-inputs">
+                <input type="number" id="unit-input" placeholder="Value">
+                <span class="arrow">➡️</span>
+                <input type="text" id="unit-output" readonly placeholder="Result">
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 📜 History Log Section -->
+        <div class="history-section">
+            <h3>📜 History Log</h3>
+            <ul id="history-list">
+                <li class="empty-msg">No history yet</li>
+            </ul>
+            <button id="clear-history">Clear History</button>
         </div>
     </div>
     <script src="script.js"></script>
