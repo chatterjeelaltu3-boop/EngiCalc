@@ -341,11 +341,7 @@
                         </div>
                         <div class="form-group">
                             <label>Subject</label>
-                            <select id="quizSubject" onchange="updateQuizTopics()"></select>
-                        </div>
-                        <div class="form-group">
-                            <label>Topic</label>
-                            <select id="quizTopic"></select>
+                            <select id="quizSubject"></select>
                         </div>
                         <div class="form-group">
                             <label>Difficulty</label>
@@ -424,7 +420,6 @@
                         <button class="admin-tab active" data-tab="questions">Questions</button>
                         <button class="admin-tab" data-tab="departments">Departments</button>
                         <button class="admin-tab" data-tab="subjects">Subjects</button>
-                        <button class="admin-tab" data-tab="topics">Topics</button>
                         <button class="admin-tab" data-tab="difficulties">Difficulties</button>
                         <button class="admin-tab" data-tab="quizsettings">Quiz Settings</button>
                         <button class="admin-tab" data-tab="formulas">Formulas</button>
@@ -456,18 +451,6 @@
                             <button class="btn-primary" onclick="addSubject()">Add Subject</button>
                         </div>
                         <div id="subjectList" class="topic-list"></div>
-                    </div>
-
-                    <!-- Topics -->
-                    <div id="adminTopics" class="admin-panel">
-                        <h3>Manage Topics</h3>
-                        <div class="topic-form">
-                            <select id="topicDepartmentSelect" onchange="updateTopicSubjectSelect()"></select>
-                            <select id="topicSubjectSelect"></select>
-                            <input type="text" id="newTopic" placeholder="New Topic Name">
-                            <button class="btn-primary" onclick="addTopic()">Add Topic</button>
-                        </div>
-                        <div id="topicList" class="topic-list"></div>
                     </div>
 
                     <!-- Difficulties -->
