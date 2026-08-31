@@ -1,87 +1,357 @@
-<!-- ADMIN SECTION -->
-<section id="admin" class="section">
-    <div class="admin-container">
-        <h2>Admin Panel</h2>
-        
-        <!-- Admin Dashboard (Hidden by default) -->
-        <div id="adminDashboard" style="display:none;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
-                <h3>Admin Dashboard</h3>
-                <button class="btn-secondary" onclick="adminLogout()">🚪 Logout</button>
-            </div>
-            
-            <div class="admin-tabs">
-                <button class="admin-tab active" data-tab="questions">Questions</button>
-                <button class="admin-tab" data-tab="topics">Topics</button>
-                <button class="admin-tab" data-tab="formulas">Formulas</button>
-                <button class="admin-tab" data-tab="settings">Settings</button>
-            </div>
-
-            <!-- Admin - Questions -->
-            <div id="adminQuestions" class="admin-panel active">
-                <h3>Manage Questions</h3>
-                <button class="btn-primary" onclick="showAddQuestion()">+ Add Question</button>
-                <div id="questionBank" class="question-bank"></div>
-            </div>
-
-            <!-- Admin - Topics -->
-            <div id="adminTopics" class="admin-panel">
-                <h3>Manage Topics</h3>
-                <div class="topic-form">
-                    <input type="text" id="newTopic" placeholder="New Topic Name">
-                    <button class="btn-primary" onclick="addTopic()">Add Topic</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENGICALC — Engineering Student Platform</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-section">
+                <div class="logo-placeholder">
+                    <span class="logo-icon">⚡</span>
                 </div>
-                <div id="topicList" class="topic-list"></div>
+                <div class="brand-text">
+                    <h1>ENGICALC</h1>
+                    <span class="subtitle">Engineering Student Platform</span>
+                </div>
             </div>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-section="home">Home</button>
+                <button class="nav-btn" data-section="calculator">Calculator</button>
+                <button class="nav-btn" data-section="quiz">Quiz</button>
+                <button class="nav-btn" data-section="formulas">Formulas</button>
+                <button class="nav-btn" data-section="admin">Admin</button>
+            </nav>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </header>
 
-            <!-- Admin - Formulas -->
-            <div id="adminFormulas" class="admin-panel">
-                <h3>Manage Formulas</h3>
-                <button class="btn-primary" onclick="showAddFormula()">+ Add Formula</button>
-                <div id="adminFormulaList" class="formula-admin-list"></div>
-            </div>
-
-            <!-- Admin - Settings -->
-            <div id="adminSettings" class="admin-panel">
-                <h3>Quiz Settings</h3>
-                <div class="settings-group">
-                    <h4>Easy Quiz</h4>
-                    <div class="setting-row">
-                        <label>Questions: <input type="number" id="easyQuestions" value="10"></label>
-                        <label>Time (min): <input type="number" id="easyTime" value="10"></label>
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- HOME SECTION -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <h2>Welcome to ENGICALC</h2>
+                <p>Your all-in-one engineering companion — Calculator, Formulas, and Quiz</p>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧮</div>
+                        <h3>Scientific Calculator</h3>
+                        <p>Full-featured calculator with history</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Formula Library</h3>
+                        <p>Complete engineering formulas</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Quiz System</h3>
+                        <p>Practice with AI-generated questions</p>
                     </div>
                 </div>
-                <div class="settings-group">
-                    <h4>Medium Quiz</h4>
-                    <div class="setting-row">
-                        <label>Questions: <input type="number" id="mediumQuestions" value="20"></label>
-                        <label>Time (min): <input type="number" id="mediumTime" value="20"></label>
-                    </div>
-                </div>
-                <div class="settings-group">
-                    <h4>Hard Quiz</h4>
-                    <div class="setting-row">
-                        <label>Questions: <input type="number" id="hardQuestions" value="30"></label>
-                        <label>Time (min): <input type="number" id="hardTime" value="45"></label>
-                    </div>
-                </div>
-                <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
             </div>
+        </section>
+
+        <!-- CALCULATOR SECTION -->
+        <section id="calculator" class="section">
+            <div class="calc-container">
+                <div class="calc-main">
+                    <div class="calc-display">
+                        <div class="calc-history-display" id="historyDisplay"></div>
+                        <div class="calc-expression" id="expression"></div>
+                        <div class="calc-result" id="result">0</div>
+                    </div>
+                    <div class="calc-mode">
+                        <button class="mode-btn active" data-mode="deg">DEG</button>
+                        <button class="mode-btn" data-mode="rad">RAD</button>
+                    </div>
+                    <div class="calc-buttons">
+                        <div class="calc-row">
+                            <button class="calc-btn func" data-value="(">(</button>
+                            <button class="calc-btn func" data-value=")">)</button>
+                            <button class="calc-btn func" data-value="C">C</button>
+                            <button class="calc-btn func" data-value="⌫">⌫</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn func" data-value="sin">sin</button>
+                            <button class="calc-btn func" data-value="cos">cos</button>
+                            <button class="calc-btn func" data-value="tan">tan</button>
+                            <button class="calc-btn func" data-value="π">π</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn func" data-value="sin⁻¹">sin⁻¹</button>
+                            <button class="calc-btn func" data-value="cos⁻¹">cos⁻¹</button>
+                            <button class="calc-btn func" data-value="tan⁻¹">tan⁻¹</button>
+                            <button class="calc-btn func" data-value="e">e</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn func" data-value="log">log</button>
+                            <button class="calc-btn func" data-value="ln">ln</button>
+                            <button class="calc-btn func" data-value="√">√</button>
+                            <button class="calc-btn func" data-value="x!">x!</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn func" data-value="x²">x²</button>
+                            <button class="calc-btn func" data-value="xʸ">xʸ</button>
+                            <button class="calc-btn func" data-value="10ˣ">10ˣ</button>
+                            <button class="calc-btn func" data-value="%">%</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn num" data-value="7">7</button>
+                            <button class="calc-btn num" data-value="8">8</button>
+                            <button class="calc-btn num" data-value="9">9</button>
+                            <button class="calc-btn op" data-value="÷">÷</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn num" data-value="4">4</button>
+                            <button class="calc-btn num" data-value="5">5</button>
+                            <button class="calc-btn num" data-value="6">6</button>
+                            <button class="calc-btn op" data-value="×">×</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn num" data-value="1">1</button>
+                            <button class="calc-btn num" data-value="2">2</button>
+                            <button class="calc-btn num" data-value="3">3</button>
+                            <button class="calc-btn op" data-value="-">−</button>
+                        </div>
+                        <div class="calc-row">
+                            <button class="calc-btn num" data-value="0">0</button>
+                            <button class="calc-btn num" data-value=".">.</button>
+                            <button class="calc-btn eq" data-value="=">=</button>
+                            <button class="calc-btn op" data-value="+">+</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="calc-history">
+                    <h3>History</h3>
+                    <div id="historyList"></div>
+                    <button class="clear-history-btn" onclick="clearHistory()">Clear History</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUIZ SECTION -->
+        <section id="quiz" class="section">
+            <div class="quiz-container">
+                <div id="quizSetup" class="quiz-setup">
+                    <h2>Quiz Setup</h2>
+                    <div class="quiz-form">
+                        <div class="form-group">
+                            <label>Topic</label>
+                            <select id="quizTopic">
+                                <option value="Electrical Engineering">Electrical Engineering</option>
+                                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                                <option value="Civil Engineering">Civil Engineering</option>
+                                <option value="Engineering Mathematics">Engineering Mathematics</option>
+                                <option value="Computer Science">Computer Science</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Sub-topic</label>
+                            <select id="quizSubtopic"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Difficulty</label>
+                            <select id="quizDifficulty">
+                                <option value="easy">Easy</option>
+                                <option value="medium">Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Number of Questions</label>
+                            <select id="quizCount">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Time (minutes)</label>
+                            <select id="quizTime">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                                <option value="30">30</option>
+                                <option value="45">45</option>
+                                <option value="60">60</option>
+                            </select>
+                        </div>
+                        <div class="quiz-actions">
+                            <button class="btn-primary" onclick="startQuiz('bank')">Start from Bank</button>
+                            <button class="btn-primary btn-ai" onclick="startQuiz('ai')">🤖 Generate with AI</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="quizInterface" class="quiz-interface" style="display:none;">
+                    <div class="quiz-header">
+                        <div class="quiz-progress">
+                            <span id="questionCounter">Question 1/10</span>
+                            <div class="progress-bar">
+                                <div id="progressFill" style="width:0%"></div>
+                            </div>
+                        </div>
+                        <div class="quiz-timer">
+                            ⏱️ <span id="timerDisplay">10:00</span>
+                        </div>
+                    </div>
+                    <div id="questionContainer" class="question-container">
+                        <h3 id="questionText">Loading question...</h3>
+                        <div id="optionsContainer" class="options-container"></div>
+                    </div>
+                    <div class="quiz-controls">
+                        <button class="btn-secondary" onclick="submitQuiz()">Submit Quiz</button>
+                        <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+                    </div>
+                </div>
+
+                <div id="quizResult" class="quiz-result" style="display:none;">
+                    <h2>Quiz Complete! 🎉</h2>
+                    <div class="result-stats">
+                        <div class="stat-card">
+                            <span class="stat-label">Total Questions</span>
+                            <span id="resultTotal" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-card correct">
+                            <span class="stat-label">Correct</span>
+                            <span id="resultCorrect" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-card wrong">
+                            <span class="stat-label">Wrong</span>
+                            <span id="resultWrong" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-card score">
+                            <span class="stat-label">Score</span>
+                            <span id="resultScore" class="stat-value">0%</span>
+                        </div>
+                    </div>
+                    <p id="resultMessage" class="result-message"></p>
+                    <button class="btn-primary" onclick="resetQuiz()">Retake Quiz</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULAS SECTION -->
+        <section id="formulas" class="section">
+            <div class="formulas-container">
+                <h2>Engineering Formula Library</h2>
+                <div class="formula-search">
+                    <input type="text" id="formulaSearch" placeholder="🔍 Search formulas..." oninput="searchFormulas()">
+                </div>
+                <div id="formulaList" class="formula-grid"></div>
+            </div>
+        </section>
+
+        <!-- ADMIN SECTION -->
+        <section id="admin" class="section">
+            <div class="admin-container">
+                <h2>Admin Panel</h2>
+                
+                <!-- Admin Dashboard (Hidden by default) -->
+                <div id="adminDashboard" style="display:none;">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+                        <h3>Admin Dashboard</h3>
+                        <button class="btn-secondary" onclick="adminLogout()">🚪 Logout</button>
+                    </div>
+                    
+                    <div class="admin-tabs">
+                        <button class="admin-tab active" data-tab="questions">Questions</button>
+                        <button class="admin-tab" data-tab="topics">Topics</button>
+                        <button class="admin-tab" data-tab="formulas">Formulas</button>
+                        <button class="admin-tab" data-tab="settings">Settings</button>
+                    </div>
+
+                    <!-- Admin - Questions -->
+                    <div id="adminQuestions" class="admin-panel active">
+                        <h3>Manage Questions</h3>
+                        <button class="btn-primary" onclick="showAddQuestion()">+ Add Question</button>
+                        <div id="questionBank" class="question-bank"></div>
+                    </div>
+
+                    <!-- Admin - Topics -->
+                    <div id="adminTopics" class="admin-panel">
+                        <h3>Manage Topics</h3>
+                        <div class="topic-form">
+                            <input type="text" id="newTopic" placeholder="New Topic Name">
+                            <button class="btn-primary" onclick="addTopic()">Add Topic</button>
+                        </div>
+                        <div id="topicList" class="topic-list"></div>
+                    </div>
+
+                    <!-- Admin - Formulas -->
+                    <div id="adminFormulas" class="admin-panel">
+                        <h3>Manage Formulas</h3>
+                        <button class="btn-primary" onclick="showAddFormula()">+ Add Formula</button>
+                        <div id="adminFormulaList" class="formula-admin-list"></div>
+                    </div>
+
+                    <!-- Admin - Settings -->
+                    <div id="adminSettings" class="admin-panel">
+                        <h3>Quiz Settings</h3>
+                        <div class="settings-group">
+                            <h4>Easy Quiz</h4>
+                            <div class="setting-row">
+                                <label>Questions: <input type="number" id="easyQuestions" value="10"></label>
+                                <label>Time (min): <input type="number" id="easyTime" value="10"></label>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h4>Medium Quiz</h4>
+                            <div class="setting-row">
+                                <label>Questions: <input type="number" id="mediumQuestions" value="20"></label>
+                                <label>Time (min): <input type="number" id="mediumTime" value="20"></label>
+                            </div>
+                        </div>
+                        <div class="settings-group">
+                            <h4>Hard Quiz</h4>
+                            <div class="setting-row">
+                                <label>Questions: <input type="number" id="hardQuestions" value="30"></label>
+                                <label>Time (min): <input type="number" id="hardTime" value="45"></label>
+                            </div>
+                        </div>
+                        <button class="btn-primary" onclick="saveSettings()">Save Settings</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2026 ENGICALC — Engineering Student Platform</p>
+    </footer>
+
+    <!-- Password Modal - শুধু Admin এর জন্য -->
+    <div id="adminPasswordModal" class="modal" style="display:none;">
+        <div class="modal-content" style="max-width:400px;">
+            <span class="modal-close" onclick="closePasswordModal()">&times;</span>
+            <h3 style="text-align:center;margin-bottom:1.5rem;">🔐 Admin Access</h3>
+            <div class="form-group">
+                <label>Enter Password</label>
+                <input type="password" id="adminPasswordInput" placeholder="Enter admin password" 
+                       onkeydown="if(event.key==='Enter') verifyAdminPassword()">
+            </div>
+            <button class="btn-primary" onclick="verifyAdminPassword()" style="width:100%;">Unlock Admin Panel</button>
+            <p id="passwordError" style="color:red;display:none;text-align:center;margin-top:0.5rem;">❌ Wrong password! Try again.</p>
         </div>
     </div>
-</section>
 
-<!-- Password Modal - শুধু Admin এর জন্য -->
-<div id="adminPasswordModal" class="modal" style="display:none;">
-    <div class="modal-content" style="max-width:400px;">
-        <span class="modal-close" onclick="closePasswordModal()">&times;</span>
-        <h3 style="text-align:center;margin-bottom:1.5rem;">🔐 Admin Access</h3>
-        <div class="form-group">
-            <label>Enter Password</label>
-            <input type="password" id="adminPasswordInput" placeholder="Enter admin password" 
-                   onkeydown="if(event.key==='Enter') verifyAdminPassword()">
+    <!-- Modal for Add Question/Formula -->
+    <div id="modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
         </div>
-        <button class="btn-primary" onclick="verifyAdminPassword()" style="width:100%;">Unlock Admin Panel</button>
-        <p id="passwordError" style="color:red;display:none;text-align:center;margin-top:0.5rem;">❌ Wrong password! Try again.</p>
     </div>
-</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
