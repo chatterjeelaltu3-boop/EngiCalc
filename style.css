@@ -41,7 +41,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    padding: 0.75rem 2rem;
+    padding: 0.5rem 1.5rem;
 }
 
 .header-container {
@@ -56,56 +56,46 @@ body {
 .logo-section {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
-.logo-placeholder {
-    width: 48px;
-    height: 48px;
-    background: var(--primary);
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: white;
-    font-weight: 800;
-}
-
-.logo-icon {
-    font-size: 1.8rem;
+.site-logo {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
+    border-radius: 6px;
 }
 
 .brand-text h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 800;
     color: var(--primary);
     letter-spacing: -0.5px;
-    line-height: 1.2;
+    line-height: 1.1;
 }
 
 .brand-text .subtitle {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     color: var(--text-light);
     font-weight: 500;
     display: block;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
 }
 
 .main-nav {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.3rem;
     align-items: center;
     flex-wrap: wrap;
 }
 
 .nav-btn {
-    padding: 0.4rem 0.8rem;
+    padding: 0.35rem 0.7rem;
     border: none;
     background: transparent;
     color: var(--text-light);
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: var(--transition);
@@ -135,7 +125,7 @@ main {
     flex: 1;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1.5rem;
     width: 100%;
 }
 
@@ -155,28 +145,28 @@ main {
 
 /* ===== HOME SECTION ===== */
 .hero h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
     color: var(--text);
 }
 
 .hero > p {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: var(--text-light);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
 }
 
 .feature-card {
     background: var(--white);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     text-align: center;
@@ -191,42 +181,42 @@ main {
 }
 
 .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
 }
 
 .feature-card h3 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
 }
 
 .feature-card p {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: var(--text-light);
 }
 
 /* ===== CALCULATOR ===== */
 .calc-container {
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 2rem;
+    grid-template-columns: 1fr 250px;
+    gap: 1.5rem;
     align-items: start;
 }
 
 .calc-main {
     background: var(--white);
     border-radius: var(--radius);
-    padding: 1.5rem;
+    padding: 1rem;
     box-shadow: var(--shadow);
-    max-width: 480px;
+    max-width: 420px;
 }
 
 .calc-display {
     background: var(--bg);
-    padding: 1rem 1.25rem;
+    padding: 0.8rem 1rem;
     border-radius: var(--radius-sm);
-    margin-bottom: 1rem;
-    min-height: 100px;
+    margin-bottom: 0.8rem;
+    min-height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -234,39 +224,39 @@ main {
 }
 
 .calc-history-display {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-light);
-    min-height: 20px;
+    min-height: 18px;
 }
 
 .calc-expression {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: var(--text-light);
-    min-height: 28px;
+    min-height: 24px;
     word-break: break-all;
 }
 
 .calc-result {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--text);
-    min-height: 44px;
+    min-height: 38px;
 }
 
 .calc-mode {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 0.3rem;
+    margin-bottom: 0.8rem;
 }
 
 .mode-btn {
-    padding: 0.3rem 1rem;
+    padding: 0.2rem 0.8rem;
     border: 2px solid var(--border);
     background: transparent;
     border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     transition: var(--transition);
     font-family: inherit;
 }
@@ -280,20 +270,20 @@ main {
 .calc-buttons {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .calc-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .calc-btn {
-    padding: 0.9rem 0.5rem;
+    padding: 0.6rem 0.3rem;
     border: none;
     border-radius: var(--radius-sm);
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;
     transition: var(--transition);
@@ -324,7 +314,7 @@ main {
 .calc-btn.func {
     background: #F1F5F9;
     color: var(--text-light);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 .calc-btn.eq {
@@ -336,29 +326,29 @@ main {
 .calc-history {
     background: var(--white);
     border-radius: var(--radius);
-    padding: 1.5rem;
+    padding: 1rem;
     box-shadow: var(--shadow);
-    max-height: 500px;
+    max-height: 400px;
     display: flex;
     flex-direction: column;
 }
 
 .calc-history h3 {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
     color: var(--text-light);
 }
 
 #historyList {
     flex: 1;
     overflow-y: auto;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
 }
 
 .history-item {
-    padding: 0.5rem;
+    padding: 0.3rem;
     border-bottom: 1px solid var(--border);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     display: flex;
     justify-content: space-between;
 }
@@ -373,13 +363,13 @@ main {
 }
 
 .clear-history-btn {
-    padding: 0.5rem;
+    padding: 0.3rem;
     border: 1px solid var(--error);
     color: var(--error);
     background: transparent;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     transition: var(--transition);
     font-family: inherit;
 }
@@ -391,13 +381,13 @@ main {
 
 /* ===== UNIT CONVERTER ===== */
 .converter-container {
-    max-width: 700px;
+    max-width: 650px;
     margin: 0 auto;
 }
 
 .converter-box {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
@@ -405,28 +395,28 @@ main {
 .converter-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .converter-row .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.2rem;
 }
 
 .converter-row .form-group label {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-light);
 }
 
 .converter-row .form-group select,
 .converter-row .form-group input {
-    padding: 0.6rem 0.8rem;
+    padding: 0.5rem 0.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: inherit;
 }
 
@@ -438,31 +428,32 @@ main {
 
 /* ===== EQUATION SOLVER ===== */
 .solver-container {
-    max-width: 800px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
 .solver-box {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
 
 .solver-tabs {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
 }
 
 .solver-tab {
-    padding: 0.5rem 1.2rem;
+    padding: 0.4rem 1rem;
     border: 2px solid var(--border);
     background: transparent;
     border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: 600;
+    font-size: 0.8rem;
     transition: var(--transition);
     font-family: inherit;
 }
@@ -486,43 +477,44 @@ main {
 }
 
 .solver-panel h4 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
 }
 
 .solver-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .solver-row .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.2rem;
 }
 
 .solver-row .form-group label {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-light);
 }
 
 .solver-row .form-group input {
-    padding: 0.6rem 0.8rem;
+    padding: 0.5rem 0.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: inherit;
 }
 
 .solver-result {
-    margin-top: 1.5rem;
-    padding: 1rem;
+    margin-top: 1rem;
+    padding: 0.8rem;
     background: var(--primary-light);
     border-radius: var(--radius-sm);
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
     display: none;
     line-height: 1.8;
 }
@@ -533,31 +525,32 @@ main {
 
 /* ===== ELECTRICAL CALCULATOR ===== */
 .electrical-container {
-    max-width: 800px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
 .electrical-box {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
 
 .electrical-tabs {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
 }
 
 .electrical-tab {
-    padding: 0.5rem 1.2rem;
+    padding: 0.4rem 1rem;
     border: 2px solid var(--border);
     background: transparent;
     border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: 600;
+    font-size: 0.8rem;
     transition: var(--transition);
     font-family: inherit;
 }
@@ -581,44 +574,45 @@ main {
 }
 
 .electrical-panel h4 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
 }
 
 .electrical-row {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .electrical-row .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.2rem;
 }
 
 .electrical-row .form-group label {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-light);
 }
 
 .electrical-row .form-group select,
 .electrical-row .form-group input {
-    padding: 0.6rem 0.8rem;
+    padding: 0.5rem 0.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: inherit;
 }
 
 .electrical-result {
-    margin-top: 1.5rem;
-    padding: 1rem;
+    margin-top: 1rem;
+    padding: 0.8rem;
     background: var(--primary-light);
     border-radius: var(--radius-sm);
     font-weight: 500;
-    font-size: 1.1rem;
+    font-size: 1rem;
     display: none;
     line-height: 1.8;
 }
@@ -629,45 +623,46 @@ main {
 
 /* ===== QUIZ SECTION ===== */
 .quiz-container {
-    max-width: 800px;
+    max-width: 750px;
     margin: 0 auto;
 }
 
 .quiz-setup {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
 
 .quiz-setup h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .quiz-form {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
+    gap: 0.8rem;
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.2rem;
 }
 
 .form-group label {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-light);
 }
 
 .form-group select,
 .form-group input {
-    padding: 0.6rem 0.8rem;
+    padding: 0.5rem 0.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: inherit;
     background: var(--white);
 }
@@ -675,12 +670,12 @@ main {
 .quiz-actions {
     grid-column: 1 / -1;
     display: flex;
-    gap: 1rem;
-    margin-top: 0.5rem;
+    gap: 0.8rem;
+    margin-top: 0.3rem;
 }
 
 .btn-primary {
-    padding: 0.7rem 1.5rem;
+    padding: 0.5rem 1.2rem;
     background: var(--primary);
     color: white;
     border: none;
@@ -689,7 +684,7 @@ main {
     cursor: pointer;
     transition: var(--transition);
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 .btn-primary:hover {
@@ -707,7 +702,7 @@ main {
 }
 
 .btn-secondary {
-    padding: 0.7rem 1.5rem;
+    padding: 0.5rem 1.2rem;
     background: var(--bg);
     color: var(--text);
     border: 1px solid var(--border);
@@ -716,6 +711,7 @@ main {
     cursor: pointer;
     transition: var(--transition);
     font-family: inherit;
+    font-size: 0.85rem;
 }
 
 .btn-secondary:hover {
@@ -725,7 +721,7 @@ main {
 /* Quiz Interface */
 .quiz-interface {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
@@ -734,7 +730,7 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
     gap: 0.5rem;
 }
@@ -745,15 +741,15 @@ main {
 
 .quiz-progress span {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 .progress-bar {
     width: 100%;
-    height: 6px;
+    height: 5px;
     background: var(--bg);
     border-radius: 3px;
-    margin-top: 0.4rem;
+    margin-top: 0.3rem;
     overflow: hidden;
 }
 
@@ -765,38 +761,38 @@ main {
 }
 
 .quiz-timer {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--primary);
     background: var(--primary-light);
-    padding: 0.3rem 1rem;
+    padding: 0.2rem 0.8rem;
     border-radius: var(--radius-sm);
 }
 
 .question-container {
-    margin: 1.5rem 0;
+    margin: 1rem 0;
 }
 
 #questionText {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
     line-height: 1.6;
 }
 
 .options-container {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
 }
 
 .option-btn {
-    padding: 0.8rem 1.2rem;
+    padding: 0.6rem 1rem;
     background: var(--bg);
     border: 2px solid var(--border);
     border-radius: var(--radius-sm);
     cursor: pointer;
     text-align: left;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: var(--transition);
     font-family: inherit;
 }
@@ -824,48 +820,49 @@ main {
 .quiz-controls {
     display: flex;
     justify-content: space-between;
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     gap: 0.5rem;
 }
 
 /* Quiz Result */
 .quiz-result {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     text-align: center;
 }
 
 .quiz-result h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .result-stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 1rem;
-    margin: 1.5rem 0;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 0.8rem;
+    margin: 1rem 0;
 }
 
 .stat-card {
     background: var(--bg);
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: var(--radius-sm);
 }
 
 .stat-label {
     display: block;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-light);
     font-weight: 500;
 }
 
 .stat-value {
     display: block;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
 }
 
 .stat-card.correct .stat-value { color: var(--success); }
@@ -873,44 +870,45 @@ main {
 .stat-card.score .stat-value { color: var(--primary); }
 
 .result-message {
-    font-size: 1.1rem;
-    margin: 1rem 0;
+    font-size: 1rem;
+    margin: 0.8rem 0;
     font-weight: 500;
 }
 
 /* ===== FORMULAS ===== */
 .formulas-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 .formulas-container h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .formula-search {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .formula-search input {
     width: 100%;
-    max-width: 500px;
-    padding: 0.8rem 1.2rem;
+    max-width: 400px;
+    padding: 0.6rem 1rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-family: inherit;
 }
 
 .formula-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
 }
 
 .formula-card {
     background: var(--white);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     border-left: 4px solid var(--primary);
@@ -918,12 +916,12 @@ main {
 }
 
 .formula-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
     box-shadow: var(--shadow-lg);
 }
 
 .formula-card .formula-subject {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 600;
     color: var(--primary);
     text-transform: uppercase;
@@ -931,52 +929,54 @@ main {
 }
 
 .formula-card h4 {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
+    font-size: 1rem;
+    margin: 0.3rem 0;
 }
 
 .formula-card .formula-equation {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--primary);
-    padding: 0.5rem;
+    padding: 0.4rem;
     background: var(--primary-light);
     border-radius: var(--radius-sm);
     text-align: center;
-    margin: 0.5rem 0;
+    margin: 0.3rem 0;
     font-family: 'Courier New', monospace;
 }
 
 .formula-card .formula-desc {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: var(--text-light);
-    margin-top: 0.5rem;
+    margin-top: 0.3rem;
 }
 
 /* ===== ADMIN ===== */
 .admin-container {
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto;
 }
 
 .admin-container h2 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .admin-tabs {
     display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
+    gap: 0.3rem;
+    margin-bottom: 1rem;
     flex-wrap: wrap;
 }
 
 .admin-tab {
-    padding: 0.6rem 1.5rem;
+    padding: 0.4rem 1.2rem;
     border: 2px solid var(--border);
     background: transparent;
     border-radius: var(--radius-sm);
     cursor: pointer;
     font-weight: 600;
+    font-size: 0.8rem;
     transition: var(--transition);
     font-family: inherit;
 }
@@ -994,7 +994,7 @@ main {
 .admin-panel {
     display: none;
     background: var(--white);
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
@@ -1004,24 +1004,25 @@ main {
 }
 
 .admin-panel h3 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
 }
 
 /* Question Bank */
 .question-bank {
-    margin-top: 1rem;
+    margin-top: 0.8rem;
 }
 
 .question-item {
     background: var(--bg);
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: var(--radius-sm);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .question-item .q-info {
@@ -1030,24 +1031,25 @@ main {
 
 .question-item .q-info .q-text {
     font-weight: 500;
+    font-size: 0.9rem;
 }
 
 .question-item .q-info .q-meta {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--text-light);
 }
 
 .question-item .q-actions {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .question-item .q-actions button {
-    padding: 0.3rem 0.8rem;
+    padding: 0.2rem 0.6rem;
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     font-family: inherit;
 }
 
@@ -1061,66 +1063,71 @@ main {
     color: var(--error);
 }
 
-/* Topics */
+/* Topics & Subjects */
 .topic-form {
     display: flex;
     gap: 0.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
 }
 
-.topic-form input {
+.topic-form input,
+.topic-form select {
     flex: 1;
-    padding: 0.6rem 0.8rem;
+    min-width: 120px;
+    padding: 0.5rem 0.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: inherit;
 }
 
 .topic-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .topic-tag {
     background: var(--primary-light);
     color: var(--primary);
-    padding: 0.4rem 1rem;
+    padding: 0.3rem 0.8rem;
     border-radius: var(--radius-sm);
     font-weight: 500;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 /* Settings */
 .settings-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .settings-group h4 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
     color: var(--text-light);
 }
 
 .setting-row {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     flex-wrap: wrap;
 }
 
 .setting-row label {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.3rem;
     font-weight: 500;
+    font-size: 0.85rem;
 }
 
 .setting-row input {
-    width: 70px;
-    padding: 0.3rem 0.5rem;
+    width: 60px;
+    padding: 0.2rem 0.4rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
 }
 
 /* ===== MODAL ===== */
@@ -1139,9 +1146,9 @@ main {
 
 .modal-content {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
-    max-width: 600px;
+    max-width: 550px;
     width: 90%;
     max-height: 90vh;
     overflow-y: auto;
@@ -1150,9 +1157,9 @@ main {
 
 .modal-close {
     position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    font-size: 2rem;
+    top: 0.8rem;
+    right: 1.2rem;
+    font-size: 1.8rem;
     cursor: pointer;
     color: var(--text-light);
     transition: var(--transition);
@@ -1163,57 +1170,59 @@ main {
 }
 
 .modal-content h3 {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
 }
 
 .modal-content .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
 }
 
 .modal-content .form-group label {
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .modal-content .form-group input,
 .modal-content .form-group select,
 .modal-content .form-group textarea {
-    padding: 0.6rem 0.8rem;
+    padding: 0.5rem 0.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-family: inherit;
     width: 100%;
 }
 
 .modal-content .form-group textarea {
-    min-height: 80px;
+    min-height: 60px;
     resize: vertical;
 }
 
 .modal-content .options-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 0.3rem;
 }
 
 .modal-content .radio-group {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 /* Password Modal */
 #adminPasswordModal .modal-content {
-    max-width: 400px;
+    max-width: 380px;
 }
 
 #adminPasswordModal .form-group input {
     width: 100%;
-    padding: 0.8rem;
+    padding: 0.6rem;
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
-    font-size: 1.1rem;
+    font-size: 1rem;
     text-align: center;
     letter-spacing: 2px;
 }
@@ -1221,11 +1230,11 @@ main {
 /* ===== FOOTER ===== */
 .main-footer {
     text-align: center;
-    padding: 2rem;
+    padding: 1.5rem;
     color: var(--text-light);
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     border-top: 1px solid var(--border);
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -1234,13 +1243,13 @@ main {
         grid-template-columns: 1fr;
     }
     .calc-history {
-        max-height: 300px;
+        max-height: 250px;
     }
 }
 
 @media (max-width: 768px) {
     .main-header {
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 0.8rem;
     }
     
     .main-nav {
@@ -1251,9 +1260,9 @@ main {
         right: 0;
         background: var(--white);
         flex-direction: column;
-        padding: 1rem;
+        padding: 0.8rem;
         box-shadow: var(--shadow-lg);
-        gap: 0.3rem;
+        gap: 0.2rem;
     }
     
     .main-nav.open {
@@ -1265,19 +1274,24 @@ main {
     }
     
     .brand-text h1 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
     
     .brand-text .subtitle {
-        font-size: 0.6rem;
+        font-size: 0.5rem;
+    }
+    
+    .site-logo {
+        width: 28px;
+        height: 28px;
     }
     
     main {
-        padding: 1rem;
+        padding: 0.8rem;
     }
     
     .hero h2 {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
     
     .quiz-form {
@@ -1289,8 +1303,8 @@ main {
     }
     
     .calc-btn {
-        padding: 0.7rem 0.3rem;
-        font-size: 0.85rem;
+        padding: 0.5rem 0.2rem;
+        font-size: 0.75rem;
     }
     
     .result-stats {
@@ -1302,7 +1316,7 @@ main {
     }
     
     .modal-content {
-        padding: 1.5rem;
+        padding: 1rem;
         width: 95%;
     }
     
@@ -1341,12 +1355,12 @@ main {
     }
     
     .calc-row {
-        gap: 0.3rem;
+        gap: 0.2rem;
     }
     
     .calc-btn {
-        padding: 0.6rem 0.2rem;
-        font-size: 0.75rem;
+        padding: 0.4rem 0.15rem;
+        font-size: 0.65rem;
     }
     
     .quiz-header {
@@ -1364,5 +1378,9 @@ main {
     
     .quiz-controls button {
         width: 100%;
+    }
+    
+    .topic-form {
+        flex-direction: column;
     }
 }
