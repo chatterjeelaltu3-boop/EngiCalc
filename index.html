@@ -3,42 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering Calculator</title>
+    <title>Engineering Scientific Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="calculator-container">
-        <!-- Logo Display -->
+        <!-- Logo -->
         <img src="Screenshot 2026-08-31 093047.png" alt="EngiCalc Logo" class="logo">
-        
         <h1>Engineering Calculator</h1>
         
         <!-- Screen -->
         <input type="text" id="screen" readonly placeholder="0">
         
-        <!-- Buttons -->
+        <!-- Buttons Grid -->
         <div class="buttons">
+            <!-- Scientific Row 1 -->
+            <button class="btn sci">sin</button>
+            <button class="btn sci">cos</button>
+            <button class="btn sci">tan</button>
             <button class="btn clear">C</button>
-            <button class="btn oper">/</button>
-            <button class="btn oper">*</button>
-            <button class="btn oper">-</button>
             
+            <!-- Scientific Row 2 -->
+            <button class="btn sci">√</button>
+            <button class="btn sci">^</button>
+            <button class="btn sci">π</button>
+            <button class="btn oper">/</button>
+            
+            <!-- Numbers & Operators -->
             <button class="btn">7</button>
             <button class="btn">8</button>
             <button class="btn">9</button>
-            <button class="btn oper">+</button>
+            <button class="btn oper">*</button>
             
             <button class="btn">4</button>
             <button class="btn">5</button>
             <button class="btn">6</button>
-            <button class="btn equal">=</button>
+            <button class="btn oper">-</button>
             
             <button class="btn">1</button>
             <button class="btn">2</button>
             <button class="btn">3</button>
+            <button class="btn oper">+</button>
+            
             <button class="btn">0</button>
+            <button class="btn">.</button>
+            <button class="btn equal">=</button>
         </div>
     </div>
-        <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
