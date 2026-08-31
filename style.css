@@ -1,689 +1,832 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ENGICALC | Engineering Student Platform</title>
-
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-<!-- ================= HEADER ================= -->
-
-<header class="header">
-
-    <div class="brand">
-
-        <!--
-        IMPORTANT:
-        Put your logo file in the same GitHub repository.
-        Rename it to: engicalc-logo.png
-        -->
-
-        <img
-            src="engicalc-logo.png"
-            alt="ENGICALC"
-            class="logo"
-            onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex';"
-        >
-
-        <div id="logoFallback" class="logo-fallback">
-            🧮
-        </div>
-
-        <div class="brand-text">
-            <h1>ENGICALC</h1>
-            <p>ENGINEERING STUDENT PLATFORM</p>
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- ================= NAVIGATION ================= -->
-
-<nav class="navigation">
-
-    <button class="nav-button active" onclick="openPage('calculator', this)">
-        🧮 Calculator
-    </button>
-
-    <button class="nav-button" onclick="openPage('quiz', this)">
-        📝 Quiz
-    </button>
-
-    <button class="nav-button" onclick="openPage('formulas', this)">
-        📚 Formulas
-    </button>
-
-    <button class="nav-button" onclick="openPage('admin', this)">
-        👨‍💼 Admin
-    </button>
-
-</nav>
-
-
-<!-- ================= MAIN ================= -->
-
-<main>
-
-
-<!-- ======================================================
-                    CALCULATOR
-====================================================== -->
-
-<section id="calculator" class="page active-page">
-
-    <div class="calculator-area">
-
-        <div class="calculator">
-
-            <div class="calculator-display">
-
-                <div id="expression"></div>
-
-                <div id="display">
-                    0
-                </div>
-
-            </div>
-
-
-            <!-- Top controls -->
-
-            <div class="calc-top-buttons">
-
-                <button onclick="toggleAngle()" id="angleBtn">
-                    DEG
-                </button>
-
-                <button onclick="clearCalculator()">
-                    AC
-                </button>
-
-                <button onclick="backspace()">
-                    ⌫
-                </button>
-
-            </div>
-
-
-            <!-- Scientific -->
-
-            <div class="scientific-grid">
-
-                <button onclick="insertValue('sin(')">sin</button>
-                <button onclick="insertValue('cos(')">cos</button>
-                <button onclick="insertValue('tan(')">tan</button>
-                <button onclick="insertValue('asin(')">sin⁻¹</button>
-                <button onclick="insertValue('acos(')">cos⁻¹</button>
-
-                <button onclick="insertValue('atan(')">tan⁻¹</button>
-                <button onclick="insertValue('log(')">log</button>
-                <button onclick="insertValue('ln(')">ln</button>
-                <button onclick="insertValue('sqrt(')">√</button>
-                <button onclick="factorial()">x!</button>
-
-                <button onclick="insertValue('π')">π</button>
-                <button onclick="insertValue('e')">e</button>
-                <button onclick="insertValue('^')">xʸ</button>
-                <button onclick="square()">x²</button>
-                <button onclick="insertValue('10^')">10ˣ</button>
-
-            </div>
-
-
-            <!-- NORMAL CALCULATOR
-                 DO NOT CHANGE THIS ORDER -->
-
-            <div class="number-grid">
-
-                <button onclick="insertValue('(')">(</button>
-                <button onclick="insertValue(')')">)</button>
-                <button onclick="insertValue('%')">%</button>
-                <button class="operator" onclick="insertValue('/')">÷</button>
-
-                <button onclick="insertValue('7')">7</button>
-                <button onclick="insertValue('8')">8</button>
-                <button onclick="insertValue('9')">9</button>
-                <button class="operator" onclick="insertValue('*')">×</button>
-
-                <button onclick="insertValue('4')">4</button>
-                <button onclick="insertValue('5')">5</button>
-                <button onclick="insertValue('6')">6</button>
-                <button class="operator" onclick="insertValue('-')">−</button>
-
-                <button onclick="insertValue('1')">1</button>
-                <button onclick="insertValue('2')">2</button>
-                <button onclick="insertValue('3')">3</button>
-                <button class="operator" onclick="insertValue('+')">+</button>
-
-                <button class="zero" onclick="insertValue('0')">0</button>
-                <button onclick="insertValue('.')">.</button>
-                <button class="equals" onclick="calculate()">=</button>
-
-            </div>
-
-
-            <div class="answer">
-                Ans:
-                <span id="answer">0</span>
-            </div>
-
-        </div>
-
-
-        <!-- History -->
-
-        <div class="history">
-
-            <div class="history-title">
-
-                <h3>History</h3>
-
-                <button onclick="clearHistory()">
-                    Clear
-                </button>
-
-            </div>
-
-            <div id="historyList">
-                <p class="empty">
-                    No calculations yet.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ======================================================
-                         QUIZ
-====================================================== -->
-
-<section id="quiz" class="page">
-
-    <div class="page-heading">
-
-        <h2>📝 Quiz Generator</h2>
-
-        <p>
-            Generate engineering quizzes using topic,
-            sub-topic, difficulty and time.
-        </p>
-
-    </div>
-
-
-    <!-- Quiz setup -->
-
-    <div id="quizSetup" class="quiz-box">
-
-        <h3>Create Quiz</h3>
-
-
-        <label>Topic</label>
-
-        <select id="quizTopic">
-        </select>
-
-
-        <label>Sub-topic</label>
-
-        <select id="quizSubtopic">
-        </select>
-
-
-        <label>Difficulty</label>
-
-        <div class="difficulty">
-
-            <button
-                class="difficulty-button selected"
-                onclick="chooseDifficulty('Easy', this)"
-            >
-                Easy
-            </button>
-
-            <button
-                class="difficulty-button"
-                onclick="chooseDifficulty('Medium', this)"
-            >
-                Medium
-            </button>
-
-            <button
-                class="difficulty-button"
-                onclick="chooseDifficulty('Hard', this)"
-            >
-                Hard
-            </button>
-
-        </div>
-
-
-        <label>Number of Questions</label>
-
-        <select id="questionNumberSelect">
-
-            <option value="5">5 Questions</option>
-            <option value="10">10 Questions</option>
-            <option value="15">15 Questions</option>
-            <option value="20">20 Questions</option>
-
-        </select>
-
-
-        <label>Time Limit</label>
-
-        <select id="quizTimeSelect">
-
-            <option value="5">5 Minutes</option>
-            <option value="10">10 Minutes</option>
-            <option value="15">15 Minutes</option>
-            <option value="20">20 Minutes</option>
-            <option value="30">30 Minutes</option>
-            <option value="45">45 Minutes</option>
-            <option value="60">60 Minutes</option>
-
-        </select>
-
-
-        <div class="quiz-generation-buttons">
-
-            <button
-                class="ai-button"
-                onclick="generateAIQuiz()"
-            >
-                🤖 Generate with AI
-            </button>
-
-            <button
-                class="local-button"
-                onclick="generateLocalQuiz()"
-            >
-                📚 Generate from Question Bank
-            </button>
-
-        </div>
-
-
-        <p class="ai-status" id="aiStatus"></p>
-
-    </div>
-
-
-    <!-- Quiz game -->
-
-    <div id="quizGame" class="quiz-box hidden">
-
-        <div class="quiz-header">
-
-            <span id="questionCounter">
-                Question 1 / 5
-            </span>
-
-            <span id="quizTimer">
-                05:00
-            </span>
-
-        </div>
-
-
-        <div class="progress">
-
-            <div id="progressBar"></div>
-
-        </div>
-
-
-        <h2 id="quizQuestion">
-            Question
-        </h2>
-
-
-        <div id="options" class="options">
-        </div>
-
-
-        <button
-            class="next-question"
-            onclick="nextQuestion()"
-        >
-            Next Question →
-        </button>
-
-    </div>
-
-
-    <!-- Result -->
-
-    <div id="quizResult" class="quiz-box hidden">
-
-        <div class="result-emoji">
-            🏆
-        </div>
-
-        <h2>Quiz Completed</h2>
-
-        <div id="score" class="score">
-            0 / 0
-        </div>
-
-        <p id="resultText"></p>
-
-        <button
-            class="ai-button"
-            onclick="showQuizSetup()"
-        >
-            Create Another Quiz
-        </button>
-
-    </div>
-
-</section>
-
-
-
-<!-- ======================================================
-                       FORMULA LIBRARY
-====================================================== -->
-
-<section id="formulas" class="page">
-
-    <div class="page-heading">
-
-        <h2>📚 Engineering Formula Library</h2>
-
-        <p>
-            Formulas added by the administrator.
-        </p>
-
-    </div>
-
-
-    <div id="formulaGrid" class="formula-grid">
-    </div>
-
-</section>
-
-
-
-<!-- ======================================================
-                       ADMIN PANEL
-====================================================== -->
-
-<section id="admin" class="page">
-
-    <div class="page-heading">
-
-        <h2>👨‍💼 Admin Panel</h2>
-
-        <p>
-            Manage quizzes, topics and formulas.
-        </p>
-
-    </div>
-
-
-    <!-- LOGIN -->
-
-    <div id="adminLoginBox" class="admin-box">
-
-        <h3>Administrator Login</h3>
-
-        <input
-            id="adminUsername"
-            placeholder="Username"
-        >
-
-        <input
-            id="adminPassword"
-            type="password"
-            placeholder="Password"
-        >
-
-        <button onclick="loginAdmin()">
-            Login
-        </button>
-
-        <small>
-            Demo login: admin / 1234
-        </small>
-
-    </div>
-
-
-    <!-- ADMIN DASHBOARD -->
-
-    <div id="adminDashboard" class="hidden">
-
-        <div class="admin-dashboard-header">
-
-            <h2>
-                Administrator Dashboard
-            </h2>
-
-            <button onclick="logoutAdmin()">
-                Logout
-            </button>
-
-        </div>
-
-
-        <div class="admin-grid">
-
-
-            <!-- TOPIC -->
-
-            <div class="admin-box">
-
-                <h3>➕ Add Topic & Sub-topic</h3>
-
-                <input
-                    id="newTopic"
-                    placeholder="Topic"
-                >
-
-                <input
-                    id="newSubtopic"
-                    placeholder="Sub-topic"
-                >
-
-                <button onclick="addTopic()">
-                    Add Topic
-                </button>
-
-            </div>
-
-
-            <!-- QUIZ SETTINGS -->
-
-            <div class="admin-box">
-
-                <h3>⚙️ Quiz Settings</h3>
-
-                <label>Topic</label>
-
-                <select id="adminTopic">
-                </select>
-
-                <label>Sub-topic</label>
-
-                <select id="adminSubtopic">
-                </select>
-
-                <label>Difficulty</label>
-
-                <select id="adminDifficulty">
-
-                    <option>Easy</option>
-                    <option>Medium</option>
-                    <option>Hard</option>
-
-                </select>
-
-                <label>Default Time</label>
-
-                <select id="adminDefaultTime">
-
-                    <option value="5">5 Minutes</option>
-                    <option value="10">10 Minutes</option>
-                    <option value="15">15 Minutes</option>
-                    <option value="20">20 Minutes</option>
-                    <option value="30">30 Minutes</option>
-                    <option value="45">45 Minutes</option>
-                    <option value="60">60 Minutes</option>
-
-                </select>
-
-            </div>
-
-
-            <!-- QUESTION -->
-
-            <div class="admin-box wide">
-
-                <h3>📝 Add Question</h3>
-
-                <textarea
-                    id="adminQuestion"
-                    placeholder="Write the question..."
-                ></textarea>
-
-                <input
-                    id="adminOptionA"
-                    placeholder="Option A"
-                >
-
-                <input
-                    id="adminOptionB"
-                    placeholder="Option B"
-                >
-
-                <input
-                    id="adminOptionC"
-                    placeholder="Option C"
-                >
-
-                <input
-                    id="adminOptionD"
-                    placeholder="Option D"
-                >
-
-                <label>Correct Answer</label>
-
-                <select id="adminCorrect">
-
-                    <option value="0">Option A</option>
-                    <option value="1">Option B</option>
-                    <option value="2">Option C</option>
-                    <option value="3">Option D</option>
-
-                </select>
-
-                <button onclick="addQuestion()">
-                    Add Question
-                </button>
-
-            </div>
-
-
-            <!-- FORMULA -->
-
-            <div class="admin-box wide">
-
-                <h3>📚 Add Formula</h3>
-
-                <input
-                    id="formulaSubject"
-                    placeholder="Subject e.g. Electrical Engineering"
-                >
-
-                <input
-                    id="formulaName"
-                    placeholder="Formula name"
-                >
-
-                <input
-                    id="formulaEquation"
-                    placeholder="Formula e.g. V = IR"
-                >
-
-                <textarea
-                    id="formulaDescription"
-                    placeholder="Short explanation"
-                ></textarea>
-
-                <button onclick="addFormula()">
-                    Add Formula
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- QUESTION LIST -->
-
-        <div class="admin-box list-box">
-
-            <div class="list-heading">
-
-                <h3>📋 Question Bank</h3>
-
-                <button onclick="resetQuestions()">
-                    Reset Demo Questions
-                </button>
-
-            </div>
-
-            <div id="questionBank">
-            </div>
-
-        </div>
-
-
-        <!-- FORMULA LIST -->
-
-        <div class="admin-box list-box">
-
-            <h3>📚 Formula Management</h3>
-
-            <div id="adminFormulaList">
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <strong>ENGICALC</strong>
-
-    <span>
-        Engineering Student Platform © 2026
-    </span>
-
-</footer>
-
-
-<script src="script.js"></script>
-
-</body>
-</html>
+/* ===== RESET & BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #2563EB;
+    --primary-dark: #1E40AF;
+    --primary-light: #DBEAFE;
+    --secondary: #64748B;
+    --bg: #F8FAFC;
+    --white: #FFFFFF;
+    --card-bg: #FFFFFF;
+    --text: #0F172A;
+    --text-light: #475569;
+    --border: #E2E8F0;
+    --success: #10B981;
+    --error: #EF4444;
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    --radius: 12px;
+    --radius-sm: 8px;
+    --transition: all 0.3s ease;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== HEADER ===== */
+.main-header {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 0.75rem 2rem;
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-placeholder {
+    width: 48px;
+    height: 48px;
+    background: var(--primary);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    font-weight: 800;
+}
+
+.logo-icon {
+    font-size: 1.8rem;
+}
+
+.brand-text h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
+
+.brand-text .subtitle {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    font-weight: 500;
+    display: block;
+    letter-spacing: 0.5px;
+}
+
+.main-nav {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.nav-btn {
+    padding: 0.5rem 1.25rem;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.nav-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.nav-btn.active {
+    background: var(--primary);
+    color: white;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* ===== MAIN CONTENT ===== */
+main {
+    flex: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== HOME SECTION ===== */
+.hero h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+}
+
+.hero > p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.feature-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+    border: 1px solid var(--border);
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.feature-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    color: var(--text-light);
+}
+
+/* ===== CALCULATOR ===== */
+.calc-container {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 2rem;
+    align-items: start;
+}
+
+.calc-main {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    max-width: 480px;
+}
+
+.calc-display {
+    background: var(--bg);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1rem;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.calc-history-display {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    min-height: 20px;
+}
+
+.calc-expression {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    min-height: 28px;
+    word-break: break-all;
+}
+
+.calc-result {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text);
+    min-height: 44px;
+}
+
+.calc-mode {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.mode-btn {
+    padding: 0.3rem 1rem;
+    border: 2px solid var(--border);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.mode-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.calc-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.calc-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.calc-btn {
+    padding: 0.9rem 0.5rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.calc-btn:hover {
+    transform: scale(0.97);
+    opacity: 0.8;
+}
+
+.calc-btn:active {
+    transform: scale(0.93);
+}
+
+.calc-btn.num {
+    background: var(--white);
+    border: 1px solid var(--border);
+}
+
+.calc-btn.op {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.calc-btn.func {
+    background: #F1F5F9;
+    color: var(--text-light);
+    font-size: 0.8rem;
+}
+
+.calc-btn.eq {
+    background: var(--primary);
+    color: white;
+}
+
+/* Calculator History */
+.calc-history {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    max-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.calc-history h3 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+}
+
+#historyList {
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 0.75rem;
+}
+
+.history-item {
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-item .h-expr {
+    color: var(--text-light);
+}
+
+.history-item .h-result {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.clear-history-btn {
+    padding: 0.5rem;
+    border: 1px solid var(--error);
+    color: var(--error);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.clear-history-btn:hover {
+    background: var(--error);
+    color: white;
+}
+
+/* ===== QUIZ SECTION ===== */
+.quiz-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.quiz-setup {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.quiz-setup h2 {
+    margin-bottom: 1.5rem;
+}
+
+.quiz-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.form-group select,
+.form-group input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: var(--white);
+}
+
+.quiz-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.btn-primary {
+    padding: 0.7rem 1.5rem;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+    font-size: 0.95rem;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-ai {
+    background: #7C3AED;
+}
+
+.btn-ai:hover {
+    background: #6D28D9;
+}
+
+.btn-secondary {
+    padding: 0.7rem 1.5rem;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.btn-secondary:hover {
+    background: var(--border);
+}
+
+/* Quiz Interface */
+.quiz-interface {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.quiz-progress {
+    flex: 1;
+}
+
+.quiz-progress span {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--bg);
+    border-radius: 3px;
+    margin-top: 0.4rem;
+    overflow: hidden;
+}
+
+#progressFill {
+    height: 100%;
+    background: var(--primary);
+    transition: width 0.3s ease;
+    border-radius: 3px;
+}
+
+.quiz-timer {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 0.3rem 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.question-container {
+    margin: 1.5rem 0;
+}
+
+#questionText {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.option-btn {
+    padding: 0.8rem 1.2rem;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.95rem;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.option-btn:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.option-btn.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.option-btn.correct {
+    border-color: var(--success);
+    background: #D1FAE5;
+}
+
+.option-btn.wrong {
+    border-color: var(--error);
+    background: #FEE2E2;
+}
+
+.quiz-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    gap: 0.5rem;
+}
+
+/* Quiz Result */
+.quiz-result {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.quiz-result h2 {
+    margin-bottom: 1.5rem;
+}
+
+.result-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.stat-card {
+    background: var(--bg);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+}
+
+.stat-card.correct .stat-value { color: var(--success); }
+.stat-card.wrong .stat-value { color: var(--error); }
+.stat-card.score .stat-value { color: var(--primary); }
+
+.result-message {
+    font-size: 1.1rem;
+    margin: 1rem 0;
+    font-weight: 500;
+}
+
+/* ===== FORMULAS ===== */
+.formulas-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.formulas-container h2 {
+    margin-bottom: 1.5rem;
+}
+
+.formula-search {
+    margin-bottom: 2rem;
+}
+
+.formula-search input {
+    width: 100%;
+    max-width: 500px;
+    padding: 0.8rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.formula-card {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--primary);
+    transition: var(--transition);
+}
+
+.formula-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.formula-card .formula-subject {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.formula-card h4 {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.formula-card .formula-equation {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    padding: 0.5rem;
+    background: var(--primary-light);
+    border-radius: var(--radius-sm);
+    text-align: center;
+    margin: 0.5rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+.formula-card .formula-desc {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+/* ===== ADMIN ===== */
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-container h2 {
+    margin-bottom: 1.5rem;
+}
+
+.admin-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.admin-tab {
+    padding: 0.6rem 1.5rem;
+    border: 2px solid var(--border);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.admin-tab.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.admin-tab:hover:not(.active) {
+    background: var(--bg);
+}
+
+.admin-panel {
+    display: none;
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.admin-panel.active {
+    display: block;
+}
+
+.admin-panel h3 {
+    margin-bottom: 1rem;
+}
+
+/* Question Bank */
+.question-bank {
+    margin-top: 1rem;
+}
+
+.question-item {
+    background: var(--bg);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.question-item .q-info {
+    flex: 1;
+}
+
+.question-item .q-info .q-text {
+    font-weight: 500;
+}
+
+.question-item .q-info .q-meta {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.question-item .q-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.question-item .q-actions button {
+    padding: 0.3rem 0.8rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: inherit;
+}
+
+.btn-edit {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.btn-delete {
+    background: #FEE2E2;
+    color: var(--error);
+}
+
+/* Topics */
+.topic-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.topic-form input {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
