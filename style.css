@@ -96,15 +96,16 @@ body {
     display: flex;
     gap: 0.5rem;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .nav-btn {
-    padding: 0.5rem 1.25rem;
+    padding: 0.4rem 0.8rem;
     border: none;
     background: transparent;
     color: var(--text-light);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: var(--transition);
@@ -168,19 +169,20 @@ main {
 
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
     margin-top: 1rem;
 }
 
 .feature-card {
     background: var(--white);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     text-align: center;
     transition: var(--transition);
     border: 1px solid var(--border);
+    cursor: pointer;
 }
 
 .feature-card:hover {
@@ -189,16 +191,17 @@ main {
 }
 
 .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .feature-card h3 {
-    font-size: 1.2rem;
+    font-size: 1rem;
     margin-bottom: 0.5rem;
 }
 
 .feature-card p {
+    font-size: 0.85rem;
     color: var(--text-light);
 }
 
@@ -321,7 +324,7 @@ main {
 .calc-btn.func {
     background: #F1F5F9;
     color: var(--text-light);
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 .calc-btn.eq {
@@ -384,6 +387,244 @@ main {
 .clear-history-btn:hover {
     background: var(--error);
     color: white;
+}
+
+/* ===== UNIT CONVERTER ===== */
+.converter-container {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.converter-box {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.converter-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.converter-row .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.converter-row .form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.converter-row .form-group select,
+.converter-row .form-group input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.converter-row .form-group input[readonly] {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* ===== EQUATION SOLVER ===== */
+.solver-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.solver-box {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.solver-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.solver-tab {
+    padding: 0.5rem 1.2rem;
+    border: 2px solid var(--border);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.solver-tab.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.solver-tab:hover:not(.active) {
+    background: var(--bg);
+}
+
+.solver-panel {
+    display: none;
+}
+
+.solver-panel.active {
+    display: block;
+}
+
+.solver-panel h4 {
+    margin-bottom: 1rem;
+}
+
+.solver-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.solver-row .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.solver-row .form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.solver-row .form-group input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.solver-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--primary-light);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: none;
+    line-height: 1.8;
+}
+
+.solver-result.show {
+    display: block;
+}
+
+/* ===== ELECTRICAL CALCULATOR ===== */
+.electrical-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.electrical-box {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.electrical-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.electrical-tab {
+    padding: 0.5rem 1.2rem;
+    border: 2px solid var(--border);
+    background: transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.electrical-tab.active {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: white;
+}
+
+.electrical-tab:hover:not(.active) {
+    background: var(--bg);
+}
+
+.electrical-panel {
+    display: none;
+}
+
+.electrical-panel.active {
+    display: block;
+}
+
+.electrical-panel h4 {
+    margin-bottom: 1rem;
+}
+
+.electrical-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.electrical-row .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.electrical-row .form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.electrical-row .form-group select,
+.electrical-row .form-group input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.electrical-result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--primary-light);
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 1.1rem;
+    display: none;
+    line-height: 1.8;
+}
+
+.electrical-result.show {
+    display: block;
 }
 
 /* ===== QUIZ SECTION ===== */
@@ -663,7 +904,7 @@ main {
 
 .formula-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.5rem;
 }
 
@@ -1012,6 +1253,7 @@ main {
         flex-direction: column;
         padding: 1rem;
         box-shadow: var(--shadow-lg);
+        gap: 0.3rem;
     }
     
     .main-nav.open {
@@ -1067,6 +1309,30 @@ main {
     .modal-content .options-grid {
         grid-template-columns: 1fr;
     }
+    
+    .converter-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .solver-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .electrical-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .solver-tabs {
+        justify-content: center;
+    }
+    
+    .electrical-tabs {
+        justify-content: center;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1080,7 +1346,7 @@ main {
     
     .calc-btn {
         padding: 0.6rem 0.2rem;
-        font-size: 0.8rem;
+        font-size: 0.75rem;
     }
     
     .quiz-header {
