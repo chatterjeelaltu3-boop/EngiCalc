@@ -3,83 +3,1191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All-in-One Engineering Calc</title>
+
+    <meta name="description"
+        content="ENGICALC - Engineering Calculator for students with Scientific Calculator, Engineering Tools, Unit Converter, Formula Book and Quiz.">
+
+    <title>ENGICALC - Engineering Calculator</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <!-- Theme Toggle Controller -->
-    <div class="theme-toggle">
-        <button id="mode-btn">🌙 Dark Mode</button>
-    </div>
 
-    <div class="calculator-container">
-        <!-- Logo -->
-        <img src="Screenshot 2026-08-31 093047.png" alt="EngiCalc Logo" class="logo">
-        <h1>Engineering Calculator</h1>
-        
-        <!-- Screen -->
-        <input type="text" id="screen" readonly placeholder="0">
-        
-        <!-- Buttons Grid -->
-        <div class="buttons">
-            <button class="btn sci">sin</button>
-            <button class="btn sci">cos</button>
-            <button class="btn sci">tan</button>
-            <button class="btn clear">C</button>
-            
-            <button class="btn sci">√</button>
-            <button class="btn sci">^</button>
-            <button class="btn sci">π</button>
-            <button class="btn oper">/</button>
-            
-            <button class="btn">7</button>
-            <button class="btn">8</button>
-            <button class="btn">9</button>
-            <button class="btn oper">*</button>
-            
-            <button class="btn">4</button>
-            <button class="btn">5</button>
-            <button class="btn">6</button>
-            <button class="btn oper">-</button>
-            
-            <button class="btn">1</button>
-            <button class="btn">2</button>
-            <button class="btn">3</button>
-            <button class="btn oper">+</button>
-            
-            <button class="btn">0</button>
-            <button class="btn">.</button>
-            <button class="btn equal">=</button>
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <div class="brand">
+
+        <img src="logo.png" alt="ENGICALC Logo" class="logo">
+
+        <div class="brand-text">
+            <h1>ENGICALC</h1>
+            <span>ENGINEERING CALCULATOR</span>
         </div>
 
-        <hr class="divider">
+    </div>
 
-        <!-- 📊 Engineering Unit Converter Section -->
-        <div class="converter-section">
-            <h3>📊 Unit Converter</h3>
-            <select id="converter-type">
-                <option value="length">Length (Meter to Km)</option>
-                <option value="weight">Weight (Kg to Pound)</option>
-                <option value="temp">Temp (Celsius to Fahr)</option>
-            </select>
-            <div class="converter-inputs">
-                <input type="number" id="unit-input" placeholder="Value">
-                <span class="arrow">➡️</span>
-                <input type="text" id="unit-output" readonly placeholder="Result">
+    <nav class="navbar">
+
+        <button onclick="showSection('home')">Home</button>
+
+        <button onclick="showSection('scientific')">
+            Scientific
+        </button>
+
+        <button onclick="showSection('engineering')">
+            Engineering
+        </button>
+
+        <button onclick="showSection('converter')">
+            Converter
+        </button>
+
+        <button onclick="showSection('formulas')">
+            Formulas
+        </button>
+
+        <button onclick="showSection('quiz')">
+            Quiz
+        </button>
+
+        <button class="theme-btn" onclick="toggleTheme()">
+            🌙
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= MAIN ================= -->
+
+<main>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="section active">
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <span class="badge">
+                ENGINEERING STUDENT TOOLKIT
+            </span>
+
+            <h2>
+                Calculate Smarter.<br>
+                <span>Engineer Better.</span>
+            </h2>
+
+            <p>
+                A powerful calculator and engineering toolkit
+                designed for students.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="showSection('scientific')">
+
+                    🧮 Open Calculator
+
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="showSection('engineering')">
+
+                    ⚡ Engineering Tools
+
+                </button>
+
             </div>
+
         </div>
 
-        <hr class="divider">
 
-        <!-- 📜 History Log Section -->
-        <div class="history-section">
-            <h3>📜 History Log</h3>
-            <ul id="history-list">
-                <li class="empty-msg">No history yet</li>
-            </ul>
-            <button id="clear-history">Clear History</button>
+        <div class="hero-logo">
+
+            <img src="logo.png" alt="ENGICALC">
+
         </div>
+
     </div>
-    <script src="script.js"></script>
+
+
+    <div class="feature-grid">
+
+        <div class="feature-card"
+            onclick="showSection('scientific')">
+
+            <div class="feature-icon">🧮</div>
+
+            <h3>Scientific Calculator</h3>
+
+            <p>
+                Advanced mathematical and scientific
+                calculations.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card"
+            onclick="showSection('engineering')">
+
+            <div class="feature-icon">⚡</div>
+
+            <h3>Engineering Tools</h3>
+
+            <p>
+                Electrical, mechanical and civil
+                engineering calculators.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card"
+            onclick="showSection('converter')">
+
+            <div class="feature-icon">📐</div>
+
+            <h3>Unit Converter</h3>
+
+            <p>
+                Convert engineering units quickly.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card"
+            onclick="showSection('formulas')">
+
+            <div class="feature-icon">📚</div>
+
+            <h3>Formula Book</h3>
+
+            <p>
+                Important engineering formulas in one place.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card"
+            onclick="showSection('quiz')">
+
+            <div class="feature-icon">🧠</div>
+
+            <h3>Engineering Quiz</h3>
+
+            <p>
+                Test your engineering knowledge.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card"
+            onclick="showSection('history')">
+
+            <div class="feature-icon">🕘</div>
+
+            <h3>Calculation History</h3>
+
+            <p>
+                Keep track of your recent calculations.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SCIENTIFIC ================= -->
+
+<section id="scientific" class="section">
+
+    <div class="section-title">
+
+        <span>🧮</span>
+
+        <div>
+            <h2>Scientific Calculator</h2>
+            <p>Advanced mathematical calculator</p>
+        </div>
+
+    </div>
+
+
+    <div class="calculator-wrapper">
+
+        <div class="calculator">
+
+            <div class="calculator-top">
+
+                <button onclick="clearCalculator()">
+                    AC
+                </button>
+
+                <button onclick="deleteLast()">
+                    DEL
+                </button>
+
+                <button onclick="memoryClear()">
+                    MC
+                </button>
+
+                <button onclick="memoryRecall()">
+                    MR
+                </button>
+
+                <button onclick="memoryAdd()">
+                    M+
+                </button>
+
+                <button onclick="memorySubtract()">
+                    M-
+                </button>
+
+            </div>
+
+
+            <div class="display">
+
+                <div id="expression">
+                    0
+                </div>
+
+                <div id="result">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="calculator-mode">
+
+                <button
+                    id="angleMode"
+                    onclick="toggleAngleMode()">
+
+                    DEG
+
+                </button>
+
+                <button onclick="addFunction('Math.sin(')">
+                    sin
+                </button>
+
+                <button onclick="addFunction('Math.cos(')">
+                    cos
+                </button>
+
+                <button onclick="addFunction('Math.tan(')">
+                    tan
+                </button>
+
+                <button onclick="addFunction('Math.log10(')">
+                    log
+                </button>
+
+                <button onclick="addFunction('Math.log(')">
+                    ln
+                </button>
+
+            </div>
+
+
+            <div class="calculator-buttons">
+
+                <button onclick="addValue('(')">(</button>
+                <button onclick="addValue(')')">)</button>
+                <button onclick="addValue('Math.PI')">π</button>
+                <button onclick="addValue('Math.E')">e</button>
+                <button onclick="squareRoot()">√</button>
+
+                <button onclick="square()">x²</button>
+                <button onclick="power()">xʸ</button>
+                <button onclick="factorial()">n!</button>
+                <button onclick="addValue('%')">%</button>
+                <button class="operator"
+                    onclick="addValue('/')">÷</button>
+
+
+                <button onclick="addValue('7')">7</button>
+                <button onclick="addValue('8')">8</button>
+                <button onclick="addValue('9')">9</button>
+                <button class="operator"
+                    onclick="addValue('*')">×</button>
+                <button onclick="addValue('Math.PI')">π</button>
+
+
+                <button onclick="addValue('4')">4</button>
+                <button onclick="addValue('5')">5</button>
+                <button onclick="addValue('6')">6</button>
+                <button class="operator"
+                    onclick="addValue('-')">−</button>
+                <button onclick="addValue('Math.E')">e</button>
+
+
+                <button onclick="addValue('1')">1</button>
+                <button onclick="addValue('2')">2</button>
+                <button onclick="addValue('3')">3</button>
+                <button class="operator"
+                    onclick="addValue('+')">+</button>
+                <button onclick="reciprocal()">1/x</button>
+
+
+                <button class="zero"
+                    onclick="addValue('0')">0</button>
+
+                <button onclick="addValue('.')">.</button>
+
+                <button class="equals"
+                    onclick="calculate()">
+
+                    =
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="history-panel">
+
+            <div class="history-header">
+
+                <h3>🕘 History</h3>
+
+                <button onclick="clearHistory()">
+                    Clear
+                </button>
+
+            </div>
+
+            <div id="historyList">
+
+                <p class="empty-history">
+                    No calculations yet.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ENGINEERING ================= -->
+
+<section id="engineering" class="section">
+
+    <div class="section-title">
+
+        <span>⚙️</span>
+
+        <div>
+            <h2>Engineering Calculators</h2>
+            <p>Useful calculators for engineering students</p>
+        </div>
+
+    </div>
+
+
+    <div class="engineering-tabs">
+
+        <button
+            class="eng-tab active"
+            onclick="engineeringTab('electrical')">
+
+            ⚡ Electrical
+
+        </button>
+
+        <button
+            class="eng-tab"
+            onclick="engineeringTab('mechanical')">
+
+            ⚙️ Mechanical
+
+        </button>
+
+        <button
+            class="eng-tab"
+            onclick="engineeringTab('civil')">
+
+            🏗️ Civil
+
+        </button>
+
+    </div>
+
+
+    <!-- ELECTRICAL -->
+
+    <div id="electrical" class="engineering-content active">
+
+        <div class="tool-card">
+
+            <h3>⚡ Ohm's Law</h3>
+
+            <p class="formula">
+                V = I × R
+            </p>
+
+            <label>Voltage (V)</label>
+
+            <input
+                type="number"
+                id="voltage"
+                placeholder="Enter voltage">
+
+            <label>Current (A)</label>
+
+            <input
+                type="number"
+                id="current"
+                placeholder="Enter current">
+
+            <label>Resistance (Ω)</label>
+
+            <input
+                type="number"
+                id="resistance"
+                placeholder="Enter resistance">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateOhm()">
+
+                Calculate
+
+            </button>
+
+            <div id="ohmResult"
+                class="tool-result">
+
+                Enter any two values.
+
+            </div>
+
+        </div>
+
+
+        <div class="tool-card">
+
+            <h3>⚡ Electrical Power</h3>
+
+            <p class="formula">
+                P = V × I
+            </p>
+
+            <label>Voltage (V)</label>
+
+            <input
+                type="number"
+                id="powerVoltage"
+                placeholder="Voltage">
+
+            <label>Current (A)</label>
+
+            <input
+                type="number"
+                id="powerCurrent"
+                placeholder="Current">
+
+            <button
+                class="calculate-btn"
+                onclick="calculatePower()">
+
+                Calculate
+
+            </button>
+
+            <div id="powerResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+
+        <div class="tool-card">
+
+            <h3>🔗 Series Resistance</h3>
+
+            <p class="formula">
+                R = R₁ + R₂ + R₃ + ...
+            </p>
+
+            <input
+                id="seriesResistance"
+                placeholder="Example: 10,20,30">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateSeries()">
+
+                Calculate
+
+            </button>
+
+            <div id="seriesResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+
+        <div class="tool-card">
+
+            <h3>🔗 Parallel Resistance</h3>
+
+            <p class="formula">
+                1/R = 1/R₁ + 1/R₂ + ...
+            </p>
+
+            <input
+                id="parallelResistance"
+                placeholder="Example: 10,20,30">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateParallel()">
+
+                Calculate
+
+            </button>
+
+            <div id="parallelResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MECHANICAL -->
+
+    <div id="mechanical" class="engineering-content">
+
+        <div class="tool-card">
+
+            <h3>⚙️ Force Calculator</h3>
+
+            <p class="formula">
+                F = m × a
+            </p>
+
+            <label>Mass (kg)</label>
+
+            <input
+                id="mass"
+                type="number"
+                placeholder="Mass">
+
+            <label>Acceleration (m/s²)</label>
+
+            <input
+                id="acceleration"
+                type="number"
+                placeholder="Acceleration">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateForce()">
+
+                Calculate
+
+            </button>
+
+            <div id="forceResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+
+        <div class="tool-card">
+
+            <h3>⚙️ Work Calculator</h3>
+
+            <p class="formula">
+                W = F × d
+            </p>
+
+            <label>Force (N)</label>
+
+            <input
+                id="workForce"
+                type="number"
+                placeholder="Force">
+
+            <label>Distance (m)</label>
+
+            <input
+                id="distance"
+                type="number"
+                placeholder="Distance">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateWork()">
+
+                Calculate
+
+            </button>
+
+            <div id="workResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+
+        <div class="tool-card">
+
+            <h3>⚙️ Power Calculator</h3>
+
+            <p class="formula">
+                P = W / t
+            </p>
+
+            <label>Work (J)</label>
+
+            <input
+                id="mechanicalWork"
+                type="number"
+                placeholder="Work">
+
+            <label>Time (s)</label>
+
+            <input
+                id="mechanicalTime"
+                type="number"
+                placeholder="Time">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateMechanicalPower()">
+
+                Calculate
+
+            </button>
+
+            <div id="mechanicalPowerResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- CIVIL -->
+
+    <div id="civil" class="engineering-content">
+
+        <div class="tool-card">
+
+            <h3>🏗️ Rectangle Area</h3>
+
+            <p class="formula">
+                Area = Length × Width
+            </p>
+
+            <label>Length</label>
+
+            <input
+                id="rectangleLength"
+                type="number"
+                placeholder="Length">
+
+            <label>Width</label>
+
+            <input
+                id="rectangleWidth"
+                type="number"
+                placeholder="Width">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateArea()">
+
+                Calculate
+
+            </button>
+
+            <div id="areaResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+
+        <div class="tool-card">
+
+            <h3>🏗️ Concrete Volume</h3>
+
+            <p class="formula">
+                Volume = L × W × H
+            </p>
+
+            <label>Length (m)</label>
+
+            <input
+                id="concreteLength"
+                type="number"
+                placeholder="Length">
+
+            <label>Width (m)</label>
+
+            <input
+                id="concreteWidth"
+                type="number"
+                placeholder="Width">
+
+            <label>Height (m)</label>
+
+            <input
+                id="concreteHeight"
+                type="number"
+                placeholder="Height">
+
+            <button
+                class="calculate-btn"
+                onclick="calculateConcrete()">
+
+                Calculate
+
+            </button>
+
+            <div id="concreteResult"
+                class="tool-result">
+
+                Result will appear here.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CONVERTER ================= -->
+
+<section id="converter" class="section">
+
+    <div class="section-title">
+
+        <span>📐</span>
+
+        <div>
+            <h2>Unit Converter</h2>
+            <p>Convert common engineering units</p>
+        </div>
+
+    </div>
+
+
+    <div class="converter-card">
+
+        <label>Category</label>
+
+        <select id="conversionCategory"
+            onchange="loadUnits()">
+
+            <option value="length">
+                Length
+            </option>
+
+            <option value="mass">
+                Mass
+            </option>
+
+            <option value="temperature">
+                Temperature
+            </option>
+
+            <option value="area">
+                Area
+            </option>
+
+            <option value="volume">
+                Volume
+            </option>
+
+            <option value="speed">
+                Speed
+            </option>
+
+            <option value="force">
+                Force
+            </option>
+
+            <option value="pressure">
+                Pressure
+            </option>
+
+            <option value="power">
+                Power
+            </option>
+
+            <option value="energy">
+                Energy
+            </option>
+
+        </select>
+
+
+        <div class="converter-grid">
+
+            <div>
+
+                <label>From</label>
+
+                <select id="fromUnit"></select>
+
+                <input
+                    id="fromValue"
+                    type="number"
+                    value="1"
+                    oninput="convertUnits()">
+
+            </div>
+
+
+            <div class="swap">
+
+                ⇄
+
+            </div>
+
+
+            <div>
+
+                <label>To</label>
+
+                <select id="toUnit"
+                    onchange="convertUnits()">
+                </select>
+
+                <input
+                    id="toValue"
+                    readonly>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FORMULAS ================= -->
+
+<section id="formulas" class="section">
+
+    <div class="section-title">
+
+        <span>📚</span>
+
+        <div>
+            <h2>Formula Book</h2>
+            <p>Important engineering formulas</p>
+        </div>
+
+    </div>
+
+
+    <input
+        class="formula-search"
+        id="formulaSearch"
+        placeholder="🔍 Search formula..."
+        oninput="searchFormulas()">
+
+
+    <div class="formula-grid"
+        id="formulaGrid">
+
+
+        <div class="formula-card">
+
+            <span>⚡ Electrical</span>
+
+            <h3>Ohm's Law</h3>
+
+            <div>V = I × R</div>
+
+            <p>
+                V = Voltage<br>
+                I = Current<br>
+                R = Resistance
+            </p>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>⚡ Electrical</span>
+
+            <h3>Electrical Power</h3>
+
+            <div>P = V × I</div>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>⚙️ Mechanical</span>
+
+            <h3>Newton's Second Law</h3>
+
+            <div>F = m × a</div>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>⚙️ Mechanical</span>
+
+            <h3>Work</h3>
+
+            <div>W = F × d</div>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>⚙️ Mechanical</span>
+
+            <h3>Power</h3>
+
+            <div>P = W / t</div>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>🏗️ Civil</span>
+
+            <h3>Rectangle Area</h3>
+
+            <div>A = L × W</div>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>🏗️ Civil</span>
+
+            <h3>Volume</h3>
+
+            <div>V = L × W × H</div>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>📐 Mathematics</span>
+
+            <h3>Pythagorean Theorem</h3>
+
+            <div>a² + b² = c²</div>
+
+        </div>
+
+
+        <div class="formula-card">
+
+            <span>📐 Mathematics</span>
+
+            <h3>Quadratic Equation</h3>
+
+            <div>
+                x = (-b ± √(b² - 4ac)) / 2a
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= QUIZ ================= -->
+
+<section id="quiz" class="section">
+
+    <div class="section-title">
+
+        <span>🧠</span>
+
+        <div>
+            <h2>Engineering Quiz</h2>
+            <p>Test your engineering knowledge</p>
+        </div>
+
+    </div>
+
+
+    <div class="quiz-card">
+
+        <div class="quiz-top">
+
+            <span id="quizProgress">
+                Question 1 / 5
+            </span>
+
+            <span id="quizScore">
+                Score: 0
+            </span>
+
+        </div>
+
+
+        <h2 id="quizQuestion">
+            Loading question...
+        </h2>
+
+
+        <div id="quizOptions"
+            class="quiz-options">
+        </div>
+
+
+        <button
+            class="primary-btn"
+            id="nextQuiz"
+            onclick="nextQuestion()">
+
+            Next Question →
+
+        </button>
+
+
+        <div id="quizResult"
+            class="quiz-result">
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= HISTORY ================= -->
+
+<section id="history" class="section">
+
+    <div class="section-title">
+
+        <span>🕘</span>
+
+        <div>
+            <h2>Calculation History</h2>
+            <p>Your recent calculations</p>
+        </div>
+
+    </div>
+
+
+    <div class="full-history"
+        id="fullHistory">
+
+        <p>
+            No calculation history available.
+        </p>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-brand">
+
+        <img src="logo.png" alt="ENGICALC">
+
+        <div>
+
+            <h2>ENGICALC</h2>
+
+            <p>
+                ENGINEERING CALCULATOR
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <p class="copyright">
+
+        © 2026 ENGICALC. Built for Engineering Students.
+
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
 </body>
 </html>
