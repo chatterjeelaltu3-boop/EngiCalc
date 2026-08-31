@@ -7,25 +7,43 @@ const DATA = {
     questions: JSON.parse(localStorage.getItem('engicalc_questions')) || [],
     formulas: JSON.parse(localStorage.getItem('engicalc_formulas')) || [],
     history: JSON.parse(localStorage.getItem('engicalc_history')) || [],
-    subjects: JSON.parse(localStorage.getItem('engicalc_subjects')) || ['Electrical Engineering', 'Mechanical Engineering', 'Civil Engineering', 'Engineering Mathematics', 'Computer Science'],
+    
+    departments: JSON.parse(localStorage.getItem('engicalc_departments')) || [
+        'Electrical Engineering',
+        'Mechanical Engineering', 
+        'Civil Engineering',
+        'Computer Science',
+        'Electronics & Communication'
+    ],
+    
+    subjects: JSON.parse(localStorage.getItem('engicalc_subjects')) || {
+        'Electrical Engineering': ['Engineering Chemistry', 'Engineering Physics', 'Circuit Theory', 'Network Theory'],
+        'Mechanical Engineering': ['Engineering Mechanics', 'Thermodynamics', 'Fluid Mechanics'],
+        'Civil Engineering': ['Structural Analysis', 'Soil Mechanics', 'Fluid Mechanics'],
+        'Computer Science': ['Data Structures', 'Algorithms', 'Discrete Math'],
+        'Electronics & Communication': ['Signals & Systems', 'Digital Electronics', 'Communication Systems']
+    },
+    
     topics: JSON.parse(localStorage.getItem('engicalc_topics')) || {
-        'Electrical Engineering': ['Circuit Theory', 'Network Theory', 'Electrical Machines', 'Power Systems'],
-        'Mechanical Engineering': ['Thermodynamics', 'Fluid Mechanics', 'Strength of Materials', 'Dynamics'],
-        'Civil Engineering': ['Structural Analysis', 'Fluid Mechanics', 'Soil Mechanics', 'Transportation'],
-        'Engineering Mathematics': ['Calculus', 'Linear Algebra', 'Differential Equations', 'Statistics'],
-        'Computer Science': ['Data Structures', 'Algorithms', 'Discrete Math', 'Programming']
+        'Engineering Chemistry': ['Electrochemistry', 'Thermodynamics', 'Organic Chemistry'],
+        'Engineering Physics': ['Optics', 'Thermodynamics', 'Quantum Physics'],
+        'Circuit Theory': ['DC Circuits', 'AC Circuits', 'Network Theorems'],
+        'Network Theory': ['Two-port Networks', 'Network Functions'],
+        'Engineering Mechanics': ['Statics', 'Dynamics', 'Strength of Materials'],
+        'Thermodynamics': ['Laws of Thermodynamics', 'Heat Transfer'],
+        'Fluid Mechanics': ['Fluid Properties', 'Flow Dynamics'],
+        'Data Structures': ['Arrays', 'Linked Lists', 'Trees', 'Graphs'],
+        'Algorithms': ['Sorting', 'Searching', 'Dynamic Programming']
     },
-    subtopics: JSON.parse(localStorage.getItem('engicalc_subtopics')) || {
-        'Circuit Theory': ['AC Circuits', 'DC Circuits', 'Network Theorems'],
-        'Network Theory': ['Two-port Networks', 'Network Functions', 'Filters'],
-        'Thermodynamics': ['Laws of Thermodynamics', 'Heat Transfer', 'Thermodynamic Cycles'],
-        'Calculus': ['Differentiation', 'Integration', 'Differential Equations'],
-        'Data Structures': ['Arrays', 'Linked Lists', 'Trees', 'Graphs']
-    },
-    settings: JSON.parse(localStorage.getItem('engicalc_settings')) || {
-        easy: { questions: 10, time: 10 },
-        medium: { questions: 20, time: 20 },
-        hard: { questions: 30, time: 45 }
+    
+    difficulties: JSON.parse(localStorage.getItem('engicalc_difficulties')) || ['Easy', 'Medium', 'Hard'],
+    
+    quizSettings: JSON.parse(localStorage.getItem('engicalc_quizSettings')) || {
+        questionCounts: [5, 10, 15, 20],
+        timeOptions: [5, 10, 15, 20, 30, 45, 60],
+        defaultDifficulty: 'Medium',
+        defaultCount: 10,
+        defaultTime: 10
     }
 };
 
@@ -34,35 +52,30 @@ function saveData() {
     localStorage.setItem('engicalc_questions', JSON.stringify(DATA.questions));
     localStorage.setItem('engicalc_formulas', JSON.stringify(DATA.formulas));
     localStorage.setItem('engicalc_history', JSON.stringify(DATA.history));
+    localStorage.setItem('engicalc_departments', JSON.stringify(DATA.departments));
     localStorage.setItem('engicalc_subjects', JSON.stringify(DATA.subjects));
     localStorage.setItem('engicalc_topics', JSON.stringify(DATA.topics));
-    localStorage.setItem('engicalc_subtopics', JSON.stringify(DATA.subtopics));
-    localStorage.setItem('engicalc_settings', JSON.stringify(DATA.settings));
+    localStorage.setItem('engicalc_difficulties', JSON.stringify(DATA.difficulties));
+    localStorage.setItem('engicalc_quizSettings', JSON.stringify(DATA.quizSettings));
 }
 
 // ===== INITIALIZE SAMPLE DATA =====
 function initSampleData() {
     if (DATA.questions.length === 0) {
         DATA.questions = [
-            { id: 1, subject: 'Electrical Engineering', topic: 'Circuit Theory', subtopic: 'DC Circuits', difficulty: 'easy', question: 'What is Ohm\'s Law?', options: ['V = IR', 'V = I/R', 'I = VR', 'R = VI'], correct: 0 },
-            { id: 2, subject: 'Electrical Engineering', topic: 'Circuit Theory', subtopic: 'DC Circuits', difficulty: 'easy', question: 'What is the unit of resistance?', options: ['Volt', 'Ampere', 'Ohm', 'Watt'], correct: 2 },
-            { id: 3, subject: 'Electrical Engineering', topic: 'Network Theory', subtopic: 'Two-port Networks', difficulty: 'medium', question: 'What is the equivalent resistance of two 10Ω resistors in parallel?', options: ['20Ω', '10Ω', '5Ω', '2Ω'], correct: 2 },
-            { id: 4, subject: 'Mechanical Engineering', topic: 'Thermodynamics', subtopic: 'Laws of Thermodynamics', difficulty: 'easy', question: 'What is the First Law of Thermodynamics?', options: ['Energy is created', 'Energy is destroyed', 'Energy is conserved', 'Entropy always increases'], correct: 2 },
-            { id: 5, subject: 'Engineering Mathematics', topic: 'Calculus', subtopic: 'Differentiation', difficulty: 'easy', question: 'What is the derivative of x²?', options: ['x', '2x', 'x²', '2x²'], correct: 1 },
-            { id: 6, subject: 'Computer Science', topic: 'Data Structures', subtopic: 'Arrays', difficulty: 'easy', question: 'What is the time complexity of binary search?', options: ['O(n)', 'O(log n)', 'O(n²)', 'O(1)'], correct: 1 },
-            { id: 7, subject: 'Civil Engineering', topic: 'Structural Analysis', subtopic: 'Beams', difficulty: 'easy', question: 'What is a beam?', options: ['Column', 'Horizontal member', 'Vertical member', 'Foundation'], correct: 1 }
+            { id: 1, department: 'Electrical Engineering', subject: 'Engineering Chemistry', topic: 'Electrochemistry', difficulty: 'Easy', question: 'What is the unit of conductivity?', options: ['S/m', 'Ω/m', 'S/cm', 'Ω/cm'], correct: 0 },
+            { id: 2, department: 'Electrical Engineering', subject: 'Engineering Physics', topic: 'Optics', difficulty: 'Easy', question: 'What is the speed of light in vacuum?', options: ['3×10⁸ m/s', '3×10⁶ m/s', '3×10¹⁰ m/s', '3×10⁵ m/s'], correct: 0 },
+            { id: 3, department: 'Mechanical Engineering', subject: 'Engineering Mechanics', topic: 'Statics', difficulty: 'Medium', question: 'What is the moment of inertia?', options: ['Resistance to motion', 'Resistance to rotation', 'Resistance to force', 'Resistance to acceleration'], correct: 1 },
+            { id: 4, department: 'Computer Science', subject: 'Data Structures', topic: 'Arrays', difficulty: 'Easy', question: 'What is the time complexity of accessing an array element?', options: ['O(1)', 'O(n)', 'O(log n)', 'O(n²)'], correct: 0 }
         ];
         saveData();
     }
     
     if (DATA.formulas.length === 0) {
         DATA.formulas = [
-            { id: 1, subject: 'Electrical Engineering', name: 'Ohm\'s Law', equation: 'V = I × R', description: 'Voltage = Current × Resistance' },
-            { id: 2, subject: 'Electrical Engineering', name: 'Power Formula', equation: 'P = V × I', description: 'Power = Voltage × Current' },
-            { id: 3, subject: 'Mechanical Engineering', name: 'Newton\'s Second Law', equation: 'F = m × a', description: 'Force = Mass × Acceleration' },
-            { id: 4, subject: 'Civil Engineering', name: 'Stress Formula', equation: 'σ = F / A', description: 'Stress = Force / Area' },
-            { id: 5, subject: 'Engineering Mathematics', name: 'Quadratic Formula', equation: 'x = (-b ± √(b² - 4ac)) / 2a', description: 'Solution for ax² + bx + c = 0' },
-            { id: 6, subject: 'Computer Science', name: 'Big O Notation', equation: 'O(f(n))', description: 'Upper bound of algorithm complexity' }
+            { id: 1, department: 'Electrical Engineering', subject: 'Engineering Chemistry', name: 'Nernst Equation', equation: 'E = E° - (RT/nF)ln(Q)', description: 'Electrode potential under non-standard conditions' },
+            { id: 2, department: 'Electrical Engineering', subject: 'Engineering Physics', name: 'Wave Equation', equation: 'v = fλ', description: 'Wave velocity = Frequency × Wavelength' },
+            { id: 3, department: 'Mechanical Engineering', subject: 'Engineering Mechanics', name: 'Newton\'s Second Law', equation: 'F = ma', description: 'Force = Mass × Acceleration' }
         ];
         saveData();
     }
@@ -114,12 +127,9 @@ function verifyAdminPassword() {
         document.getElementById('adminPasswordModal').style.display = 'none';
         document.getElementById('adminDashboard').style.display = 'block';
         document.getElementById('passwordError').style.display = 'none';
-        renderQuestionBank();
-        renderSubjects();
-        renderTopics();
-        renderAdminFormulas();
-        loadSettings();
-        populateSubjectSelects();
+        renderAll();
+        populateAllSelects();
+        populateQuizOptions();
         switchToSection('admin');
     } else {
         document.getElementById('passwordError').style.display = 'block';
@@ -144,11 +154,35 @@ function adminLogout() {
 }
 
 // ============================================
-// QUIZ - Subject/Topic/Subtopic Functions
+// QUIZ - POPULATE OPTIONS
 // ============================================
-function populateQuizSubjects() {
+function populateQuizOptions() {
+    const diffSelect = document.getElementById('quizDifficulty');
+    diffSelect.innerHTML = DATA.difficulties.map(d => `<option value="${d}">${d}</option>`).join('');
+    
+    const countSelect = document.getElementById('quizCount');
+    countSelect.innerHTML = DATA.quizSettings.questionCounts.map(c => `<option value="${c}">${c}</option>`).join('');
+    
+    const timeSelect = document.getElementById('quizTime');
+    timeSelect.innerHTML = DATA.quizSettings.timeOptions.map(t => `<option value="${t}">${t}</option>`).join('');
+    
+    // Set defaults
+    document.getElementById('quizDifficulty').value = DATA.quizSettings.defaultDifficulty;
+    document.getElementById('quizCount').value = DATA.quizSettings.defaultCount;
+    document.getElementById('quizTime').value = DATA.quizSettings.defaultTime;
+}
+
+function populateQuizDepartments() {
+    const select = document.getElementById('quizDepartment');
+    select.innerHTML = DATA.departments.map(d => `<option value="${d}">${d}</option>`).join('');
+    updateQuizSubjects();
+}
+
+function updateQuizSubjects() {
+    const department = document.getElementById('quizDepartment').value;
     const select = document.getElementById('quizSubject');
-    select.innerHTML = DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    const subjects = DATA.subjects[department] || ['General'];
+    select.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
     updateQuizTopics();
 }
 
@@ -157,65 +191,128 @@ function updateQuizTopics() {
     const select = document.getElementById('quizTopic');
     const topics = DATA.topics[subject] || ['General'];
     select.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
-    updateQuizSubtopics();
-}
-
-function updateQuizSubtopics() {
-    const topic = document.getElementById('quizTopic').value;
-    const select = document.getElementById('quizSubtopic');
-    const subtopics = DATA.subtopics[topic] || ['General'];
-    select.innerHTML = subtopics.map(st => `<option value="${st}">${st}</option>`).join('');
 }
 
 // ============================================
-// ADMIN - Subjects Management
+// ADMIN - DIFFICULTIES
 // ============================================
-function renderSubjects() {
-    const container = document.getElementById('subjectList');
-    container.innerHTML = DATA.subjects.map(s => `<span class="topic-tag">${s}</span>`).join('');
+function renderDifficulties() {
+    const container = document.getElementById('difficultyList');
+    container.innerHTML = DATA.difficulties.map(d => `<span class="topic-tag">${d}</span>`).join('');
 }
 
-function addSubject() {
-    const input = document.getElementById('newSubject');
-    const subject = input.value.trim();
-    if (subject && !DATA.subjects.includes(subject)) {
-        DATA.subjects.push(subject);
-        DATA.topics[subject] = ['General'];
+function addDifficulty() {
+    const input = document.getElementById('newDifficulty');
+    const diff = input.value.trim();
+    if (diff && !DATA.difficulties.includes(diff)) {
+        DATA.difficulties.push(diff);
         saveData();
-        renderSubjects();
-        populateSubjectSelects();
-        populateQuizSubjects();
+        renderDifficulties();
+        populateQuizOptions();
         input.value = '';
     } else {
-        alert('Subject already exists or invalid.');
+        alert('Difficulty already exists or invalid.');
     }
 }
 
 // ============================================
-// ADMIN - Topics Management
+// ADMIN - DEPARTMENTS
+// ============================================
+function renderDepartments() {
+    const container = document.getElementById('departmentList');
+    container.innerHTML = DATA.departments.map(d => `<span class="topic-tag">${d}</span>`).join('');
+}
+
+function addDepartment() {
+    const input = document.getElementById('newDepartment');
+    const dept = input.value.trim();
+    if (dept && !DATA.departments.includes(dept)) {
+        DATA.departments.push(dept);
+        DATA.subjects[dept] = ['General'];
+        saveData();
+        renderAll();
+        populateAllSelects();
+        populateQuizDepartments();
+        input.value = '';
+    } else {
+        alert('Department already exists or invalid.');
+    }
+}
+
+// ============================================
+// ADMIN - SUBJECTS
 // ============================================
 function populateSubjectSelects() {
-    const selects = document.querySelectorAll('#topicSubjectSelect, #qtSubject');
+    const selects = document.querySelectorAll('#subjectDepartmentSelect, #topicDepartmentSelect');
     selects.forEach(sel => {
         if (sel) {
-            sel.innerHTML = DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+            sel.innerHTML = DATA.departments.map(d => `<option value="${d}">${d}</option>`).join('');
+            if (sel.id === 'topicDepartmentSelect') updateTopicSubjectSelect();
         }
     });
 }
 
+function updateTopicSubjectSelect() {
+    const dept = document.getElementById('topicDepartmentSelect').value;
+    const select = document.getElementById('topicSubjectSelect');
+    const subjects = DATA.subjects[dept] || ['General'];
+    select.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+}
+
+function renderSubjects() {
+    const container = document.getElementById('subjectList');
+    let html = '';
+    DATA.departments.forEach(dept => {
+        const subjects = DATA.subjects[dept] || [];
+        subjects.forEach(sub => {
+            html += `<span class="topic-tag">${dept} › ${sub}</span>`;
+        });
+    });
+    container.innerHTML = html || '<p>No subjects added yet.</p>';
+}
+
+function addSubject() {
+    const dept = document.getElementById('subjectDepartmentSelect').value;
+    const input = document.getElementById('newSubject');
+    const subject = input.value.trim();
+    if (subject) {
+        if (!DATA.subjects[dept]) DATA.subjects[dept] = [];
+        if (!DATA.subjects[dept].includes(subject)) {
+            DATA.subjects[dept].push(subject);
+            DATA.topics[subject] = ['General'];
+            saveData();
+            renderAll();
+            populateAllSelects();
+            populateQuizDepartments();
+            input.value = '';
+        } else {
+            alert('Subject already exists in this department.');
+        }
+    } else {
+        alert('Please enter a subject name.');
+    }
+}
+
+// ============================================
+// ADMIN - TOPICS
+// ============================================
 function renderTopics() {
     const container = document.getElementById('topicList');
     let html = '';
-    DATA.subjects.forEach(subject => {
-        const topics = DATA.topics[subject] || [];
-        topics.forEach(topic => {
-            html += `<span class="topic-tag">${subject} › ${topic}</span>`;
+    DATA.departments.forEach(dept => {
+        const subjects = DATA.subjects[dept] || [];
+        subjects.forEach(sub => {
+            const topics = DATA.topics[sub] || [];
+            topics.forEach(topic => {
+                html += `<span class="topic-tag">${dept} › ${sub} › ${topic}</span>`;
+            });
         });
     });
     container.innerHTML = html || '<p>No topics added yet.</p>';
 }
 
 function addTopic() {
+    const dept = document.getElementById('topicDepartmentSelect').value;
     const subject = document.getElementById('topicSubjectSelect').value;
     const input = document.getElementById('newTopic');
     const topic = input.value.trim();
@@ -223,10 +320,9 @@ function addTopic() {
         if (!DATA.topics[subject]) DATA.topics[subject] = [];
         if (!DATA.topics[subject].includes(topic)) {
             DATA.topics[subject].push(topic);
-            DATA.subtopics[topic] = ['General'];
             saveData();
-            renderTopics();
-            populateQuizSubjects();
+            renderAll();
+            populateQuizDepartments();
             input.value = '';
         } else {
             alert('Topic already exists in this subject.');
@@ -234,6 +330,46 @@ function addTopic() {
     } else {
         alert('Please enter a topic name.');
     }
+}
+
+// ============================================
+// ADMIN - QUIZ SETTINGS
+// ============================================
+function loadQuizSettings() {
+    document.getElementById('questionCountOptions').value = DATA.quizSettings.questionCounts.join(',');
+    document.getElementById('timeOptions').value = DATA.quizSettings.timeOptions.join(',');
+    
+    const defaultDiff = document.getElementById('defaultDifficulty');
+    defaultDiff.innerHTML = DATA.difficulties.map(d => `<option value="${d}" ${d === DATA.quizSettings.defaultDifficulty ? 'selected' : ''}>${d}</option>`).join('');
+    
+    const defaultCount = document.getElementById('defaultCount');
+    defaultCount.innerHTML = DATA.quizSettings.questionCounts.map(c => `<option value="${c}" ${c === DATA.quizSettings.defaultCount ? 'selected' : ''}>${c}</option>`).join('');
+    
+    const defaultTime = document.getElementById('defaultTime');
+    defaultTime.innerHTML = DATA.quizSettings.timeOptions.map(t => `<option value="${t}" ${t === DATA.quizSettings.defaultTime ? 'selected' : ''}>${t}</option>`).join('');
+}
+
+function saveQuizSettings() {
+    const countStr = document.getElementById('questionCountOptions').value.trim();
+    const timeStr = document.getElementById('timeOptions').value.trim();
+    
+    const counts = countStr.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n) && n > 0);
+    const times = timeStr.split(',').map(s => parseInt(s.trim())).filter(n => !isNaN(n) && n > 0);
+    
+    if (counts.length === 0 || times.length === 0) {
+        alert('Please enter valid comma-separated numbers.');
+        return;
+    }
+    
+    DATA.quizSettings.questionCounts = counts;
+    DATA.quizSettings.timeOptions = times;
+    DATA.quizSettings.defaultDifficulty = document.getElementById('defaultDifficulty').value;
+    DATA.quizSettings.defaultCount = parseInt(document.getElementById('defaultCount').value);
+    DATA.quizSettings.defaultTime = parseInt(document.getElementById('defaultTime').value);
+    
+    saveData();
+    populateQuizOptions();
+    alert('Quiz settings saved successfully!');
 }
 
 // ============================================
@@ -643,9 +779,9 @@ function shuffleArray(arr) {
 }
 
 function startQuiz(source) {
+    const department = document.getElementById('quizDepartment').value;
     const subject = document.getElementById('quizSubject').value;
     const topic = document.getElementById('quizTopic').value;
-    const subtopic = document.getElementById('quizSubtopic').value;
     const difficulty = document.getElementById('quizDifficulty').value;
     const count = parseInt(document.getElementById('quizCount').value);
     const time = parseInt(document.getElementById('quizTime').value);
@@ -653,14 +789,14 @@ function startQuiz(source) {
     let questions = [];
     if (source === 'bank') {
         questions = DATA.questions.filter(q => 
+            q.department === department && 
             q.subject === subject && 
             q.topic === topic && 
-            q.subtopic === subtopic && 
             q.difficulty === difficulty
         );
         questions = shuffleArray(questions).slice(0, count);
     } else {
-        questions = generateAIQuestions(subject, topic, subtopic, difficulty, count);
+        questions = generateAIQuestions(department, subject, topic, difficulty, count);
         questions = shuffleArray(questions);
     }
     
@@ -684,12 +820,12 @@ function startQuiz(source) {
     startTimer();
 }
 
-function generateAIQuestions(subject, topic, subtopic, difficulty, count) {
+function generateAIQuestions(department, subject, topic, difficulty, count) {
     const templates = [
-        { q: `What is a fundamental principle in ${subtopic}?`, opts: ['Principle A', 'Principle B', 'Principle C', 'Principle D'], correct: 0 },
-        { q: `Which equation is used in ${subject} for ${topic}?`, opts: ['Equation 1', 'Equation 2', 'Equation 3', 'Equation 4'], correct: 1 },
-        { q: `How is ${subtopic} applied in engineering?`, opts: ['Application X', 'Application Y', 'Application Z', 'Application W'], correct: 2 },
-        { q: `What is the main concept of ${topic}?`, opts: ['Concept 1', 'Concept 2', 'Concept 3', 'Concept 4'], correct: 0 }
+        { q: `What is a fundamental concept in ${topic}?`, opts: ['Concept A', 'Concept B', 'Concept C', 'Concept D'], correct: 0 },
+        { q: `Which principle applies to ${subject} in ${department}?`, opts: ['Principle 1', 'Principle 2', 'Principle 3', 'Principle 4'], correct: 1 },
+        { q: `How is ${topic} used in ${subject}?`, opts: ['Application X', 'Application Y', 'Application Z', 'Application W'], correct: 2 },
+        { q: `What is the main equation for ${topic}?`, opts: ['Equation 1', 'Equation 2', 'Equation 3', 'Equation 4'], correct: 0 }
     ];
     const questions = [];
     for (let i = 0; i < Math.min(count, templates.length); i++) {
@@ -698,7 +834,7 @@ function generateAIQuestions(subject, topic, subtopic, difficulty, count) {
         const correctIdx = shuffledOpts.indexOf(template.opts[template.correct]);
         questions.push({
             id: Date.now() + i,
-            subject, topic, subtopic, difficulty,
+            department, subject, topic, difficulty,
             question: template.q,
             options: shuffledOpts,
             correct: correctIdx,
@@ -796,13 +932,14 @@ function renderFormulas(filter = '') {
         const f = filter.toLowerCase();
         formulas = formulas.filter(fm => 
             fm.name.toLowerCase().includes(f) || 
+            fm.department.toLowerCase().includes(f) ||
             fm.subject.toLowerCase().includes(f) ||
             fm.description.toLowerCase().includes(f)
         );
     }
     container.innerHTML = formulas.map(f => `
         <div class="formula-card">
-            <div class="formula-subject">${f.subject}</div>
+            <div class="formula-subject">${f.department} › ${f.subject}</div>
             <h4>${f.name}</h4>
             <div class="formula-equation">${f.equation}</div>
             <div class="formula-desc">${f.description}</div>
@@ -815,7 +952,7 @@ function searchFormulas() {
 }
 
 // ============================================
-// ADMIN PANEL
+// ADMIN PANEL - QUESTIONS
 // ============================================
 document.querySelectorAll('.admin-tab').forEach(tab => {
     tab.addEventListener('click', function() {
@@ -833,7 +970,7 @@ function renderQuestionBank() {
         <div class="question-item">
             <div class="q-info">
                 <div class="q-text">${q.question}</div>
-                <div class="q-meta">${q.subject} › ${q.topic} › ${q.subtopic} • ${q.difficulty}</div>
+                <div class="q-meta">${q.department} › ${q.subject} › ${q.topic} • ${q.difficulty}</div>
             </div>
             <div class="q-actions">
                 <button class="btn-edit" onclick="editQuestion(${i})">Edit</button>
@@ -848,38 +985,38 @@ function showAddQuestion() {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Add Question</h3>
-        <div class="form-group"><label>Subject</label><select id="mqSubject">${DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
-        <div class="form-group"><label>Topic</label><select id="mqTopic">${DATA.topics[DATA.subjects[0]]?.map(t => `<option value="${t}">${t}</option>`).join('') || '<option>General</option>'}</select></div>
-        <div class="form-group"><label>Sub-topic</label><select id="mqSubtopic"><option>General</option></select></div>
-        <div class="form-group"><label>Difficulty</label><select id="mqDifficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></div>
+        <div class="form-group"><label>Department</label><select id="mqDepartment">${DATA.departments.map(d => `<option value="${d}">${d}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="mqSubject">${(DATA.subjects[DATA.departments[0]] || ['General']).map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Topic</label><select id="mqTopic"><option>General</option></select></div>
+        <div class="form-group"><label>Difficulty</label><select id="mqDifficulty">${DATA.difficulties.map(d => `<option value="${d}">${d}</option>`).join('')}</select></div>
         <div class="form-group"><label>Question</label><textarea id="mqQuestion" placeholder="Enter your question..."></textarea></div>
         <div class="form-group"><label>Options</label><div class="options-grid"><input type="text" id="mqOpt0" placeholder="Option A"><input type="text" id="mqOpt1" placeholder="Option B"><input type="text" id="mqOpt2" placeholder="Option C"><input type="text" id="mqOpt3" placeholder="Option D"></div></div>
         <div class="form-group"><label>Correct Answer</label><div class="radio-group"><label><input type="radio" name="mqCorrect" value="0"> A</label><label><input type="radio" name="mqCorrect" value="1"> B</label><label><input type="radio" name="mqCorrect" value="2"> C</label><label><input type="radio" name="mqCorrect" value="3"> D</label></div></div>
         <button class="btn-primary" onclick="addQuestion()">Add Question</button>
     `;
+    document.getElementById('mqDepartment').addEventListener('change', function() {
+        const subjectSelect = document.getElementById('mqSubject');
+        const subjects = DATA.subjects[this.value] || ['General'];
+        subjectSelect.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    });
     document.getElementById('mqSubject').addEventListener('change', function() {
         const topicSelect = document.getElementById('mqTopic');
         const topics = DATA.topics[this.value] || ['General'];
         topicSelect.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
     });
-    document.getElementById('mqTopic').addEventListener('change', function() {
-        const subtopicSelect = document.getElementById('mqSubtopic');
-        const subtopics = DATA.subtopics[this.value] || ['General'];
-        subtopicSelect.innerHTML = subtopics.map(st => `<option value="${st}">${st}</option>`).join('');
-    });
     modal.style.display = 'flex';
 }
 
 function addQuestion() {
+    const department = document.getElementById('mqDepartment').value;
     const subject = document.getElementById('mqSubject').value;
     const topic = document.getElementById('mqTopic').value;
-    const subtopic = document.getElementById('mqSubtopic').value;
     const difficulty = document.getElementById('mqDifficulty').value;
     const question = document.getElementById('mqQuestion').value;
     const options = [0,1,2,3].map(i => document.getElementById('mqOpt'+i).value);
     const correct = parseInt(document.querySelector('input[name="mqCorrect"]:checked')?.value);
     if (!question || options.some(o => !o) || isNaN(correct)) { alert('Please fill all fields.'); return; }
-    DATA.questions.push({ id: Date.now(), subject, topic, subtopic, difficulty, question, options, correct });
+    DATA.questions.push({ id: Date.now(), department, subject, topic, difficulty, question, options, correct });
     saveData(); renderQuestionBank(); closeModal(); alert('Question added!');
 }
 
@@ -893,46 +1030,49 @@ function editQuestion(index) {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Edit Question</h3>
-        <div class="form-group"><label>Subject</label><select id="eqSubject">${DATA.subjects.map(s => `<option value="${s}" ${s===q.subject?'selected':''}>${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Department</label><select id="eqDepartment">${DATA.departments.map(d => `<option value="${d}" ${d===q.department?'selected':''}>${d}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="eqSubject">${(DATA.subjects[q.department] || ['General']).map(s => `<option value="${s}" ${s===q.subject?'selected':''}>${s}</option>`).join('')}</select></div>
         <div class="form-group"><label>Topic</label><select id="eqTopic">${(DATA.topics[q.subject] || ['General']).map(t => `<option value="${t}" ${t===q.topic?'selected':''}>${t}</option>`).join('')}</select></div>
-        <div class="form-group"><label>Sub-topic</label><select id="eqSubtopic">${(DATA.subtopics[q.topic] || ['General']).map(st => `<option value="${st}" ${st===q.subtopic?'selected':''}>${st}</option>`).join('')}</select></div>
-        <div class="form-group"><label>Difficulty</label><select id="eqDifficulty"><option value="easy" ${q.difficulty==='easy'?'selected':''}>Easy</option><option value="medium" ${q.difficulty==='medium'?'selected':''}>Medium</option><option value="hard" ${q.difficulty==='hard'?'selected':''}>Hard</option></select></div>
+        <div class="form-group"><label>Difficulty</label><select id="eqDifficulty">${DATA.difficulties.map(d => `<option value="${d}" ${d===q.difficulty?'selected':''}>${d}</option>`).join('')}</select></div>
         <div class="form-group"><label>Question</label><textarea id="eqQuestion">${q.question}</textarea></div>
         <div class="form-group"><label>Options</label><div class="options-grid">${q.options.map((o,i) => `<input type="text" id="eqOpt${i}" value="${o}" placeholder="Option ${String.fromCharCode(65+i)}">`).join('')}</div></div>
         <div class="form-group"><label>Correct Answer</label><div class="radio-group">${q.options.map((_,i) => `<label><input type="radio" name="eqCorrect" value="${i}" ${q.correct===i?'checked':''}> ${String.fromCharCode(65+i)}</label>`).join('')}</div></div>
         <button class="btn-primary" onclick="saveEditQuestion(${index})">Save Changes</button>
     `;
+    document.getElementById('eqDepartment').addEventListener('change', function() {
+        const subjectSelect = document.getElementById('eqSubject');
+        const subjects = DATA.subjects[this.value] || ['General'];
+        subjectSelect.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    });
     document.getElementById('eqSubject').addEventListener('change', function() {
         const topicSelect = document.getElementById('eqTopic');
         const topics = DATA.topics[this.value] || ['General'];
         topicSelect.innerHTML = topics.map(t => `<option value="${t}">${t}</option>`).join('');
     });
-    document.getElementById('eqTopic').addEventListener('change', function() {
-        const subtopicSelect = document.getElementById('eqSubtopic');
-        const subtopics = DATA.subtopics[this.value] || ['General'];
-        subtopicSelect.innerHTML = subtopics.map(st => `<option value="${st}">${st}</option>`).join('');
-    });
     modal.style.display = 'flex';
 }
 
 function saveEditQuestion(index) {
+    const department = document.getElementById('eqDepartment').value;
     const subject = document.getElementById('eqSubject').value;
     const topic = document.getElementById('eqTopic').value;
-    const subtopic = document.getElementById('eqSubtopic').value;
     const difficulty = document.getElementById('eqDifficulty').value;
     const question = document.getElementById('eqQuestion').value;
     const options = [0,1,2,3].map(i => document.getElementById('eqOpt'+i).value);
     const correct = parseInt(document.querySelector('input[name="eqCorrect"]:checked')?.value);
     if (!question || options.some(o => !o) || isNaN(correct)) { alert('Please fill all fields.'); return; }
-    DATA.questions[index] = { ...DATA.questions[index], subject, topic, subtopic, difficulty, question, options, correct };
+    DATA.questions[index] = { ...DATA.questions[index], department, subject, topic, difficulty, question, options, correct };
     saveData(); renderQuestionBank(); closeModal(); alert('Updated!');
 }
 
+// ============================================
+// ADMIN PANEL - FORMULAS
+// ============================================
 function renderAdminFormulas() {
     const container = document.getElementById('adminFormulaList');
     container.innerHTML = DATA.formulas.map((f, i) => `
         <div class="question-item">
-            <div class="q-info"><div class="q-text"><strong>${f.name}</strong> — ${f.equation}</div><div class="q-meta">${f.subject}</div></div>
+            <div class="q-info"><div class="q-text"><strong>${f.name}</strong> — ${f.equation}</div><div class="q-meta">${f.department} › ${f.subject}</div></div>
             <div class="q-actions"><button class="btn-edit" onclick="editAdminFormula(${i})">Edit</button><button class="btn-delete" onclick="deleteAdminFormula(${i})">Delete</button></div>
         </div>
     `).join('') || '<p>No formulas added yet.</p>';
@@ -943,22 +1083,29 @@ function showAddFormula() {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Add Formula</h3>
-        <div class="form-group"><label>Subject</label><select id="mfSubject">${DATA.subjects.map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Department</label><select id="mfDepartment">${DATA.departments.map(d => `<option value="${d}">${d}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="mfSubject">${(DATA.subjects[DATA.departments[0]] || ['General']).map(s => `<option value="${s}">${s}</option>`).join('')}</select></div>
         <div class="form-group"><label>Formula Name</label><input type="text" id="mfName" placeholder="e.g., Ohm's Law"></div>
-        <div class="form-group"><label>Equation</label><input type="text" id="mfEquation" placeholder="e.g., V = I × R"></div>
+        <div class="form-group"><label>Equation</label><input type="text" id="mfEquation" placeholder="e.g., V = IR"></div>
         <div class="form-group"><label>Description</label><textarea id="mfDesc" placeholder="Brief explanation..."></textarea></div>
         <button class="btn-primary" onclick="addAdminFormula()">Add Formula</button>
     `;
+    document.getElementById('mfDepartment').addEventListener('change', function() {
+        const subjectSelect = document.getElementById('mfSubject');
+        const subjects = DATA.subjects[this.value] || ['General'];
+        subjectSelect.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    });
     modal.style.display = 'flex';
 }
 
 function addAdminFormula() {
+    const department = document.getElementById('mfDepartment').value;
     const subject = document.getElementById('mfSubject').value;
     const name = document.getElementById('mfName').value.trim();
     const equation = document.getElementById('mfEquation').value.trim();
     const description = document.getElementById('mfDesc').value.trim();
     if (!name || !equation) { alert('Please fill required fields.'); return; }
-    DATA.formulas.push({ id: Date.now(), subject, name, equation, description });
+    DATA.formulas.push({ id: Date.now(), department, subject, name, equation, description });
     saveData(); renderAdminFormulas(); renderFormulas(); closeModal(); alert('Formula added!');
 }
 
@@ -972,72 +1119,69 @@ function editAdminFormula(index) {
     const body = document.getElementById('modalBody');
     body.innerHTML = `
         <h3>Edit Formula</h3>
-        <div class="form-group"><label>Subject</label><select id="efSubject">${DATA.subjects.map(s => `<option value="${s}" ${s===f.subject?'selected':''}>${s}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Department</label><select id="efDepartment">${DATA.departments.map(d => `<option value="${d}" ${d===f.department?'selected':''}>${d}</option>`).join('')}</select></div>
+        <div class="form-group"><label>Subject</label><select id="efSubject">${(DATA.subjects[f.department] || ['General']).map(s => `<option value="${s}" ${s===f.subject?'selected':''}>${s}</option>`).join('')}</select></div>
         <div class="form-group"><label>Formula Name</label><input type="text" id="efName" value="${f.name}"></div>
         <div class="form-group"><label>Equation</label><input type="text" id="efEquation" value="${f.equation}"></div>
         <div class="form-group"><label>Description</label><textarea id="efDesc">${f.description || ''}</textarea></div>
         <button class="btn-primary" onclick="saveAdminFormula(${index})">Save Changes</button>
     `;
+    document.getElementById('efDepartment').addEventListener('change', function() {
+        const subjectSelect = document.getElementById('efSubject');
+        const subjects = DATA.subjects[this.value] || ['General'];
+        subjectSelect.innerHTML = subjects.map(s => `<option value="${s}">${s}</option>`).join('');
+    });
     modal.style.display = 'flex';
 }
 
 function saveAdminFormula(index) {
+    const department = document.getElementById('efDepartment').value;
     const subject = document.getElementById('efSubject').value;
     const name = document.getElementById('efName').value.trim();
     const equation = document.getElementById('efEquation').value.trim();
     const description = document.getElementById('efDesc').value.trim();
     if (!name || !equation) { alert('Please fill required fields.'); return; }
-    DATA.formulas[index] = { ...DATA.formulas[index], subject, name, equation, description };
+    DATA.formulas[index] = { ...DATA.formulas[index], department, subject, name, equation, description };
     saveData(); renderAdminFormulas(); renderFormulas(); closeModal(); alert('Formula updated!');
 }
 
-function loadSettings() {
-    document.getElementById('easyQuestions').value = DATA.settings.easy.questions;
-    document.getElementById('easyTime').value = DATA.settings.easy.time;
-    document.getElementById('mediumQuestions').value = DATA.settings.medium.questions;
-    document.getElementById('mediumTime').value = DATA.settings.medium.time;
-    document.getElementById('hardQuestions').value = DATA.settings.hard.questions;
-    document.getElementById('hardTime').value = DATA.settings.hard.time;
+// ============================================
+// POPULATE ALL SELECTS
+// ============================================
+function populateAllSelects() {
+    populateSubjectSelects();
+    populateQuizDepartments();
 }
 
-function saveSettings() {
-    DATA.settings = {
-        easy: { questions: parseInt(document.getElementById('easyQuestions').value), time: parseInt(document.getElementById('easyTime').value) },
-        medium: { questions: parseInt(document.getElementById('mediumQuestions').value), time: parseInt(document.getElementById('mediumTime').value) },
-        hard: { questions: parseInt(document.getElementById('hardQuestions').value), time: parseInt(document.getElementById('hardTime').value) }
-    };
-    saveData(); alert('Settings saved!');
-}
-
-// ===== MODAL =====
-function closeModal() {
-    document.getElementById('modal').style.display = 'none';
-}
-document.getElementById('modal').addEventListener('click', function(e) {
-    if (e.target === this) closeModal();
-});
-
-// ===== HOME PAGE CARDS =====
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.style.cursor = 'pointer';
-});
-
-// ===== INITIALIZATION =====
-function init() {
-    initSampleData();
+// ============================================
+// RENDER ALL
+// ============================================
+function renderAll() {
     renderFormulas();
     renderQuestionBank();
+    renderDepartments();
     renderSubjects();
     renderTopics();
+    renderDifficulties();
     renderAdminFormulas();
-    loadSettings();
-    populateSubjectSelects();
-    populateQuizSubjects();
+    loadQuizSettings();
+}
+
+// ============================================
+// INITIALIZATION
+// ============================================
+function init() {
+    initSampleData();
+    renderAll();
+    populateAllSelects();
+    populateQuizOptions();
     updateConverterUnits();
     
     document.getElementById('adminDashboard').style.display = 'none';
     console.log('🚀 ENGICALC initialized!');
     console.log('🔐 Admin Password: 1234');
+    console.log('📚 Structure: Department → Subject → Topic');
+    console.log('⚙️ Quiz Settings: Difficulty, Count, Time all customizable from Admin');
 }
 
 document.addEventListener('DOMContentLoaded', init);
