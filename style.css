@@ -769,3 +769,334 @@ main {
 /* Question Bank */
 .question-bank {
     margin-top: 1rem;
+}
+
+.question-item {
+    background: var(--bg);
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.question-item .q-info {
+    flex: 1;
+}
+
+.question-item .q-info .q-text {
+    font-weight: 500;
+}
+
+.question-item .q-info .q-meta {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+.question-item .q-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.question-item .q-actions button {
+    padding: 0.3rem 0.8rem;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: inherit;
+}
+
+.btn-edit {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.btn-delete {
+    background: #FEE2E2;
+    color: var(--error);
+}
+
+/* Topics */
+.topic-form {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.topic-form input {
+    flex: 1;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+}
+
+.topic-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.topic-tag {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Settings */
+.settings-group {
+    margin-bottom: 1.5rem;
+}
+
+.settings-group h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.setting-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.setting-row label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.setting-row input {
+    width: 70px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+}
+
+/* ===== MODAL ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: var(--radius);
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--text-light);
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    color: var(--text);
+}
+
+.modal-content h3 {
+    margin-bottom: 1.5rem;
+}
+
+.modal-content .form-group {
+    margin-bottom: 1rem;
+}
+
+.modal-content .form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.modal-content .form-group input,
+.modal-content .form-group select,
+.modal-content .form-group textarea {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    width: 100%;
+}
+
+.modal-content .form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.modal-content .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.modal-content .radio-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Password Modal */
+#adminPasswordModal .modal-content {
+    max-width: 400px;
+}
+
+#adminPasswordModal .form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+/* ===== FOOTER ===== */
+.main-footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border);
+    margin-top: 2rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+    .calc-container {
+        grid-template-columns: 1fr;
+    }
+    .calc-history {
+        max-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 0.5rem 1rem;
+    }
+    
+    .main-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: var(--shadow-lg);
+    }
+    
+    .main-nav.open {
+        display: flex;
+    }
+    
+    .mobile-menu-btn {
+        display: block;
+    }
+    
+    .brand-text h1 {
+        font-size: 1.2rem;
+    }
+    
+    .brand-text .subtitle {
+        font-size: 0.6rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .hero h2 {
+        font-size: 1.8rem;
+    }
+    
+    .quiz-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .calc-main {
+        max-width: 100%;
+    }
+    
+    .calc-btn {
+        padding: 0.7rem 0.3rem;
+        font-size: 0.85rem;
+    }
+    
+    .result-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .formula-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        padding: 1.5rem;
+        width: 95%;
+    }
+    
+    .modal-content .options-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .calc-row {
+        gap: 0.3rem;
+    }
+    
+    .calc-btn {
+        padding: 0.6rem 0.2rem;
+        font-size: 0.8rem;
+    }
+    
+    .quiz-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .quiz-timer {
+        text-align: center;
+    }
+    
+    .quiz-controls {
+        flex-direction: column;
+    }
+    
+    .quiz-controls button {
+        width: 100%;
+    }
+}
