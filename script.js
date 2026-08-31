@@ -950,3 +950,50 @@ document.querySelectorAll('.feature-card').forEach((card, index) => {
     });
     card.style.cursor = 'pointer';
 });
+// ============================================
+// INITIALIZATION
+// ============================================
+function init() {
+    initSampleData();
+    renderFormulas();
+    renderQuestionBank();
+    renderTopics();
+    renderAdminFormulas();
+    loadSettings();
+    
+    const topicSelect = document.getElementById('quizTopic');
+    const subtopicSelect = document.getElementById('quizSubtopic');
+    
+    topicSelect.addEventListener('change', function() {
+        const subtopics = DATA.subtopics[this.value] || ['General'];
+        subtopicSelect.innerHTML = subtopics.map(s => `<option value="${s}">${s}</option>`).join('');
+    });
+    
+    topicSelect.dispatchEvent(new Event('change'));
+    
+    document.getElementById('adminDashboard').style.display = 'none';
+    
+    console.log('🚀 ENGICALC initialized successfully!');
+    console.log('🔐 Admin Password: 1234');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+// ============================================
+// 👇 এখানে নতুন কোড যোগ করুন (সবার নিচে)
+// ============================================
+document.querySelectorAll('.feature-card').forEach((card, index) => {
+    card.addEventListener('click', function() {
+        const sections = ['calculator', 'formulas', 'quiz'];
+        const section = sections[index];
+        
+        if (section) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            document.querySelector('.main-nav')?.classList.remove('open');
+        }
+    });
+    card.style.cursor = 'pointer';
+});
