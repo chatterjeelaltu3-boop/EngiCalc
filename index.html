@@ -68,7 +68,7 @@
                     <div class="feature-card" onclick="switchToSection('quiz')">
                         <div class="feature-icon">🎯</div>
                         <h3>Quiz System</h3>
-                        <p>Practice with AI-generated questions</p>
+                        <p>Auto-generate quiz from subjects</p>
                     </div>
                 </div>
             </div>
@@ -329,11 +329,11 @@
             </div>
         </section>
 
-        <!-- QUIZ SECTION -->
+        <!-- QUIZ SECTION - Auto Generate -->
         <section id="quiz" class="section">
             <div class="quiz-container">
                 <div id="quizSetup" class="quiz-setup">
-                    <h2>🎯 Quiz Setup</h2>
+                    <h2>🎯 Quiz Generator</h2>
                     <div class="quiz-form">
                         <div class="form-group">
                             <label>Department</label>
@@ -341,7 +341,7 @@
                         </div>
                         <div class="form-group">
                             <label>Subject</label>
-                            <select id="quizSubject"></select>
+                            <select id="quizSubject" onchange="updateQuizDescription()"></select>
                         </div>
                         <div class="form-group">
                             <label>Difficulty</label>
@@ -356,9 +356,10 @@
                             <select id="quizTime"></select>
                         </div>
                         <div class="quiz-actions">
-                            <button class="btn-primary" onclick="startQuiz('bank')">Start from Bank</button>
+                            <button class="btn-primary" onclick="autoGenerateQuiz()">🎯 Auto Generate Quiz</button>
                             <button class="btn-primary btn-ai" onclick="startQuiz('ai')">🤖 Generate with AI</button>
                         </div>
+                        <div id="quizDescription" style="grid-column:1/-1;margin-top:0.5rem;padding:0.8rem;background:var(--primary-light);border-radius:var(--radius-sm);text-align:center;font-weight:500;display:none;"></div>
                     </div>
                 </div>
 
